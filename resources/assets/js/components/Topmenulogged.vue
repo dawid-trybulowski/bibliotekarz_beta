@@ -1,6 +1,6 @@
 <script>
     export default {
-            template: '#topmenu',
+            template: '#topmenulogged',
             props:['elements'],
         data() {
             return{

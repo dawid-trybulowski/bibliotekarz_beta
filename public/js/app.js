@@ -18069,26 +18069,6 @@ module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"_process":1}],5:[function(require,module,exports){
-var inserted = exports.cache = {}
-
-exports.insert = function (css) {
-  if (inserted[css]) return
-  inserted[css] = true
-
-  var elem = document.createElement('style')
-  elem.setAttribute('type', 'text/css')
-
-  if ('textContent' in elem) {
-    elem.textContent = css
-  } else {
-    elem.styleSheet.cssText = css
-  }
-
-  document.getElementsByTagName('head')[0].appendChild(elem)
-  return elem
-}
-
-},{}],6:[function(require,module,exports){
 'use strict';
 
 var _vue = require('vue/dist/vue.js');
@@ -18103,8 +18083,17 @@ var _Topmenu = require('./components/Topmenu.vue');
 
 var _Topmenu2 = _interopRequireDefault(_Topmenu);
 
+var _Topmenulogged = require('./components/Topmenulogged.vue');
+
+var _Topmenulogged2 = _interopRequireDefault(_Topmenulogged);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 window.Vue = _vue2.default;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18112,17 +18101,12 @@ window.Vue = _vue2.default;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 new _vue2.default({
   el: '#app',
-  components: { books: _Books2.default, topmenu: _Topmenu2.default }
+  components: { books: _Books2.default, topmenu: _Topmenu2.default, topmenulogged: _Topmenulogged2.default }
 });
 
-},{"./components/Books.vue":7,"./components/Topmenu.vue":8,"vue/dist/vue.js":3}],7:[function(require,module,exports){
+},{"./components/Books.vue":6,"./components/Topmenu.vue":7,"./components/Topmenulogged.vue":8,"vue/dist/vue.js":3}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18171,36 +18155,54 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-7da9275c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":2}],8:[function(require,module,exports){
-var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n.violetNav{\n    background-color: #7c5bbd\n}\n")
+},{"vue":4,"vue-hot-reload-api":2}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
+    template: '#topmenu',
     props: ['elements'],
     data: function data() {
         return {};
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div>\n<ul id=\"dropdown1\" class=\"dropdown-content\">\n  <li><a href=\"#!\">one</a></li>\n  <li><a href=\"#!\">two</a></li>\n  <li class=\"divider\"></li>\n  <li><a href=\"#!\">three</a></li>\n</ul>\n<nav class=\"violetNav\">\n  <div class=\"nav-wrapper\">\n    <a href=\"#!\" class=\"brand-logo\">Logo</a>\n    <ul class=\"right hide-on-med-and-down\">\n      <li><a href=\"sass.html\">Sass</a></li>\n      <li><a href=\"badges.html\">Components</a></li>\n      <!-- Dropdown Trigger -->\n      <li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">Dropdown<i class=\"material-icons right\">arrow_drop_down</i></a></li>\n    </ul>\n  </div>\n</nav>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  module.hot.dispose(function () {
-    __vueify_insert__.cache["\n.violetNav{\n    background-color: #7c5bbd\n}\n"] = false
-    document.head.removeChild(__vueify_style__)
-  })
   if (!module.hot.data) {
     hotAPI.createRecord("_v-1c88f566", module.exports)
   } else {
     hotAPI.update("_v-1c88f566", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":4,"vue-hot-reload-api":2,"vueify/lib/insert-css":5}]},{},[6]);
+},{"vue":4,"vue-hot-reload-api":2}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    template: '#topmenulogged',
+    props: ['elements'],
+    data: function data() {
+        return {};
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-eb5ef130", module.exports)
+  } else {
+    hotAPI.update("_v-eb5ef130", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}]},{},[5]);
 
 //# sourceMappingURL=app.js.map

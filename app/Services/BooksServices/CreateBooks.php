@@ -24,6 +24,7 @@ class CreateBooks
             $book->setDescription($value->description);
             $book->setImageUrl($value->image_url);
             $book->setStatus($value->status);
+            $book->setItems($value->items);
             $book->setCreatedAt($value->created_at);
             $book->setUpdatedAt($value->updated_at);
             $result[] = $book;

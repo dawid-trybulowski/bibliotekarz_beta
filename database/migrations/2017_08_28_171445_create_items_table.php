@@ -22,8 +22,11 @@ class CreateItemsTable extends Migration
                 ->on('books');
             $table->integer('publication_year')
                 ->nullable();
+            $table->boolean('rented')
+                ->nullable();
             $table->integer('rent_user')
-                ->unsigned();
+                ->unsigned()
+                ->nullable();
             $table->foreign('rent_user')
                 ->references('id')
                 ->on('users')

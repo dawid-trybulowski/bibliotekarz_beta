@@ -18,7 +18,8 @@ class BooksTableSeeder extends Seeder {
             $book->title = $faker->word;
             $book->author = $faker->name . ' ' . $faker->lastName();
             $book->description = $faker->text('512');
-            $book->status = $faker->boolean();
+            $book->status = true;
+            $book->items = 2;
             $random = $faker->numberBetween(1, 5);
             switch ($random) {
                 case 1:

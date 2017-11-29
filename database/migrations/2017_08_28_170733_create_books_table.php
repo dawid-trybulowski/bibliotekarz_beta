@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('image_url')
                 ->nullable();
             $table->boolean('status');
+            $table->integer('items');
             $table->timestamps();
         });
     }

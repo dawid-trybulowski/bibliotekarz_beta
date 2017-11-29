@@ -13,4 +13,9 @@
 
 use Illuminate\Support\Facades\App;
 App::setLocale('pl');
+Route::get('/dashboard', 'DashboardController@index');
 Route::get('/','BooksController@index');
+Route::post('/reservation','BooksController@reservation');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

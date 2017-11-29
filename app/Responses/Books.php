@@ -17,6 +17,8 @@ class Books {
     
     private $status;
 
+    private $items;
+
     private $genres;
     
     private $createdAt;
@@ -167,5 +169,19 @@ class Books {
         $this->genres = $genres;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
 
+    /**
+     * @param mixed $items
+     */
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
 }
