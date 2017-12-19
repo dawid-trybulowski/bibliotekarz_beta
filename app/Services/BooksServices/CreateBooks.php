@@ -13,9 +13,8 @@ use App\Responses\Books;
 
 class CreateBooks
 {
-    protected $result = [];
-
     public function execute($books) {
+        $result = [];
         foreach ($books as $key => $value) {
             $book = new Books();
             $book->setId($value->id);

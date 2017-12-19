@@ -18087,6 +18087,14 @@ var _Topmenulogged = require('./components/Topmenulogged.vue');
 
 var _Topmenulogged2 = _interopRequireDefault(_Topmenulogged);
 
+var _Userdetails = require('./components/Userdetails.vue');
+
+var _Userdetails2 = _interopRequireDefault(_Userdetails);
+
+var _Userdashboardloginedit = require('./components/Userdashboardloginedit.vue');
+
+var _Userdashboardloginedit2 = _interopRequireDefault(_Userdashboardloginedit);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -18103,10 +18111,10 @@ window.Vue = _vue2.default;
 
 new _vue2.default({
   el: '#app',
-  components: { books: _Books2.default, topmenu: _Topmenu2.default, topmenulogged: _Topmenulogged2.default }
+  components: { books: _Books2.default, topmenu: _Topmenu2.default, topmenulogged: _Topmenulogged2.default, userdetails: _Userdetails2.default, userdashboardloginedit: _Userdashboardloginedit2.default }
 });
 
-},{"./components/Books.vue":6,"./components/Topmenu.vue":7,"./components/Topmenulogged.vue":8,"vue/dist/vue.js":3}],6:[function(require,module,exports){
+},{"./components/Books.vue":6,"./components/Topmenu.vue":7,"./components/Topmenulogged.vue":8,"./components/Userdashboardloginedit.vue":9,"./components/Userdetails.vue":10,"vue/dist/vue.js":3}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18165,7 +18173,16 @@ exports.default = {
     template: '#topmenu',
     props: ['elements'],
     data: function data() {
-        return {};
+        return {
+            showSearch: false
+        };
+    },
+
+    methods: {
+        showSearchFunction: function showSearchFunction() {
+            console.log('click');
+            this.showSearch = !this.showSearch;
+        }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
@@ -18187,9 +18204,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     template: '#topmenulogged',
-    props: ['elements'],
     data: function data() {
-        return {};
+        return {
+            showSearch: false
+        };
+    },
+
+    methods: {
+        showSearchFunction: function showSearchFunction() {
+            console.log('click');
+            this.showSearch = !this.showSearch;
+        }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
@@ -18201,6 +18226,78 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.createRecord("_v-eb5ef130", module.exports)
   } else {
     hotAPI.update("_v-eb5ef130", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    template: '#userdashboardloginedit',
+    mounted: function mounted() {
+        $('.modal').modal();
+    },
+    data: function data() {
+        return {
+            modal: $('#modal1')
+        };
+    },
+
+    methods: {
+
+        showLoginModal: function showLoginModal() {
+            this.modal.modal('open');
+        }
+    }
+
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-ad228cb0", module.exports)
+  } else {
+    hotAPI.update("_v-ad228cb0", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":4,"vue-hot-reload-api":2}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    template: '#userdetails',
+    data: function data() {
+        return {
+            showDetailsProp: []
+        };
+    },
+
+    methods: {
+        showDetailsFunction: function showDetailsFunction(id) {
+            var self = this;
+            if (self.showDetailsProp[id]) {
+                Vue.set(self.showDetailsProp, id, false);
+            } else {
+                Vue.set(self.showDetailsProp, id, true);
+            }
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-16ba86c9", module.exports)
+  } else {
+    hotAPI.update("_v-16ba86c9", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":4,"vue-hot-reload-api":2}]},{},[5]);

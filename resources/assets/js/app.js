@@ -8,6 +8,8 @@ import Vue from 'vue/dist/vue.js'
 import books from './components/Books.vue'
 import topmenu from './components/Topmenu.vue'
 import topmenulogged from './components/Topmenulogged.vue'
+import userdetails from './components/Userdetails.vue'
+import userdashboardloginedit from './components/Userdashboardloginedit.vue'
 window.Vue = Vue;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,7 +19,7 @@ window.Vue = Vue;
 
 new Vue({
     el: '#app',
-    components: { books, topmenu, topmenulogged }
+    components: { books, topmenu, topmenulogged, userdetails, userdashboardloginedit}
 });
 
 

@@ -11,21 +11,21 @@ namespace App\Responses;
 
 class Items
 {
-private $id;
+    private $id;
 
-private $bookId;
+    private $bookId;
 
-private $publicationYear;
+    private $publicationYear;
 
-private $rented;
+    private $status;
 
-private $rentUser;
+    private $rentUser;
 
-private $rentEnd;
+    private $rentEnd;
 
-private $createdAt;
+    private $createdAt;
 
-private $updatedAt;
+    private $updatedAt;
 
     /**
      * @return mixed
@@ -78,17 +78,17 @@ private $updatedAt;
     /**
      * @return mixed
      */
-    public function getRented()
+    public function getStatus()
     {
-        return $this->rented;
+        return $this->status;
     }
 
     /**
-     * @param mixed $rented
+     * @param mixed $status
      */
-    public function setRented($rented)
+    public function setStatus($status)
     {
-        $this->rented = $rented;
+        $this->status = $status;
     }
 
     /**

@@ -121,59 +121,59 @@ form .stars span {
 }
 
 .availabeButton {
-    background-color:#55c75a !important;
+background-color:#55c75a !important;
 }
 
 .unavailableButton {
-    background-color:#f95252 !important;
+background-color:#f95252 !important;
 }
 
 .refactored-row {
-    display: flex;
-    margin-bottom: 2px !important;
-    background-color: #fff !important;
-    color:#000 !important;
-    border-bottom:solid 1px !important;
+display: flex;
+margin-bottom: 2px !important;
+background-color: #fff !important;
+color:#000 !important;
+border-bottom:solid 1px !important;
 }
 
 .details {
-    background-color: #fff !important;
+background-color: #fff !important;
 }
 
 .cardShort {
-    background-color: #fff !important;
-    padding: 10px !important;
-    color:#000 !important;
-    border:solid 1px !important;;
+background-color: #fff !important;
+padding: 10px !important;
+color:#000 !important;
+border:solid 1px !important;;
 }
 
 .cardLong {
-    background-color: #fff !important;
-    padding: 10px !important;
-    color:#000 !important;
-    border:solid 1px !important;;
+background-color: #fff !important;
+padding: 10px !important;
+color:#000 !important;
+border:solid 1px !important;;
 }
 
 .cardLongRating {
-    background-color: #cf0c4a !important;
-    padding: 10px !important;
+background-color: #cf0c4a !important;
+padding: 10px !important;
 }
 
 .violetNav{
-    background-color: #7c5bbd
+background-color: #7c5bbd
 }
 
 .labelCard{
-    background-color: #d7cece !important;
-    font-weight: bold;
+background-color: #d7cece !important;
+font-weight: bold;
 }
 
 .dataCard{
-    background-color: #fff !important;
+background-color: #fff !important;
 }
 
 .userDashboardCard{
-    color: #000 !important;
-    border: solid 1px !important;
-    margin: 0.5rem 0 0rem 0;
+color: #000 !important;
+border: solid 1px !important;
+margin: 0.5rem 0 0rem 0;
 }

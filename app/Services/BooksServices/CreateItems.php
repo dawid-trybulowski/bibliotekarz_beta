@@ -19,9 +19,7 @@ class CreateItems
             $item = new Items();
             $item->setId($value->id);
             $item->setPublicationYear($value->publication_year);
-            $item->setRented($value->rented);
-            $item->setRentUser($value->rent_user);
-            $item->setRentEnd($value->rent_end);
+            $item->setStatus($value->status);
             $item->setCreatedAt($value->created_at);
             $item->setUpdatedAt($value->updated_at);
             $result[] = $item;

@@ -3,29 +3,27 @@
         @foreach ($refactoredBooks as $book)
             <div>
                 <div class="row refactored-row">
-                    <div class="col s1 centered cursorPointer" id="{{'bookImgSmall_' . $book->getId()}}"
-                         @click="showDetailsFunction({{$book->getId()}})">
+                    <div class="col s1 centered" id="{{'bookImgSmall_' . $book->getId()}}">
                         <img src="{{asset('img/'.$book->getImageUrl())}}" class="bookImgSmall">
                     </div>
-                    <div class="col s3 valign-wrapper cursorPointer" style="display:flex"
-                         id="{{'bookData_' . $book->getId()}}" @click="showDetailsFunction({{$book->getId()}})">
+                    <div class="col s3 valign-wrapper" style="display:flex"
+                         id="{{'bookData_' . $book->getId()}}">
                         <div>
                             <div>
-                                <a class="waves-effect waves-light btn biggerButton">{{$book->getTitle()}}</a>
+                                <a class="waves-effect waves-light btn biggerButton" @click="showDetailsFunction({{$book->getId()}})">{{$book->getTitle()}}</a>
                             </div>
                             <div>
-                                <a class="waves-effect waves-light btn smallButton">{{$book->getauthor()}}</a>
+                                <a class="waves-effect waves-light btn smallButton" href="{{url('/') . '/author/' . $book->getauthor()}}">{{$book->getauthor()}}</a>
                             </div>
                             <h6>
                                 @foreach($book->getGenres() as $genre)
-                                    <a class="waves-effect waves-light btn smallButton blueButton">{{$genre[0]}}</a>
+                                    <a class="waves-effect waves-light btn smallButton blueButton" href="{{url('/') . '/genre/' . $genre['genreId']}}">{{$genre['genreName'][0]}}</a>
                                 @endforeach
                             </h6>
                         </div>
                     </div>
-                    <div class="col s5 valign-wrapper cursorPointer" style="display:flex"
-                         id="{{'bookDescriptionShort_' . $book->getId()}}"
-                         @click="showDetailsFunction({{$book->getId()}})">
+                    <div class="col s4 valign-wrapper" style="display:flex"
+                         id="{{'bookDescriptionShort_' . $book->getId()}}">
 
                         <div class="col s12">
                             <div class="card-panel teal cardShort centered">
@@ -36,8 +34,8 @@
 
 
                     </div>
-                    <div class="col s1 valign-wrapper centered cursorPointer" style="display:flex"
-                         id="{{'bookStatus_' . $book->getId()}}" @click="showDetailsFunction({{$book->getId()}})">
+                    <div class="col s1 valign-wrapper centered" style="display:flex"
+                         id="{{'bookStatus_' . $book->getId()}}">
                         @if ($book->getStatus() == 'Dostępna')
                             <div>
                                 <a class="waves-effect waves-light btn smallButton availabeButton">{{$book->getStatus()}}</a>
@@ -50,13 +48,17 @@
                     </div>
                     <div class="col s2 valign-wrapper centered " style="display:flex"
                          id="{{'bookReservation_' . $book->getId()}}">
-                            <form class="col s12" action="reservation" method="post">
+                            <form class="col s12 centered" action="reservation" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="bookId" value="{{$book->getId()}}">
                                 <input type="hidden" name="userId" value="{{isset(Auth::user()->id) ? Auth::user()->id : 0}}">
                                 <input class="waves-effect waves-light btn biggerButton" type="submit"
                                        name="reservation" value="Zarezerwuj">
                             </form>
+                    </div>
+                    <div class="col s1 valign-wrapper centered " style="display:flex" >
+                    <i class="fa fa-angle-double-down cursorPointer" aria-hidden="true" style="font-size: 300%" @click="showDetailsFunction({{$book->getId()}})" v-show="showDetailsProp[{{$book->getId()}}]==false || showDetailsProp[{{$book->getId()}}]==undefined"></i>
+                        <i class="fa fa-angle-double-up cursorPointer" aria-hidden="true" style="font-size: 300%" @click="showDetailsFunction({{$book->getId()}})" v-show="showDetailsProp[{{$book->getId()}}]==true"></i>
                     </div>
                 </div>
                 <div class="row refactored-row details" style="display:flex; margin-bottom: 2px;"
@@ -67,7 +69,7 @@
                     <div class="col s5 centered">
                         <div>
                             <div class="col s12">
-                                <div class="card-panel teal cardLong centered" style="background-color">
+                                <div class="card-panel teal cardLong centered">
                                     {{$book->getDescription()}}
                                 </div>
                             </div>
@@ -108,12 +110,12 @@
                     <div class="col s3 centered">
                         <div>
                             <div class="col s12">
-                                <div class="card-panel teal cardLong centered" style="background-color">
+                                <div class="card-panel teal cardLong centered">
                                     Dostępnych egzeplarzy: {{$book->getItems()}}
                                 </div>
                             </div>
                             <div class="col s12">
-                                <div class="card-panel teal cardLong centered" style="background-color">
+                                <div class="card-panel teal cardLong centered">
                                     Ocena:
                                     <form id="ratingsForm" style="width:100%">
                                         <h6 style="text-align:center">4,52</h6>
@@ -157,5 +159,7 @@
                     <div class="divider"></div>
                 </div>
                 @endforeach
+                {{$refactoredBooks->render()}}
             </div>
+    </div>
 </template>

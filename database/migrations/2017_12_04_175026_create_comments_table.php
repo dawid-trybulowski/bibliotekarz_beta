@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBooksHaveReservationsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBooksHaveReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('books_have_reservations', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateBooksHaveReservationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books_have_reservations');
+        Schema::dropIfExists('comments');
     }
 }

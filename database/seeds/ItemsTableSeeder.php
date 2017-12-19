@@ -18,7 +18,7 @@ class ItemsTableSeeder extends Seeder
             $item = new items();
             $item->book_id = $i;
             $item->publication_year = $faker->year();
-            $item->rented = false;
+            $item->status = 0;
             $item->save();
         }
 
@@ -26,7 +26,7 @@ class ItemsTableSeeder extends Seeder
             $item = new items();
             $item->book_id = $i;
             $item->publication_year = $faker->year();
-            $item->rented = false;
+            $item->status = 0;
             $item->save();
         }
     }

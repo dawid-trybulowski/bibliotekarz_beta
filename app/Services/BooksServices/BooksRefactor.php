@@ -13,10 +13,9 @@ const statuses =
 
 class BooksRefactor
 {
-    protected $result = [];
-
     function refactor($books)
     {
+        $result = [];
         foreach ($books as $key => $book) {
 
             $this->GenresRefactor($book);
@@ -42,9 +41,12 @@ class BooksRefactor
 
         foreach ($genres as $key => $genre){
 
-            $genresRefactored[] = $genresDatabase
+            $genresRefactored[] = [
+                'genreId' => $genre->genre_id,
+                'genreName' => $genresDatabase
                 ->where('id', '=', $genre->genre_id)
-                ->pluck('name');
+                ->pluck('name')
+                ];
         }
 
         $book->setGenres($genresRefactored);

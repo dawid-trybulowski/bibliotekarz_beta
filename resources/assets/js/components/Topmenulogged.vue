@@ -1,9 +1,16 @@
 <script>
     export default {
             template: '#topmenulogged',
-            props:['elements'],
         data() {
-            return{
+         return{
+            showSearch: false
+           }
+        },
+        methods: {
+            showSearchFunction: function()
+            {
+            console.log('click');
+                this.showSearch = !this.showSearch;
             }
         }
     }

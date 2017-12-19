@@ -25,7 +25,7 @@ class ItemsController extends Controller
         return $this->items
             ->get()
             ->where('book_id', $bookId)
-            ->where('rented', 0);
+            ->where('status', 0);
     }
 
     public function reservation
@@ -39,9 +39,7 @@ class ItemsController extends Controller
             ->update
             (
                 [
-                    'rented' => true,
-                    'rent_user' => (int)$userId,
-                    'rent_end' => '2017-11-30'
+                    'status' => 1
                 ]
             );
 
