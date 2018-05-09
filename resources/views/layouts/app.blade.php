@@ -77,17 +77,31 @@
         border-radius: 10px !important;
         padding: 10px !important;
     }
+     body {
+         display: flex;
+         min-height: 100vh;
+         flex-direction: column;
+     }
 
-
+    main {
+        flex: 1 0 auto;
+    }
 
 </style>
 <body>
-    <div id="app">
-        <topmenu></topmenu>
-        @yield('content')
-    </div>
 
+    <div id="app">
+        <header>
+        @include('top-menu')
+        </header>
+
+        @yield('content')
+
+    </div>
+    <main>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @include('footer')
 </body>
 </html>
+

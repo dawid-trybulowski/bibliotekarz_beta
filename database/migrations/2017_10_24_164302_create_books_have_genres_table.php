@@ -42,6 +42,6 @@ class CreateBooksHaveGenresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books_have_genres');
+        Schema::dropIfExists('BooksHaveGenres');
     }
 }

@@ -1,24 +1,29 @@
 <?php
 
-use App\books;
+use App\Models\Book;
 use Illuminate\Database\Seeder;
 
-class BooksTableSeeder extends Seeder {
+class BooksTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 100; $i++) {
-            $book = new books();
+        for ($i = 0; $i < 5000; $i++) {
+            $book = new Book();
             $book->title = $faker->word;
-            $book->author = $faker->name . ' ' . $faker->lastName();
+            $book->unified_title = $book->title;
+            $book->author = $faker->randomLetter . '. ' . $faker->lastName();
             $book->description = $faker->text('512');
+            $book->subauthors = $faker->randomLetter . '. ' . $faker->lastName() . ', ' . $faker->randomLetter . '. ' . $faker->lastName();
             $book->status = true;
+            $book->content_description = 'test';
             $book->items = 2;
             $random = $faker->numberBetween(1, 5);
             switch ($random) {
@@ -38,9 +43,27 @@ class BooksTableSeeder extends Seeder {
                     $img = 'phmspr.jpg';
             }
             $book->image_url = $img;
+            $book->genres = '{
+              "0": {
+                "id": "' . $faker->numberBetween(1, 5) . '"
+              },
+              "1": {
+                "id": "' . $faker->numberBetween(6, 10) . '"
+              }
+            }';
+            $book->category_id = $faker->numberBetween(1, 5);
+            $book->age_category_id = $faker->numberBetween(1, 4);
+            $book->isbn = $faker->numberBetween(100, 999) . '-' . $faker->numberBetween(0, 10) . '-' . $faker->numberBetween(1000, 9999) . '-' . $faker->numberBetween(1000, 9999) . '-' . $faker->numberBetween(0, 10);
+            $book->publishing_house = $faker->word;
+            $book->pages = $faker->numberBetween(20, 999);
+            $book->edition = $faker->numberBetween(0, 10);
+            $book->publication_year =  $faker->year();
+            $book->location_code =  $faker->word . '/' . $faker->numberBetween(0, 10) . '/' . $faker->numberBetween(20, 999);
+            $book->owner = $faker->word;
+            $book->publishing_house = $faker->word;
+            $book->keys = $faker->word . ',' . $faker->word . ',' . $faker->word;
             $book->save();
-            $book->genres()->attach($faker->numberBetween(1,25));
-            $book->genres()->attach($faker->numberBetween(1,25));
+            $book->genres()->attach($faker->numberBetween(1, 6));
         }
     }
 

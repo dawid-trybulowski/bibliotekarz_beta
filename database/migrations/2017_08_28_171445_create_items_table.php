@@ -20,10 +20,14 @@ class CreateItemsTable extends Migration
             $table->foreign('book_id')
                 ->references('id')
                 ->on('books');
-            $table->integer('publication_year')
+            $table->string('location_code')
+                ->nullable();
+            $table->string('comment')
                 ->nullable();
             $table->boolean('status')
                 ->nullable();
+            $table->boolean('active')
+                ->default(true);
             $table->timestamps();
         });
     }

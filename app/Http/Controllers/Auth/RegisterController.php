@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,28 +50,32 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'login' => 'required|string|min:1|unique:users',
             'firstName' => 'required|string|max:255',
-            'secondName' => 'string|max:255',
+            'secondName' => 'max:255',
             'surname' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'houseNumber' => 'required|string|max:255',
-            'apartmentNumber' => 'string|max:255',
+            'apartmentNumber' => 'max:255',
             'postCode' => 'required|string|max:6',
-            'birthDate' => 'required|date|max:10'
+            'birthDate' => 'required|date|max:10',
+            'cardId' => 'max:255'
         ]);
+
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
         return User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'login' => $data['login'],
             'first_name' => $data['firstName'],
             'second_name' => $data['secondName'],
             'surname' => $data['surname'],
@@ -81,7 +85,8 @@ class RegisterController extends Controller
             'apartment_number' => $data['apartmentNumber'],
             'post_code' => $data['postCode'],
             'birth_date' => $data['birthDate'],
-            'verified'=> '0'
+            'card_number' => $data['cardId'],
+            'status' => 0
         ]);
     }
 }

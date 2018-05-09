@@ -1,6 +1,6 @@
 <?php
 
-use App\genres;
+use App\Models\Genres;
 use Illuminate\Database\Seeder;
 
 class GenresTableSeeder extends Seeder
@@ -12,12 +12,23 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-
-        for ($i = 0; $i < 100; $i++) {
-            $genre = new Genres();
-            $genre->name = $faker->word;
-            $genre->save();
-        }
+        $genre = new Genres();
+        $genre->name = 'Fantastyka';
+        $genre->save();
+        $genre = new Genres();
+        $genre->name = 'Horror';
+        $genre->save();
+        $genre = new Genres();
+        $genre->name = 'Powieść obyczajowa';
+        $genre->save();
+        $genre = new Genres();
+        $genre->name = 'Wiersze polskie';
+        $genre->save();
+        $genre = new Genres();
+        $genre->name = 'Kryminał';
+        $genre->save();
+        $genre = new Genres();
+        $genre->name = 'Naukowa';
+        $genre->save();
     }
 }

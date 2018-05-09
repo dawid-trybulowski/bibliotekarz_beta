@@ -10,7 +10,8 @@
             return{
                 title: '',
                 description: '',
-                showDetailsProp: []
+                showDetailsProp: [],
+                arrowClass: [],
             }
         },
         methods: {
@@ -25,8 +26,11 @@
                 if (self.showDetailsProp[id])
                 {
                     Vue.set(self.showDetailsProp, id, false);
+
+
                 } else {
                     Vue.set(self.showDetailsProp, id, true);
+
                 }
             }
         }

@@ -1,6 +1,9 @@
 <script>
     export default {
             template: '#topmenulogged',
+                    mounted() {
+                        $('.modal').modal();
+                    },
         data() {
          return{
             showSearch: false

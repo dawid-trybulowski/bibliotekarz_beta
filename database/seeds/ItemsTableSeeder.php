@@ -1,6 +1,6 @@
 <?php
 
-use App\items;
+use App\Models\Items;
 use Illuminate\Database\Seeder;
 
 class ItemsTableSeeder extends Seeder
@@ -14,18 +14,16 @@ class ItemsTableSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for ($i = 1; $i <= 100; $i++) {
-            $item = new items();
+        for ($i = 1; $i <= 5000; $i++) {
+            $item = new Items();
             $item->book_id = $i;
-            $item->publication_year = $faker->year();
             $item->status = 0;
             $item->save();
         }
 
-        for ($i = 1; $i <= 100; $i++) {
-            $item = new items();
+        for ($i = 1; $i <= 5000; $i++) {
+            $item = new Items();
             $item->book_id = $i;
-            $item->publication_year = $faker->year();
             $item->status = 0;
             $item->save();
         }

@@ -1,19 +1,25 @@
-@include('top')
-<div id="app">
-    @if(Auth::check())
-        <topmenulogged></topmenulogged>
-    @else
-        <topmenu></topmenu>
-    @endif
-    <books :books='{{json_encode($refactoredBooks)}}'></books>
-    @if (Session::has('message'))
-        <script>Materialize.toast('{{Session::get('message')}}', 4000)</script>
-    @endif
-    @isset ($message)
-        <script>Materialize.toast('{{$message}}', 4000)</script>
-    @endisset
-</div>
-@include('books')
-@include('top-menu')
-@include('top-menu-logged')
+<!doctype html>
+<html lang="pl">
+@include('head')
+@yield('head')
+<body>
+<header>
+    @include('search-sidebar')
+    @yield('search-sidebar')
+    <div id="menu">
+        @include('top-menu')
+        @yield('top-menu')
+    </div>
+</header>
+<main >
+    <div id="page-content-wrapper">
+        <div id="app">
+            @include('books')
+            @yield('books')
+        </div>
+    </div>
+</main>
 @include('footer')
+@yield('footer')
+</body>
+</html>
