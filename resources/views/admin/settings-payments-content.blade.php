@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <div class="row col-12">
-        <form class="col-12 mt-4" method="POST" action="{{route('admin-payments-config-update')}}">
+    <div class="row">
+        <form class="mt-4 col-12" method="POST" action="{{route('admin-payments-config-update')}}">
             <h4>Dane do przelewu tradycyjnego</h4>
-            <div class="form-row col-12">
+            <div class="form-row col-12 col-center">
                 {{ csrf_field() }}
-                <div class="form-group col-6 {{ $errors->has('accountNumber') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('accountNumber') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="accountNumber">Numer konta</label>
                     <div class="col-12">
                         <input id="accountNumber" name="accountNumber" type="text" class="form-control input-md"
@@ -17,7 +17,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('paymentTitle') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('paymentTitle') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="paymentTitle">Tytuł płatności</label>
                     <div class="col-12">
                         <input id="paymentTitle" name="paymentTitle" type="text" class="form-control input-md"
@@ -30,7 +30,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('receiver') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('receiver') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="receiver">Odbiorca płątności</label>
                     <div class="col-12">
                         <input id="receiver" name="receiver" type="text" class="form-control input-md"
@@ -43,7 +43,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('address') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('address') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="address">Adres</label>
                     <div class="col-12">
                         <input id="address" name="address" type="text" class="form-control input-md"
@@ -58,8 +58,8 @@
                 </div>
             </div>
             <h4>Płatność przez Przelewy24</h4>
-            <div class="form-row col-12">
-                <div class="form-group col-12 {{ $errors->has('przelewy24Status') ? ' has-error' : '' }}">
+            <div class="form-row col-12 col-center">
+                <div class="form-group col-12 {{ $errors->has('przelewy24Status') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label text-center" for="przelewy24Status">Aktywuj płatność przez Przelewy24
                         konta</label>
                     <div class="col-12">
@@ -74,8 +74,8 @@
                     </div>
                 </div>
             </div>
-            <div class="form-row col-12">
-                <div class="form-group col-6 {{ $errors->has('p24MerchantId') ? ' has-error' : '' }}">
+            <div class="form-row col-12 col-center">
+                <div class="form-group col-6 {{ $errors->has('p24MerchantId') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="p24MerchantId">p24_merchant_id</label>
                     <div class="col-12">
                         <input id="p24MerchantId" name="p24MerchantId" type="text" class="form-control input-md"
@@ -88,7 +88,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('p24PosId') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('p24PosId') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="p24PosId">p24_pos_id</label>
                     <div class="col-12">
                         <input id="p24PosId" name="p24PosId" type="text" class="form-control input-md"
@@ -101,7 +101,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('crc') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('crc') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="borrowTime">crc</label>
                     <div class="col-12">
                         <input id="crc" name="crc" type="text" class="form-control input-md"
@@ -114,7 +114,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('testMode') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('testMode') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label text-center" for="chargeFee">Tryb testowy</label>
                     <div class="col-12">
                         <input id="testMode" name="testMode" type="checkbox"
@@ -129,8 +129,8 @@
                 </div>
             </div>
             <h4>Opóźnienie</h4>
-            <div class="form-row col-12">
-                <div class="form-group col-6 {{ $errors->has('chargeFee') ? ' has-error' : '' }}">
+            <div class="form-row col-12 col-center">
+                <div class="form-group col-6 {{ $errors->has('chargeFee') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label text-center" for="chargeFee">Naliczaj opłatę po przekroczeniu terminu wypożyczenia</label>
                     <div class="col-12">
                         <input id="chargeFee" name="chargeFee" type="checkbox"
@@ -143,7 +143,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('delayCost') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('delayCost') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="p24PosId">Opłata za dobę opóźnienia (w groszach)</label>
                     <div class="col-12">
                         <input id="delayCost" name="delayCost" type="text" class="form-control input-md"
@@ -157,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group text-center">
+            <div class="form-group text-center col-center">
                 <div class="col-12">
                     <input name="reservation" value="{{__('view.Zatwierdź')}}"
                            class="btn btn-outline-success my-2 my-sm-0 mr-sm-2"

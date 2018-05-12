@@ -77,7 +77,7 @@
             </tbody>
         </table>
     </div>
-    <div class="center-align ">
+    <div class="pagination center pagination-sm flex-sm-wrap mt-2">
         {{$compact['items']->appends(request()->input())->links("pagination::bootstrap-4")}}
     </div>
 </div>

@@ -90,12 +90,11 @@ class BooksService
                 $book->genres = $genresArray;
             }
         } elseif (count($books) === 1) {
-            $book = $books;
-//            if (isset($books->genres)) {
-//                $book = $books;
-//            } else {
-//                $book = $books[0];
-//            }
+            if (isset($books->id)) {
+                $book = $books;
+            } else {
+                $book = $books[0];
+            }
             $bookGenres = $this->books
                 ->select('genres.id', 'genres.name')
                 ->join('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')

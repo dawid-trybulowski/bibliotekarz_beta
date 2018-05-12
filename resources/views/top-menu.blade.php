@@ -34,9 +34,6 @@
                 </li>
             </ul>
         </div>
-        <button class="navbar-toggler" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
     </nav>
 @else
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

@@ -44,6 +44,7 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
     ->name('password.email');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 Route::group(['namespace' => 'Content', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'MainController@userDashboard')
         ->name('dashboard');
@@ -105,6 +106,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'worker'], function () {
         ->name('admin-genres');
     Route::get('admin/categories', 'MainController@categories')
         ->name('admin-categories');
+    Route::get('admin/locations', 'MainController@locations')
+        ->name('admin-locations');
     Route::get('admin/age-categories', 'MainController@ageCategories')
         ->name('admin-age-categories');
     Route::get('admin/users', 'MainController@users')
@@ -193,6 +196,16 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'worker'], function () {
         ->name('borrow-for-user');
     Route::get('admin/set-payment-status', 'AdminPaymentController@setPaymentStatus')
         ->name('set-payment-status');
+    Route::get('admin/admin-location-edit', 'AdminLocationController@editLocationShow')
+        ->name('admin-location-edit-show');
+    Route::post('admin/admin-location-edit', 'AdminLocationController@editLocation')
+        ->name('admin-location-edit');
+    Route::get('admin/admin-location-add', 'AdminLocationController@addLocationShow')
+        ->name('admin-location-add-show');
+    Route::post('admin/admin-location-add', 'AdminLocationController@addLocation')
+        ->name('admin-location-add');
+    Route::get('admin/admin-location-delete', 'AdminLocationController@deleteLocation')
+        ->name('admin-location-delete');
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {

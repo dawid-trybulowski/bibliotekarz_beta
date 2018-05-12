@@ -57,10 +57,10 @@
                 <tr>
                     <td data-title="{{__('view.ID')}}">{{$book['id']}}</td>
                     <td data-title="{{__('view.Tytuł')}}">{{$book['title']}}</td>
-                    <td data-title="{{__('view.Autor')}}">{{$book['author']}}</td>
-                    <td data-title="Kategoria">{{$book['categories_name']}}</td>
-                    <td data-title="Data dodania">{{$book['created_at']}}</td>
-                    <td data-title="Data modyfikacji">{{$book['updated_at']}}</td>
+                    <td data-title="{{__('view.Autor')}}" class="break-word-all">{{$book['author']}}</td>
+                    <td data-title="Kategoria" class="break-word-all">{{$book['categories_name']}}</td>
+                    <td data-title="Dodane">{{$book['created_at'] ?: '-'}}</td>
+                    <td data-title="Modyfikacja">{{$book['updated_at'] ?: '-'}}</td>
                     <td data-title="{{__('view.Status')}}">{{$compact['config']['books_statuses'][$book->status]['string']}}</td>
                     <td data-title="{{__('view.Akcje')}}">
                         <div class="dropdown">
@@ -83,8 +83,8 @@
             </tbody>
         </table>
     </div>
-    <div class="center-align ">
-        {{$compact['books']->links("pagination::bootstrap-4")}}
+    <div class="pagination center pagination-sm flex-sm-wrap mt-2">
+        {{$compact['books']->appends(request()->input())->links("pagination::bootstrap-4")}}
     </div>
 </div>
 

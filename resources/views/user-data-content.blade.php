@@ -89,7 +89,7 @@
         </div>
         <div class=" form-group col-4 width_customize">
             <div class="col-12 bg-secondary text-white border">
-                {{__('view.Data urodzenia')}}
+                {{__('view.Data urodzenia') . ' (rrrr-mm-dd)'}}
             </div>
             <div class="col-12 border">
                 {{Auth::User()->birth_date ?: '-'}}

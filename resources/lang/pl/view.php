@@ -45,7 +45,7 @@ return [
     'Błąd' => 'Błąd',
     'Wystąpił błąd podczas zapisu danych' => 'Wystąpił błąd podczas zapisu danych',
     'W porządku!' => 'W porządku!',
-    'Operacja zakonczona sukcesem' => 'Operacja zakonczona sukcesem',
+    'Operacja zakonczona sukcesem' => 'Operacja zakończona sukcesem',
     'Tytuł' => 'Tytuł',
     'Autor' => 'Autor',
     'Data rozpoczęcia' => 'Data rozpoczęcia',
@@ -78,5 +78,9 @@ return [
     'Już zamówiłeś tę pozycję' => 'Już zamówiłeś tę pozycję',
     'Już zarezerwowałeś tę pozycję' => 'Już zarezerwowałeś tę pozycję',
     'ID' => 'ID',
-    'Zamówienie anulowane' => 'Zamówienie anulowane'
+    'Zamówienie anulowane' => 'Zamówienie anulowane',
+    'Rozpoczęcie' => 'Rozpoczęcie',
+    'Zakończenie' => 'Zakończenie',
+    'Opóźnienie' => 'Opóźnienie',
+    'Koszt' => 'Koszt'
 ];

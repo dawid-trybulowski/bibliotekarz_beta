@@ -42,6 +42,7 @@ class Items extends Model
             )
             ->get()
             ->first();
+
         return $item;
     }
 

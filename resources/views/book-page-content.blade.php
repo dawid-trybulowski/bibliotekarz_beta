@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container_fluid">
     <div class="row">
         @if($compact['book']['image_url'])
             <div class="col-12 text-center">

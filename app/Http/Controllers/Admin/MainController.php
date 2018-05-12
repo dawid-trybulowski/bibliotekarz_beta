@@ -10,6 +10,7 @@ use App\Http\Services\Admin\AdminCategoryService;
 use App\Http\Services\Admin\AdminCommuniqueService;
 use App\Http\Services\Admin\AdminGenreService;
 use App\Http\Services\Admin\AdminItemService;
+use App\Http\Services\Admin\AdminLocationService;
 use App\Http\Services\Admin\AdminPaymentService;
 use App\Http\Services\Admin\AdminReservationsService;
 use App\Http\Services\Admin\AdminUserService;
@@ -83,6 +84,10 @@ class MainController
      * @var AdminUserService
      */
     private $adminUserService;
+    /**
+     * @var AdminLocationService
+     */
+    private $adminLocationService;
 
     /**
      * MainController constructor.
@@ -110,7 +115,8 @@ class MainController
         AdminCommuniqueService $adminCommuniqueService,
         User $user,
         AdminPaymentService $adminPaymentService,
-        AdminUserService $adminUserService
+        AdminUserService $adminUserService,
+        AdminLocationService $adminLocationService
     )
     {
         $this->statisticsService = $statisticsService;
@@ -129,9 +135,10 @@ class MainController
         $this->user = $user;
         $this->adminPaymentService = $adminPaymentService;
         $this->adminUserService = $adminUserService;
+        $this->adminLocationService = $adminLocationService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $statistics = $this->statisticsService->getStatistics();
         $communiques = $this->adminCommuniqueService->getAllCommuniques();
@@ -176,11 +183,13 @@ class MainController
         $books = $this->booksService->getAllBooks($request);
         $preparedBooks = $this->booksService->prepareBooks($books->paginate());
         $users = $this->user->get();
+        $locations = $this->adminLocationService->getAllLocations($request);
         $compact =
             [
                 'users' => $users,
                 'books' => $preparedBooks,
-                'config' => $this->config
+                'config' => $this->config,
+                'locations' => $locations
             ];
 
         return view('admin/books', compact('compact'));
@@ -263,6 +272,19 @@ class MainController
         return view('admin/users-payments', compact('compact'));
     }
 
+    public function locations(Request $request)
+    {
+        $locations = $this->adminLocationService->getAllLocations($request);
+
+        $compact =
+            [
+                'locations' => $locations,
+                'config' => $this->config
+            ];
+
+        return view('admin/locations', compact('compact'));
+    }
+
     public function settingsGeneral()
     {
         $compact =
@@ -301,11 +323,6 @@ class MainController
             ];
 
         return view('admin/settings-payments', compact('compact'));
-    }
-
-    public function settingsDatabase()
-    {
-
     }
 
     public function permittedUsers(Request $request)

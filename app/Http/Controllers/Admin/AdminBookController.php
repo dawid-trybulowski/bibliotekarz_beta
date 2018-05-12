@@ -9,6 +9,7 @@ use App\Http\Services\Admin\AdminAgeCategoryService;
 use App\Http\Services\Admin\AdminBooksService;
 use App\Http\Services\Admin\AdminCategoryService;
 use App\Http\Services\Admin\AdminGenreService;
+use App\Http\Services\Admin\AdminLocationService;
 use App\Http\Services\Content\BooksService;
 use App\Http\Services\Content\CategoriesService;
 use App\Http\Services\Content\CommentsAndRatesService;
@@ -36,14 +37,19 @@ class AdminBookController extends BookController
      * @var AdminGenreService
      */
     private $adminGenresService;
+    /**
+     * @var AdminLocationService
+     */
+    private $adminLocationService;
 
-    public function __construct(Book $books, BooksService $booksService, Config $configAll, ConfigService $configService, CommentsAndRatesService $commentsAndRatesService, AdminBooksService $adminBooksService, AdminCategoryService $adminCategoryService, AdminGenreService $adminGenresService, AdminAgeCategoryService $adminAgeCategoriesService)
+    public function __construct(Book $books, BooksService $booksService, Config $configAll, ConfigService $configService, CommentsAndRatesService $commentsAndRatesService, AdminBooksService $adminBooksService, AdminCategoryService $adminCategoryService, AdminGenreService $adminGenresService, AdminAgeCategoryService $adminAgeCategoriesService, AdminLocationService $adminLocationService)
     {
         parent::__construct($books, $booksService, $configAll, $configService, $commentsAndRatesService);
         $this->adminBooksService = $adminBooksService;
         $this->adminCategoryService = $adminCategoryService;
         $this->adminAgeCategoriesService = $adminAgeCategoriesService;
         $this->adminGenresService = $adminGenresService;
+        $this->adminLocationService = $adminLocationService;
     }
 
     public function editBookShow(Request $request)
@@ -55,6 +61,7 @@ class AdminBookController extends BookController
         $categories = $this->adminCategoryService->getAllCategories($request);
         $genres = $this->adminGenresService->getAllGenres($request);
         $ageCategories = $this->adminAgeCategoriesService->getAllAgeCategories($request);
+        $locations = $this->adminLocationService->getAllLocations($request);
 
         $compact =
             [
@@ -62,7 +69,8 @@ class AdminBookController extends BookController
                 'categories' => $categories,
                 'genres' => $genres,
                 'ageCategories' => $ageCategories,
-                'config' => $this->config
+                'config' => $this->config,
+                'locations' => $locations
             ];
 
         return view('admin/admin-book-edit', compact('compact'));
@@ -89,12 +97,16 @@ class AdminBookController extends BookController
             'ageCategory' => 'required|integer',
             'owner' => 'required|string',
             'locationCode' => 'string|nullable',
-            'visible' => 'required|string'
+            'visible' => 'required|string',
+            'binding' => 'string|nullable',
+            'keys' => 'string|nullable'
         ]);
+
         $photo = null;
         if ($_FILES["photo"]) {
             $photo = $_FILES["photo"];
         }
+
         $message = $this->adminBooksService->editBook($request, $photo);
 
         return Redirect::back()->with('message', $message);
@@ -105,13 +117,15 @@ class AdminBookController extends BookController
         $categories = $this->adminCategoryService->getAllCategories($request);
         $genres = $this->adminGenresService->getAllGenres($request);
         $ageCategories = $this->adminAgeCategoriesService->getAllAgeCategories($request);
+        $locations = $this->adminLocationService->getAllLocations($request);
 
         $compact =
             [
                 'categories' => $categories,
                 'genres' => $genres,
                 'ageCategories' => $ageCategories,
-                'config' => $this->config
+                'config' => $this->config,
+                'locations' => $locations
             ];
 
         return view('admin/admin-book-add', compact('compact'));
@@ -136,7 +150,7 @@ class AdminBookController extends BookController
             'genres' => 'required',
             'ageCategory' => 'required|integer',
             'owner' => 'required|string',
-            'locationCode' => 'string|nullable',
+            'binding' => 'string|nullable',
             'visible' => 'required|string',
             'keys' => 'string|nullable'
         ]);

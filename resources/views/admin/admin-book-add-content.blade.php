@@ -145,6 +145,18 @@
                         @endif
                     </div>
                 </div>
+                <div class="form-group col-2 {{ $errors->has('binding') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="binding">Oprawa</label>
+                    <div class="col-12">
+                        <input id="binding" name="binding" type="text" class="form-control input-md"
+                               value="{{ old('binding') ? old('binding') : ''}}">
+                        @if ($errors->has('binding'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('binding') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-12 {{ $errors->has('description') ? ' has-error' : '' }} width_customize">
@@ -224,9 +236,11 @@
                 <div class="form-group col-6 {{ $errors->has('owner') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="owner">Właściciel</label>
                     <div class="col-12">
-                        <input id="owner" name="owner" type="text" class="form-control input-md"
-                               required=""
-                               value="{{ old('owner') ? old('owner') : ''}}">
+                        <select id="owner" name="owner" class="form-control" id="owner">
+                            @foreach($compact['locations'] as $location)
+                                <option value="{{$location['id']}}">{{$location['name'] . ' ' . $location['address']}}</option>
+                            @endforeach
+                        </select>
                         @if ($errors->has('owner'))
                             <span class="help-block">
                                         <strong>{{ $errors->first('owner') }}</strong>
@@ -234,14 +248,14 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('locationCode') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="locationCode">Kod lokalizacji</label>
+                <div class="form-group col-6 {{ $errors->has('keys') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="keys">Słowa kluczowe</label>
                     <div class="col-12">
-                        <input id="locationCode" name="locationCode" type="text" class="form-control input-md"
-                               value="{{ old('locationCode') ? old('locationCode') : ''}}">
-                        @if ($errors->has('locationCode'))
+                        <input id="keys" name="keys" type="text" class="form-control input-md"
+                               value="{{ old('keys') ? old('keys') : ''}}">
+                        @if ($errors->has('keys'))
                             <span class="help-block">
-                                        <strong>{{ $errors->first('locationCode') }}</strong>
+                                        <strong>{{ $errors->first('keys') }}</strong>
                                     </span>
                         @endif
                     </div>

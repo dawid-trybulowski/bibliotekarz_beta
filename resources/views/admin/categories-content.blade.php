@@ -33,7 +33,7 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div id="no-more-tables">
+    <div id="no-more-tables" class="mb-2">
         <table class="col-md-12 table-bordered table-striped table-condensed cf text-center">
             <thead class="cf bg-dark text-white">
             <tr>
@@ -49,8 +49,8 @@
                 <tr>
                     <td data-title="{{__('view.ID')}}">{{$category['id']}}</td>
                     <td data-title="Nazwa">{{$category['name']}}</td>
-                    <td data-title="Data utworzenia">{{$category['created_at']}}</td>
-                    <td data-title="Data edycji">{{$category['updated_at']}}</td>
+                    <td data-title="Data utworzenia">{{$category['created_at'] ?: '-'}}</td>
+                    <td data-title="Data edycji">{{$category['updated_at'] ?: '-'}}</td>
                     <td data-title="Akcje">
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
@@ -69,7 +69,7 @@
             </tbody>
         </table>
     </div>
-    <div class="center-align ">
+    <div class="pagination center pagination-sm flex-sm-wrap">
         {{$compact['categories']->appends(request()->input())->links("pagination::bootstrap-4")}}
     </div>
 </div>

@@ -76,12 +76,14 @@ class ReservationsService
     public function getReservationsByUserId($userId)
     {
         $reservations = $this->reservations
+            ->select('reservations.*', 'books.title', 'books.author')
             ->where('user_id', $userId)
-            ->get();
+            ->join('books', 'reservations.book_id', '=', 'books.id')
+            ->paginate(20);
 
-        $preparedReservations = $this->prepareReservations($reservations);
+       // $preparedReservations = $this->prepareReservations($reservations);
 
-        return $preparedReservations;
+        return $reservations;
     }
 
     public function prepareReservations($reservations)
@@ -99,11 +101,6 @@ class ReservationsService
         }
 
         return $preparedReservations;
-    }
-
-    public function getPreparedReservations($reservations)
-    {
-        return $this->prepareReservations($reservations);
     }
 
     public function reserve(int $bookId, int $userId, bool $external = false)
@@ -174,9 +171,9 @@ class ReservationsService
             )
             ->get();
 
-        $preparedReservations = $this->prepareReservations($reservations);
+        //$preparedReservations = $this->prepareReservations($reservations);
 
-        return $preparedReservations;
+        return $reservations;
     }
 
     public function cancelReservation($reservationId, $userId)

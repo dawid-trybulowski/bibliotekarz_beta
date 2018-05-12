@@ -28,7 +28,7 @@
     </div>
 </div>
 <div class="container-fluid">
-        <div id="no-more-tables">
+        <div id="no-more-tables" class="mb-2">
             <table class="col-md-12 table-bordered table-striped table-condensed cf text-center">
                 <thead class="cf bg-dark text-white">
                 <tr>
@@ -53,10 +53,10 @@
                         <td  data-title="{{__('view.Autor')}}">{{$reservation['author']}}</td>
                         <td  data-title="ID egzemplarza">{{$reservation['item_id']}}</td>
                         <td  data-title="ID użytkownika">{{$reservation['user_id']}}</td>
-                        <td  data-title="Dane użytkownika">{{$reservation['first_name'] . ' ' . $reservation['surname']}}</td>
-                        <td  data-title="ID wypożyczenia">{{$reservation['borrow_id'] ? $reservation['borrow_id'] : '-'}}</td>
-                        <td  data-title="{{__('view.Data rozpoczęcia')}}">{{$reservation['reservation_date_start']}}</td>
-                        <td  data-title="{{__('view.Data zakończenia')}}">{{$reservation['reservation_date_end']}}</td>
+                        <td  data-title="Użytkownik">{{$reservation['first_name'] . ' ' . $reservation['surname']}}</td>
+                        <td  data-title="ID wypożyczenia">{{$reservation['borrow_id'] ?: '-'}}</td>
+                        <td  data-title="{{__('view.Rozpoczęcie')}}">{{$reservation['reservation_date_start'] ?: '-'}}</td>
+                        <td  data-title="{{__('view.Zakończenie')}}">{{$reservation['reservation_date_end'] ?: '-'}}</td>
                         <td  data-title="{{__('view.Status')}}">{{$compact['config']['reservations_statuses'][$reservation['status']]['string']}}</td>
                         <td  data-title="{{__('view.Akcje')}}">
                             @if(!$reservation['borrow_id'] && $reservation['status'] == 1)
@@ -82,7 +82,9 @@
                 </tbody>
             </table>
         </div>
-    <div class="centered_new">{{$compact['reservations']->render()}}</div>
+    <div class="pagination center pagination-sm flex-sm-wrap">
+        {{$compact['reservations']->appends(request()->input())->links("pagination::bootstrap-4")}}
+    </div>
 </div>
 
 </div>

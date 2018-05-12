@@ -68,7 +68,8 @@ class BorrowsService
     {
         $borrows = $this->borrows
             ->where('user_id', $userId)
-            ->get();
+            ->join('books', 'borrows.book_id', '=', 'books.id')
+            ->paginate(20);
 
         return $borrows;
     }
@@ -108,7 +109,7 @@ class BorrowsService
                 ['user_id', '=', (int)$userId],
                 ['status', '=', 3]
             ])
-            ->get();
+            ->paginate(20);
         $this->prepareBorrows($dealayedBorrows);
 
         return $dealayedBorrows;

@@ -3,7 +3,6 @@
         <h2 class="ml-3 mt-2">Wyszukiwanie</h2>
         <form class="col-12 mt-4 pl-0 pr-0" action="{{route('index')}}">
             <input type="hidden" value="search" name="action">
-            {{ csrf_field() }}
             <div class="form-row col-12">
                 <div class="form-group col-6">
                     <select class="form-control" id="sortSelect" name="search_1_searchBy">

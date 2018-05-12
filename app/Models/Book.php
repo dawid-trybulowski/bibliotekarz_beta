@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class Book extends Model
 {
@@ -70,7 +71,12 @@ class Book extends Model
     public function search($search, $category, $genre, $orderBy, $orderDirection)
     {
         $where = $this->prepareWhereQuery($search, (int)$category, (int)$genre);
-
+//var_dump($where);
+//var_dump($category);
+//var_dump($genre);
+//var_dump($orderBy);
+//var_dump($orderDirection);
+//die;
         $books = $this
             ->select(
                 'books.*',
@@ -81,23 +87,30 @@ class Book extends Model
                 'age_categories.id as age_categories_id',
                 'age_categories.name as age_categories_name',
                 'age_categories.min_age as age_categories_min_age',
-                'age_categories.max_age as age_categories_max_age'
+                'age_categories.max_age as age_categories_max_age',
+                'locations.id as locations_id',
+                'locations.name as locations_name',
+                'locations.address as locations_address'
             )
-            ->join('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
-            ->join('genres', 'books_have_genres.genre_id', '=', 'genres.id')
-            ->join('categories', 'books.category_id', '=', 'categories.id')
-            ->join('age_categories', 'books.age_category_id', '=', 'age_categories.id')
             ->where($where[0]['searchBy'], $where[0]['mark'], $where[0]['text'])
             ->where($where[1]['searchBy'], $where[1]['mark'], $where[1]['text'])
             ->where($where[2]['searchBy'], $where[2]['mark'], $where[2]['text'])
             ->where($where[3]['searchBy'], $where[3]['mark'], $where[3]['text'])
             ->where($where[4]['searchBy'], $where[4]['mark'], $where[4]['text'])
             ->where($where[5]['searchBy'], $where[5]['mark'], $where[5]['text'])
+            ->where('books.active', 1)
+            ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
+            ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
+            ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
+            ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
+            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
             ->orderBy('books.' . $orderBy, $orderDirection);
 
         return $books;
     }
-    public function adminSearch($search, $orderBy, $orderDirection){
+
+    public function adminSearch($search, $orderBy, $orderDirection)
+    {
         $where = $this->prepareWhereQuery($search, null, null);
         $books = $this
             ->select(
@@ -109,12 +122,16 @@ class Book extends Model
                 'age_categories.id as age_categories_id',
                 'age_categories.name as age_categories_name',
                 'age_categories.min_age as age_categories_min_age',
-                'age_categories.max_age as age_categories_max_age'
+                'age_categories.max_age as age_categories_max_age',
+                'locations.id as locations_id',
+                'locations.name as locations_name',
+                'locations.address as locations_address'
             )
-            ->join('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
-            ->join('genres', 'books_have_genres.genre_id', '=', 'genres.id')
-            ->join('categories', 'books.category_id', '=', 'categories.id')
-            ->join('age_categories', 'books.age_category_id', '=', 'age_categories.id')
+            ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
+            ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
+            ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
+            ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
+            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
             ->where($where[0]['searchBy'], $where[0]['mark'], $where[0]['text'])
             ->orderBy($orderBy, $orderDirection);
 
@@ -127,12 +144,12 @@ class Book extends Model
         if (!empty($category)) {
             array_push($where, ['searchBy' => 'books.category_id', 'mark' => '=', 'text' => $category]);
         } else {
-            array_push($where, ['searchBy' => 'books.category_id', 'mark' => '>', 'text' => 0]);
+            array_push($where, ['searchBy' => 'books.id', 'mark' => '>', 'text' => 0]);
         }
         if (!empty($genre)) {
             array_push($where, ['searchBy' => 'books_have_genres.genre_id', 'mark' => '=', 'text' => $genre]);
         } else {
-            array_push($where, ['searchBy' => 'books_have_genres.genre_id', 'mark' => '>', 'text' => 0]);
+            array_push($where, ['searchBy' => 'books.id', 'mark' => '>', 'text' => 0]);
         }
 
         return $where;
@@ -162,13 +179,17 @@ class Book extends Model
                 'age_categories.id as age_categories_id',
                 'age_categories.name as age_categories_name',
                 'age_categories.min_age as age_categories_min_age',
-                'age_categories.max_age as age_categories_max_age'
+                'age_categories.max_age as age_categories_max_age',
+                'locations.id as locations_id',
+                'locations.name as locations_name',
+                'locations.address as locations_address'
             )
             ->where('books.active', 1)
             ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
             ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
             ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
             ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
+            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
             ->orderBy('id', 'DESC');
     }
 
@@ -193,10 +214,12 @@ class Book extends Model
                     ['active', '=', 1]
                 ]
             )
-            ->join('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
-            ->join('genres', 'books_have_genres.genre_id', '=', 'genres.id')
-            ->join('categories', 'books.category_id', '=', 'categories.id')
-            ->join('age_categories', 'books.age_category_id', '=', 'age_categories.id');
+            ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
+            ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
+            ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
+            ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
+            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
+            ->orderBy('id', 'DESC');
     }
 
     public function cancelBorrowForBook($bookId, $items)
@@ -219,9 +242,17 @@ class Book extends Model
 
     public function addItem($bookId)
     {
-        return $this
+        $result = $this
             ->where('id', (int)$bookId)
             ->increment('items');
+        if ($result) {
+            $result2 = $this
+                ->where('id', (int)$bookId)
+                ->update(['status' => 1]);
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     public function updateRate($bookId, $calculatedRate, $rateSum, $rateCount)

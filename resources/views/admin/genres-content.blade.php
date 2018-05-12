@@ -34,7 +34,7 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div id="no-more-tables">
+    <div id="no-more-tables" class="mb-2">
         <table class="col-md-12 table-bordered table-striped table-condensed cf text-center">
             <thead class="cf bg-dark text-white">
             <tr>
@@ -50,8 +50,8 @@
                 <tr>
                     <th data-title="{{__('view.ID')}}">{{$genre['id']}}</th>
                     <td data-title="Nazwa gatunku">{{$genre['name']}}</td>
-                    <td data-title="Data utworzenia">{{$genre['created_at']}}</td>
-                    <td data-title="Data edycji">{{$genre['updated_at']}}</td>
+                    <td data-title="Data utworzenia">{{$genre['created_at'] ?: '-'}}</td>
+                    <td data-title="Data edycji">{{$genre['updated_at'] ?: '-'}}</td>
                     <td data-title="Akcje">
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
@@ -72,8 +72,8 @@
             </tbody>
         </table>
     </div>
-    <div class="center-align ">
-        {{$compact['genres']->links("pagination::bootstrap-4")}}
+    <div class="pagination center pagination-sm flex-sm-wrap">
+        {{$compact['genres']->appends(request()->input())->links("pagination::bootstrap-4")}}
     </div>
 </div>
 

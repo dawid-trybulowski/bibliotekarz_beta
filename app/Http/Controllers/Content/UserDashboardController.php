@@ -72,7 +72,7 @@ class UserDashboardController
     public function userDashboardBorrowsHistory(){
         $userId = Auth::User()->id;
 
-        $borrows = $this->borrowsService->getPreparedBorrows($userId);
+        $borrows = $this->borrowsService->getBorrowsByUserId($userId);
 
         $compact =
             [

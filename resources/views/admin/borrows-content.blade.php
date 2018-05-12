@@ -30,7 +30,7 @@
     </div>
 </div>
 <div class="container-fluid">
-    <div id="no-more-tables">
+    <div id="no-more-tables" class="mb-2">
         <table class="col-md-12 table-bordered table-striped table-condensed cf text-center">
             <thead class="cf bg-dark text-white">
             <tr>
@@ -54,9 +54,9 @@
                     <td data-title="{{__('view.Autor')}}">{{$borrow['author']}}</td>
                     <td data-title="ID egzemplarza">{{$borrow['item_id']}}</td>
                     <td data-title="ID użytkownika">{{$borrow['user_id']}}</td>
-                    <td data-title="Dane użytkownika">{{$borrow['first_name'] . ' ' . $borrow['second_name'] . ' ' . $borrow['surname']}}</td>
-                    <td data-title="{{__('view.Data rozpoczęcia')}}">{{$borrow['borrow_date_start']}}</td>
-                    <td data-title="{{__('view.Data zakończenia')}}">{{$borrow['borrow_date_end']}}</td>
+                    <td data-title="Użytkownik">{{$borrow['first_name'] . ' ' . $borrow['second_name'] . ' ' . $borrow['surname']}}</td>
+                    <td data-title="{{__('view.Rozpoczęcie')}}">{{$borrow['borrow_date_start']}}</td>
+                    <td data-title="{{__('view.Zakończenie')}}">{{$borrow['borrow_date_end']}}</td>
                     <td data-title="{{__('view.Status')}}">{{$compact['config']['borrows_statuses'][$borrow['status']]['string']}}</td>
                     <td data-title="{{__('view.Akcje')}}">
                         @if($borrow['status'] == 2 || $borrow['status'] == 1)
@@ -80,7 +80,9 @@
             </tbody>
         </table>
     </div>
-    <div class="centered_new">{{$compact['borrows']->render()}}</div>
+    <div class="pagination center pagination-sm flex-sm-wrap">
+        {{$compact['borrows']->appends(request()->input())->links("pagination::bootstrap-4")}}
+    </div>
 </div>
 
 </div>

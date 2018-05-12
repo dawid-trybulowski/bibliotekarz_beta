@@ -99,7 +99,7 @@ class AdminItemService extends ItemService
                 'book_id' => (int)$request->bookId,
                 'comment' => $request->comment,
                 'location_code' => $request->locationCode,
-                'status' => 1,
+                'status' => 0,
                 'active' => $active,
                 "created_at" => \Carbon\Carbon::now(), # \Datetime()
                 "updated_at" => \Carbon\Carbon::now(),  # \Datetime()
@@ -109,7 +109,7 @@ class AdminItemService extends ItemService
 
         if ($result && $itemAdded) {
             DB::commit();
-            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem.' . ' Id nowego egzemplarza: ' . $result), 200, true);
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem') . '. Id nowego egzemplarza: ' . $result, 200, true);
         } else {
             DB::rollback();
             $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);

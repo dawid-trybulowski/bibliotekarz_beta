@@ -46,7 +46,7 @@ class AdminUserService extends UserService
                         'apartment_number' => $request->apartmentNumber,
                         'post_code' => $request->postCode,
                         'birth_date' => $request->birthDate,
-                        'card_number' => $request->cardId,
+                        'card_number' => $request->cardNumber,
                         'street' => $request->street,
                         'status' => $request->status,
                         'debt' => $request->debt

@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <div class="row col-12">
-        <form class="col-12 mt-4" method="POST" action="{{route('admin-view-config-update')}}">
+    <div class="row col-center">
+        <form class="mt-4 col-12" method="POST" action="{{route('admin-view-config-update')}}">
             <h4>Widok</h4>
-            <div class="form-row col-12">
+            <div class="form-row col-center">
                 {{ csrf_field() }}
-                <div class="form-group col-6 {{ $errors->has('booksPerPage') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('booksPerPage') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="booksPerPage">Ilość pozycji na stronę</label>
                     <div class="col-12">
                         <input id="booksPerPage" name="booksPerPage" type="text" class="form-control input-md" required=""
@@ -16,7 +16,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('ageLimit') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('ageLimit') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="ageLimit">Wyświetlaj pozycje odpowiednie do wieku</label>
                     <div class="col-12">
                         <input id="ageLimit" name="ageLimit" type="checkbox" class="form-control input-md"

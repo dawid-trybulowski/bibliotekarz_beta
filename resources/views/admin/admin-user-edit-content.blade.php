@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <div class="row col-12">
-        <form class="col-12 mt-4" method="POST" action="{{route('admin-user-edit')}}" enctype="multipart/form-data">
+    <div class="row">
+        <form class="mt-4 col-12" method="POST" action="{{route('admin-user-edit')}}" enctype="multipart/form-data">
             <div class="form-row col-12">
                 {{ csrf_field() }}
                 <input type="hidden" name="id" value="{{$compact['user']['id']}}">
-                <div class="form-group col-6 {{ $errors->has('login') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('login') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="login">Login</label>
                     <div class="col-12">
                         <input id="login" name="login" type="text" class="form-control input-md" required=""
@@ -16,7 +16,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('email') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="email">E-mail</label>
                     <div class="col-12">
                         <input id="email" name="email" type="email" class="form-control input-md"
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="form-row col-12">
-                <div class="form-group col-4 {{ $errors->has('firstName') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('firstName') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="firstName">Pierwsze imię</label>
                     <div class="col-12">
                         <input id="firstName" name="firstName" type="text" class="form-control input-md" required=""
@@ -42,7 +42,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('secondName') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('secondName') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="secondName">Drugie imię</label>
                     <div class="col-12">
                         <input id="secondName" name="secondName" type="text" class="form-control input-md"
@@ -54,7 +54,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('surname') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('surname') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="surname">Nazwisko</label>
                     <div class="col-12">
                         <input id="surname" name="surname" type="text" class="form-control input-md"
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="form-row col-12">
-                <div class="form-group col-6 {{ $errors->has('city') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('city') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="city">Miejscowość</label>
                     <div class="col-12">
                         <input id="city" name="city" type="text" class="form-control input-md" required=""
@@ -80,7 +80,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-6 {{ $errors->has('street') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('street') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="street">Ulica</label>
                     <div class="col-12">
                         <input id="street" name="street" type="text" class="form-control input-md"
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="form-row col-12">
-                <div class="form-group col-4 {{ $errors->has('houseNumber') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('houseNumber') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="houseNumber">Numer domu</label>
                     <div class="col-12">
                         <input id="houseNumber" name="houseNumber" type="text" class="form-control input-md" required=""
@@ -106,7 +106,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('apartmentNumber') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('apartmentNumber') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="apartmentNumber">Numer mieszkania</label>
                     <div class="col-12">
                         <input id="apartmentNumber" name="apartmentNumber" type="text" class="form-control input-md"
@@ -118,7 +118,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('postCode') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('postCode') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="postCode">Kod pocztowy</label>
                     <div class="col-12">
                         <input id="postCode" name="postCode" type="text" class="form-control input-md"
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="form-row col-12">
-                <div class="form-group col-4 {{ $errors->has('birthDate') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('birthDate') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="birthDate">Data urodzenia (YYYY-MM-DD)</label>
                     <div class="col-12">
                         <input id="birthDate" name="birthDate" type="text" class="form-control input-md" required=""
@@ -144,7 +144,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('cardNumber') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('cardNumber') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="cardNumber">Numer karty bibliotecznej</label>
                     <div class="col-12">
                         <input id="cardNumber" name="cardNumber" type="text" class="form-control input-md"
@@ -156,7 +156,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('debt') ? ' has-error' : '' }}">
+                <div class="form-group col-4 {{ $errors->has('debt') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="debt">Kwota zadłużenia</label>
                     <div class="col-12">
                         <input id="debt" name="debt" type="text" class="form-control input-md"
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="form-row col-12">
-                <div class="form-group col-6 {{ $errors->has('status') ? ' has-error' : '' }}">
+                <div class="form-group col-6 {{ $errors->has('status') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="status">Status</label>
                     <div class="col-12">
                         <select id="status" name="status" class="form-control">

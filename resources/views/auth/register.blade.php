@@ -124,7 +124,7 @@
                     <div class="form-group col-6 {{ $errors->has('street') ? ' has-error' : '' }} width_customize">
                         <label class="col-12 control-label" for="street">{{__('view.Ulica')}}</label>
                         <div class="col-12">
-                            <input id="street" name="street" type="text" class="form-control input-md" required=""
+                            <input id="street" name="street" type="text" class="form-control input-md"
                                    value="{{ old('street')}}">
                             @if ($errors->has('street'))
                                 <span class="help-block">
@@ -178,7 +178,7 @@
                 <div class="form-row col-12">
                     <div class="form-group col-6 {{ $errors->has('birthDate') ? ' has-error' : '' }} width_customize">
                         <label class="col-12 control-label"
-                               for="birthDate">{{__('view.Data urodzenia') . __('view.*')}}</label>
+                               for="birthDate">{{__('view.Data urodzenia') . __('view.*') . ' (rrrr-mm-dd)'}}</label>
                         <div class="col-12">
                             <input id="birthDate" name="birthDate" type="text" class="form-control input-md" required=""
                                    value="{{ old('birthDate')}}">

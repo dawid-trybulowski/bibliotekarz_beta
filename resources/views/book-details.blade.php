@@ -1,6 +1,7 @@
 <div class="row m-0 p-0" id="{{'bookDetailsRow_' . $book['id']}}" style="display:none">
-    <div class="col-3 center-align centered_new width_customize"><span class="align-middle"><img class="img-fluid align-middle"
-                                                                                 src="{{asset('img/'.$book->image_url)}}"></span>
+    <div class="col-3 center-align centered_new width_customize"><span class="align-middle"><img
+                    class="img-fluid align-middle"
+                    src="{{asset('img/'.$book->image_url)}}"></span>
     </div>
     <div class="col-5 text-justify width_customize">
         <div class="card mt-2">
@@ -26,7 +27,8 @@
                         </div>
                         <div class="text-center">
                             <label for="commentsTextArea_{{$book->id}}">{{__('view.Komentarz')}}</label>
-                            <textarea class="form-control" id="commentsTextArea_{{$book->id}}" rows="3" name="comment"></textarea>
+                            <textarea class="form-control" id="commentsTextArea_{{$book->id}}" rows="3"
+                                      name="comment"></textarea>
                         </div>
                         <br>
                         <div class="text-center">
@@ -53,9 +55,20 @@
                 </p>
                 <p><i class="font-weight-bold">{{ __('view.Dostępne egzemplarze') . __('view.:')}}</i>
                     {{$book->items}}</p>
+                <p><i class="font-weight-bold">{{ __('view.Lokalizacja') . __('view.:')}}</i>
+                    {{$book->locations_name . ' ' . $book->locations_address}}</p>
+                <p><i class="font-weight-bold">{{ __('view.Słowa kluczowe') . __('view.:')}}</i>
+                    @foreach(explode(',', $book->keys) as $key)
+                        {{$key . ' '}}
+                    @endforeach
+                </p>
                 <p><i class="font-weight-bold">{{ __('view.Średnia ocena') . __('view.:')}}</i>
-                    {!!(float)$book['rate'] > 0 ? $book->rate . ' ' . ' <span style="color:'.$compact['config']['books_rates'][round($book['rate'])]['color'] . '">' . $compact['config']['books_rates'][round($book['rate'])]['string'] . '</span>'  : __('view.Brak ocen')!!}</p>
-                <a href="{{route('show-book-page', ['bookId' => $book['id']])}}"><p class="text-center">Pokaż szczegóły</p></a>
+                    {!!(float)$book['rate'] > 0 ? $book->rate . ' ' . ' <span style="color:'.$compact['config']['books_rates'][round($book['rate'])]['color'] . '">' . $compact['config']['books_rates'][round($book['rate'])]['string'] . '</span>'  : __('view.Brak ocen')!!}
+                </p>
+                <div class="text-center">
+                    <a href="{{route('show-book-page', ['bookId' => $book['id']])}}"><button type="submit" class="btn btn-outline-dark">Pokaż
+                        szczegóły</button></a>
+                </div>
             </div>
         </div>
         <div class="card mt-2 mb-2">
@@ -64,7 +77,8 @@
                     @foreach($compact['comments'][$book->id] as $comment)
                         <h5 class="card-title">{{$comment->user->login}}</h5>
                         <h6 class="card-subtitle text-muted">{{$comment->created_at}}</h6>
-                        <h6 class="card-subtitle text-muted">Ocena: {!! '<span style="color:'.$compact['config']['books_rates'][round($comment['rate'])]['color'] . '">' . $comment->rate . '</span>' !!}</h6>
+                        <h6 class="card-subtitle text-muted">
+                            Ocena: {!! '<span style="color:'.$compact['config']['books_rates'][round($comment['rate'])]['color'] . '">' . $comment->rate . '</span>' !!}</h6>
                         <p class="card-text">{{$comment->comment}}</p>
                     @endforeach
                 @else

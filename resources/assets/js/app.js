@@ -103,7 +103,7 @@ var menu = new Vue({
                             '<td data-title="Tytuł">' + reservation.book_title + '</td>' +
                             '<td data-title="Autor" class="numeric">' + reservation.book_author + '</td>' +
                             '<td data-title="Rozpoczęcie" class="numeric">' + reservation.reservation_date_start + '</td>' +
-                            '<td data-title="Zakońćzenie" class="numeric">' + reservation.reservation_date_end + '</td>' +
+                            '<td data-title="Zakończenie" class="numeric">' + reservation.reservation_date_end + '</td>' +
                             '<td data-title="Akcje" class="numeric"><a href="cancelReservation/' + reservation.id + '"><button type="button" class="btn btn-danger btn-sm">Anuluj</button></a></td>' +
                             '</tr>';
                         $('#activeReservationsTbody').append(row);

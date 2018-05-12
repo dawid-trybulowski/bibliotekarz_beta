@@ -23,17 +23,19 @@
                         <td data-title="{{__('view.ID')}}" class="numeric">{{$delayedBorrow->id}}</td>
                         <td data-title="{{__('view.Tytuł')}}" class="numeric">{{$delayedBorrow->book_title}}</td>
                         <td data-title="{{__('view.Autor')}}" class="numeric">{{$delayedBorrow->book_author}}</td>
-                        <td data-title="{{__('view.Data rozpoczęcia')}}" class="numeric">{{$delayedBorrow->borrow_date_start}}</td>
-                        <td data-title="{{__('view.Data zakończenia')}}" class="numeric">{{$delayedBorrow->borrow_date_end}}</td>
-                        <td data-title="{{__('view.Dni opóźnienia')}}" class="numeric">{{$delayedBorrow->delay}}</td>
-                        <td data-title="{{__('view.Koszt opóźnienia')}}" class="numeric">{{$delayedBorrow->delay_cost . ' PLN'}}</td>
+                        <td data-title="{{__('view.Rozpoczęcie')}}" class="numeric">{{$delayedBorrow->borrow_date_start}}</td>
+                        <td data-title="{{__('view.Zakończenie')}}" class="numeric">{{$delayedBorrow->borrow_date_end}}</td>
+                        <td data-title="{{__('view.Opóźnienie')}}" class="numeric">{{$delayedBorrow->delay}}</td>
+                        <td data-title="{{__('view.Koszt')}}" class="numeric">{{$delayedBorrow->delay_cost . ' PLN'}}</td>
                         <td data-title="{{__('view.Status')}}" class="numeric">{{$compact['config']['borrows_statuses'][$delayedBorrow->status]['string']}}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
-
+        <div class="pagination center mt-2">
+            {{$compact['delayedBorrows']->appends(request()->input())->links("pagination::bootstrap-4")}}
+        </div>
     </div>
     <div class="col-12">
         <h2 class="mb-2 mt-2">{{__('view.Do zapłaty') . ': ' . Auth::User()->debt / 100 . ' PLN'}}</h2>

@@ -49,6 +49,8 @@ class AdminBooksService extends BooksService
                     'category_id' => $request->category,
                     'age_category_id' => $request->ageCategory,
                     'visible' => $visible,
+                    'binding' => $request->binding,
+                    'keys' => $request->keys
                 ]
             )) {
             $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
@@ -91,15 +93,15 @@ class AdminBooksService extends BooksService
                     'edition' => $request->edition,
                     'publication_year' => $request->publicationYear,
                     'owner' => $request->owner,
-                    'location_code' => $request->locationCode,
                     'description' => $request->description,
                     'image_url' => $photo,
                     'category_id' => $request->category,
                     'age_category_id' => $request->ageCategory,
                     'status' => 0,
                     'items' => 0,
+                    'binding' => $request->binding,
                     'keys' => $request->keys,
-                    'visible' => $visible,
+                    'visible' => $visible
                 ]
             );
         if ($bookId) {
@@ -142,9 +144,9 @@ class AdminBooksService extends BooksService
             $uploadOk = 0;
         }
 // Check if file already exists
-        if (file_exists($target_file)) {
-            $uploadOk = 0;
-        }
+//        if (file_exists($target_file)) {
+//            $uploadOk = 0;
+//        }
 // Check file size
         if ($photo["size"] > 500000) {
             $uploadOk = 0;

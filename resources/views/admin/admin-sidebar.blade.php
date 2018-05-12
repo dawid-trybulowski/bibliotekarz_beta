@@ -32,6 +32,9 @@
             <li>
                 <a href="{{route('admin-age-categories')}}">Kategorie wiekowe</a>
             </li>
+            <li>
+                <a href="{{route('admin-locations')}}">Lokalizacje</a>
+            </li>
             <li class="sidebar-brand bg-secondary">
                 <span class="text-white">
                     Zarządzanie użytkownikami
