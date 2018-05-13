@@ -18110,8 +18110,148 @@ window.Vue = _vue2.default;
  */
 
 new _vue2.default({
-  el: '#app',
-  components: { books: _Books2.default, topmenu: _Topmenu2.default, topmenulogged: _Topmenulogged2.default, userdetails: _Userdetails2.default, userdashboardloginedit: _Userdashboardloginedit2.default }
+    el: '#app',
+    data: function data() {
+        return {
+            showDetailsProp: []
+        };
+    },
+    methods: {
+        setBooks: function setBooks(books) {
+            var self = this;
+            $.each(books, function (key, value) {
+                _vue2.default.set(self.showDetailsProp, value.id, false);
+            });
+        },
+        showDetailsFunction: function showDetailsFunction(id) {
+            var self = this;
+            console.log('#bookDetailsRow_' + id);
+            if ($('#bookDetailsRow_' + id).is(":visible")) {
+                $('#bookDetailsRow_' + id).slideToggle(function () {
+                    $('#arrow_' + id).removeClass('fa-angle-double-up');
+                    $('#arrow_' + id).addClass('fa-angle-double-down');
+                    $('#bookItem_' + id).removeClass('active');
+                });
+            } else {
+                $('#bookItem_' + id).addClass('active');
+                $('#arrow_' + id).removeClass('fa-angle-double-down');
+                $('#arrow_' + id).addClass('fa-angle-double-up');
+                $('#bookDetailsRow_' + id).slideToggle(function () {});
+            }
+        },
+        showActiveReservationsModal: function showActiveReservationsModal() {
+            console.log('tutaj');
+            $('#activeReservationsModal').modal('show');
+        },
+        showPrzelewy24PaymentsModal: function showPrzelewy24PaymentsModal() {
+            $('#przelewy24PaymentsModal').modal('show');
+        },
+        showCommuniquesModal: function showCommuniquesModal() {
+            $('#communiquesModal').modal('show');
+        },
+        showAddCommuniqueModal: function showAddCommuniqueModal() {
+            $('#addCommuniqueModal').modal('show');
+        },
+        showPaymentsDataModal: function showPaymentsDataModal() {
+            $('#paymentsDataModal').modal('show');
+        },
+        showBorrowForUserModal: function showBorrowForUserModal(bookId) {
+            $('#bookId').val(bookId);
+            $('#borrowForUserModal').modal('show');
+        }
+    }
+});
+
+var menu = new _vue2.default({
+    el: '#menu',
+    data: function data() {
+        return {
+            activeReservationsLoaded: false,
+            activeBorrowsLoaded: false,
+            waitingListLoaded: false
+        };
+    },
+    methods: {
+        showActiveReservationsModal: function showActiveReservationsModal() {
+            $.post("activeReservationsByUser", function (data) {
+                var self = this;
+                if (data.length > 0) {
+                    $('#activeReservationsThead').empty();
+                    $('#activeReservationsTbody').empty();
+                    var mainRow = '<tr>' + '<th class="numeric">ID</th>' + '<th class="numeric">Tytuł</th>' + '<th class="numeric">Autor</th>' + '<th class="numeric">Data rozpoczęcia</th>' + '<th class="numeric">Data zakonczenia</th>' + '<th class="numeric">Akcje</th>' + '</tr>';
+                    $('#activeReservationsThead').append(mainRow);
+                    $.each(data, function (key, reservation) {
+                        var row = '<tr>' + '<td data-title="ID">' + reservation.id + '</td>' + '<td data-title="Tytuł">' + reservation.book_title + '</td>' + '<td data-title="Autor" class="numeric">' + reservation.book_author + '</td>' + '<td data-title="Rozpoczęcie" class="numeric">' + reservation.reservation_date_start + '</td>' + '<td data-title="Zakończenie" class="numeric">' + reservation.reservation_date_end + '</td>' + '<td data-title="Akcje" class="numeric"><a href="cancelReservation/' + reservation.id + '"><button type="button" class="btn btn-danger btn-sm">Anuluj</button></a></td>' + '</tr>';
+                        $('#activeReservationsTbody').append(row);
+                    });
+                } else {
+                    $('#activeReservationsTable').append('Brak aktywnych rezerwacji');
+                }
+                $('.loaderReservations').remove();
+                self.activeReservationsLoaded = true;
+            });
+            $('#activeReservationsModal').modal('show');
+        },
+        showActiveBorrowsModal: function showActiveBorrowsModal() {
+            $.post("activeBorrowsByUser", function (data) {
+                if (data.length > 0) {
+                    $('#activeBorrowsThead').empty();
+                    $('#activeBorrowsTbody').empty();
+                    var mainRow = '<tr>' + '<th class="numeric">ID</th>' + '<th class="numeric">Tytuł</th>' + '<th class="numeric">Autor</th>' + '<th class="numeric">Data rozpoczęcia</th>' + '<th class="numeric">Data zakończenia</th>' + '<th class="numeric">Akcje</th>' + '</tr>';
+                    $('#activeBorrowsThead').append(mainRow);
+                    $.each(data, function (key, borrow) {
+                        var row = '<tr>' + '<td data-title="ID" class="numeric text-center">' + borrow.id + '</td>' + '<td data-title="Tytuł" class="numeric text-center">' + borrow.book_title + '</td>' + '<td data-title="Autor" class="numeric text-center">' + borrow.book_author + '</td>' + '<td data-title="Rozpoczęcie" class="numeric text-center">' + borrow.borrow_date_start + '</td>' + '<td data-title="Zakończenie" class="numeric text-center">' + borrow.borrow_date_end + '</td>' + '<td data-title="Akcje" class="numeric text-center"><a href="extendBorrow/' + borrow.id + '"><button type="button" class="btn btn-danger btn-sm">Przedłuż</button></a></td>' + '</tr>';
+                        $('#activeBorrowsTbody').append(row);
+                    });
+                } else {
+                    $('#activeBorrowsTable').append('Brak aktywnych wypożyczeń');
+                }
+            });
+            $('#activeBorrowsModal').modal('show');
+            $('.loaderBorrows').remove();
+            self.activeBorrowsLoaded = true;
+        },
+        showWaitingListModal: function showWaitingListModal() {
+            $.post("waitingListByUser", function (data) {
+
+                if (data.length > 0) {
+                    $('#waitingListThead').empty();
+                    $('#waitingListTbody').empty();
+                    var mainRow = '<tr>' + '<th class="numeric">ID</th>' + '<th class="numeric">Tytuł</th>' + '<th class="numeric">Autor</th>' + '<th class="numeric">Data rozpoczęcia</th>' + '<th class="numeric">Pozycja w kolejce</th>' + '<th class="numeric">Akcje</th>' + '</tr>';
+                    $('#waitingListThead').append(mainRow);
+                    $.each(data, function (key, waitingListElement) {
+                        var row = '<tr>' + '<td data-title="ID">' + waitingListElement.id + '</td>' + '<td data-title="Tytuł">' + waitingListElement.title + '</td>' + '<td data-title="Autor" class="numeric">' + waitingListElement.author + '</td>' + '<td data-title="Rozpoczęcie" class="numeric">' + waitingListElement.created_at + '</td>' + '<td data-title="Pozycja w kolejce" class="numeric">' + waitingListElement.position + '</td>' + '<td data-title="Akcje" class="numeric"><a href="cancelWaitingListElement/' + waitingListElement.id + '"><button type="button" class="btn btn-danger btn-sm">Anuluj</button></a></td>' + '</tr>';
+                        $('#waitingListTbody').append(row);
+                    });
+                } else {
+                    $('#waitingListTable').append('Brak aktywnych wypożyczeń');
+                }
+
+                // $('#waitingListContainer').empty();
+                // var mainRow = '<div class="row col-12 mt-1 border centered_new text-center bg-secondary text-white" >' +
+                //     '<div class="col-4">Tytuł</div>' +
+                //     '<div class="col-3">Autor</div>' +
+                //     '<div class="col-2">Data rozpoczęcia</div>' +
+                //     '<div class="col-2">Pozycja w kolejce</div>' +
+                //     '<div class="col-1"></div>' +
+                //     '</div>';
+                // $('#waitingListContainer').append(mainRow);
+                // var self = this;
+                // $.each(data, function (key, waitingListElement) {
+                //     var row = '<div class="col-12 mt-1"><div class="row col-12 border centered_new text-center" >' +
+                //         '<div class="col-4">' + waitingListElement.title + '</div>' +
+                //         '<div class="col-3">' + waitingListElement.author + '</div>' +
+                //         '<div class="col-2">' + waitingListElement.created_at + '</div>' +
+                //         '<div class="col-2">' + waitingListElement.position + '</div>' +
+                //         '<div class="col-1 centered_new"><a href="cancelWaitingListElement/' + waitingListElement.id + '"><button type="button" class="btn btn-danger btn-sm">Anuluj</button></a></div></div></div>';
+                //     $('#waitingListContainer').append(row)
+                // });
+            });
+            $('#waitingListModal').modal('show');
+            $('.loaderWaitingList').remove();
+            self.waitingListLoaded = true;
+        }
+    }
 });
 
 },{"./components/Books.vue":6,"./components/Topmenu.vue":7,"./components/Topmenulogged.vue":8,"./components/Userdashboardloginedit.vue":9,"./components/Userdetails.vue":10,"vue/dist/vue.js":3}],6:[function(require,module,exports){
@@ -18131,7 +18271,8 @@ exports.default = {
         return {
             title: '',
             description: '',
-            showDetailsProp: []
+            showDetailsProp: [],
+            arrowClass: []
         };
     },
 
@@ -18204,6 +18345,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     template: '#topmenulogged',
+    mounted: function mounted() {
+        $('.modal').modal();
+    },
     data: function data() {
         return {
             showSearch: false
@@ -18236,21 +18380,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     template: '#userdashboardloginedit',
+    props: ['showTable', 'showModal'],
     mounted: function mounted() {
         $('.modal').modal();
     },
     data: function data() {
-        return {
-            modal: $('#modal1')
-        };
+        console.log(this.showTable);
+        console.log(this.showModal);
+        return {};
     },
 
-    methods: {
-
-        showLoginModal: function showLoginModal() {
-            this.modal.modal('open');
-        }
-    }
+    methods: {}
 
 };
 if (module.exports.__esModule) module.exports = module.exports.default
@@ -18287,6 +18427,7 @@ exports.default = {
                 Vue.set(self.showDetailsProp, id, true);
             }
         }
+
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default

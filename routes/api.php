@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::group(['namespace' => 'Content'], function () {
+    Route::post('user-data-login-edit-api', 'ApiController@userDataLoginEdit')
+        ->name('user-data-login-edit-api')
+        ->middleware('auth:api');
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

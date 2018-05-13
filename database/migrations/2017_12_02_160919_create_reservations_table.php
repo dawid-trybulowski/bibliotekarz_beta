@@ -25,9 +25,19 @@ class CreateReservationsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table->integer('item_id')
+                ->unsigned();
+            $table->foreign('item_id')
+                ->references('id')
+                ->on('items');
+            $table->integer('borrow_id')
+                ->nullable();
+            $table->foreign('borrow_id')
+                ->references('id')
+                ->on('borrows');
             $table->date('reservation_date_start');
             $table->date('reservation_date_end');
-            $table->boolean('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

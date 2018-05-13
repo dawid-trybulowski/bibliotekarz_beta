@@ -1,6 +1,6 @@
 <?php
 
-use App\books_have_genres;
+use App\Models\BooksHaveGenres;
 use Illuminate\Database\Seeder;
 
 class BooksHaveGenresTableSeeder extends Seeder
@@ -12,20 +12,20 @@ class BooksHaveGenresTableSeeder extends Seeder
      */
     public function run()
     {
-     /*   $faker = \Faker\Factory::create();
+        $faker = \Faker\Factory::create();
 
         for ($i = 1; $i < 101; $i++) {
-            $BooksHaveGenres = new books_have_genres();
+            $BooksHaveGenres = new BooksHaveGenres();
             $BooksHaveGenres->book_id = $i;
             $BooksHaveGenres->genre_id = $faker->numberBetween(1,25);
             $BooksHaveGenres->save();
         }
 
         for ($i = 1; $i < 101; $i++) {
-            $BooksHaveGenres = new books_have_genres();
+            $BooksHaveGenres = new BooksHaveGenres();
             $BooksHaveGenres->book_id = $i;
             $BooksHaveGenres->genre_id = $faker->numberBetween(1,25);
             $BooksHaveGenres->save();
-        }*/
+        }
     }
 }

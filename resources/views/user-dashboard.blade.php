@@ -1,17 +1,19 @@
-@include('top')
-@isset ($message)
-    <script>Materialize.toast('{{$message}}', 4000)</script>
-@endisset
-<div id="app">
-    @if(Auth::check())
-        <topmenulogged></topmenulogged>
-    @else
-        <topmenu></topmenu>
-    @endif
-    <userdetails></userdetails>
-</div>
-
-@include('top-menu')
-@include('top-menu-logged')
-@include('user-details')
+<!doctype html>
+<html lang="pl">
+@include('head')
+@yield('head')
+<body>
+<header>
+    <div id="menu">
+        @include('top-menu')
+        @yield('top-menu')
+    </div>
+</header>
+<main>
+    @include('user-dashboard-content')
+    @yield('user-dashboard-content')
+</main>
 @include('footer')
+@yield('footer')
+</body>
+</html>
