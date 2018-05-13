@@ -51,18 +51,6 @@
                     </div>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-6 {{ $errors->has('active') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="active">Dostępny do wypożyczenia</label>
-                    <input id="active" name="active" type="checkbox" class="form-control form-check-input"
-                            {{$compact['item']['active'] ? 'checked' : ''}}>
-                    @if ($errors->has('active'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('active') }}</strong>
-                                    </span>
-                    @endif
-                </div>
-            </div>
             <div class="form-group text-center">
                 <div class="col-12">
                     <input name="reservation" value="{{__('view.Zatwierdź')}}"

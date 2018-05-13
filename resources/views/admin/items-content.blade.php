@@ -68,7 +68,7 @@
                                    href="{{route('admin-item-edit', ['itemId' => $item['id']])}}">Edytuj</a>
                                 <a class="dropdown-item"
                                    href="{{route('admin-item-delete', ['itemId' => $item['id']])}}">
-                                    Usun</a>
+                                    Usuń</a>
                             </div>
                         </div>
                     </td>

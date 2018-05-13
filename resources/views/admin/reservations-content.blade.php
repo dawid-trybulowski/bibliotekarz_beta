@@ -1,6 +1,7 @@
 <div class="container-fluid center-on-customize">
     <div class="row col-12 mt-3 mb-3 internal-div">
         <form class="col-12 width_customize" action="{{route('admin-reservations')}}" method="get">
+            <input type="hidden" name="action" value="adminSearch">
             <select name="searchBy" class="mr-2 width_customize">
                 <option value="" selected>Wyszukaj według...</option>
                 <option value="reservations.id">ID</option>

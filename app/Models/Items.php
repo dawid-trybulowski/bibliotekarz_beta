@@ -139,6 +139,10 @@ class Items extends Model
     {
         return $this
             ->where('id', (int)$itemId)
-            ->delete();
+            ->update(
+                [
+                    'visible' => 0
+                ]
+            );
     }
 }

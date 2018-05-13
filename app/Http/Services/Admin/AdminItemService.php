@@ -123,16 +123,37 @@ class AdminItemService extends ItemService
         $dependencies = $this->checkItemDependencies($itemId);
         foreach ($dependencies as $dependency) {
             if ($dependency['dependencies']) {
-                $message = new Message(__('view.Błąd'), 'Nie możesz usunąć kategorii przypisanej do ' . $dependency['string'], 409, false);
+                $message = new Message(__('view.Błąd'), 'Nie możesz usunąć egzemplarza przypisanego do ' . $dependency['string'], 409, false);
                 return $message;
             }
         }
-        $this->changeIds($itemId,'reservations');
-        $this->changeIds($itemId,'borrows');
+        DB::beginTransaction();
         $result = $this->items->deleteItem($itemId);
+        if($result)
+        {
+            $item = $this->items->getItemById($itemId);
+            $book = $this->books->getBookById($item->book_id);
+            if($item->status == 0 && $book->items == 1){
+                $result = $this->books
+                    ->where('id', $item->book_id)
+                    ->update
+                    (
+                        [
+                            'status' => 0,
+                            'items' => 0
+                        ]
+                    );
+            }elseif($item->status == 0 && $book->items > 1){
+
+                $result = $this->books
+                    ->decrement('items');
+            }
+        }
         if ($result) {
+            DB::commit();
             $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
         } else {
+            DB::rollback();
             $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
         }
         return $message;
@@ -154,7 +175,7 @@ class AdminItemService extends ItemService
         if (count($reservations)) {
             $dependencies['reservations'] =
                 [
-                    'string' => 'książki',
+                    'string' => 'rezerwacji',
                     'ids' => [],
                     'dependencies' => true
                 ];
@@ -165,7 +186,7 @@ class AdminItemService extends ItemService
         } else {
             $dependencies['reservations'] =
                 [
-                    'string' => 'Książki',
+                    'string' => 'rezerwacji',
                     'ids' => [],
                     'dependencies' => false
                 ];
@@ -183,7 +204,7 @@ class AdminItemService extends ItemService
         if (count($borrows)) {
             $dependencies['borrows'] =
                 [
-                    'string' => 'rezerwacji',
+                    'string' => 'wypożyczenia',
                     'ids' => [],
                     'dependencies' => true
                 ];

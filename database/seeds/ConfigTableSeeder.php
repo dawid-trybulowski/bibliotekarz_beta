@@ -75,12 +75,6 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'age_limit';
         $config->type = 'string';
-        $config->value = "1";
-        $config->save();
-
-        $config = new Config();
-        $config->name = 'age_limit';
-        $config->type = 'string';
         $config->value = "0";
         $config->save();
 
@@ -89,12 +83,12 @@ class ConfigTableSeeder extends Seeder
         $config->type = 'json';
         $config->value = '{
   "0": {
-    "string": "Dostępna",
-    "color": "#6eb767"
-  },
-  "1": {
     "string": "Niedostępna",
     "color": "#da4040"
+  },
+  "1": {
+    "string": "Dostępna",
+    "color": "#6eb767"
   },
   "2": {
     "string": "Dostępna w czytelni",
@@ -175,11 +169,7 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'przelewy24_config';
         $config->type = 'json';
-        $config->value = '{
-  "p24_merchant_id": "",
-  "p24_pos_id": "",
-  "crc": ""
-}';
+        $config->value = '{"p24_merchant_id":"","p24_pos_id":"","crc":"","test_mode":"on"}';
         $config->save();
 
         $config = new Config();

@@ -2,6 +2,7 @@
     <div class="row mt-3 mb-3 internal-div">
         <form class="col-12" action="{{route('admin-borrows')}}" method="get">
             <div class="col-12 width_customize">
+                <input type="hidden" name="action" value="adminSearch">
                 <select name="searchBy" class="mr-2 width_customize">
                     <option value="" selected>Wyszukaj według...</option>
                     <option value="borrows.id">ID</option>

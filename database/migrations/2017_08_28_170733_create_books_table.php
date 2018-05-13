@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -60,7 +61,7 @@ class CreateBooksTable extends Migration
                 ->nullable();
             $table->integer('publication_year')
                 ->nullable();
-            $table->integer('owner')
+            $table->integer('location_id')
                 ->unsigned();
             $table->foreign('owner')
                 ->references('id')
@@ -71,7 +72,8 @@ class CreateBooksTable extends Migration
                 ->default(true);
             $table->boolean('visible')
                 ->default(true);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

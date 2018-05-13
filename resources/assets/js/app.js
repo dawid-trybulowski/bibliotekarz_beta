@@ -68,6 +68,10 @@ new Vue({
         showBorrowForUserModal: function (bookId) {
             $('#bookId').val(bookId);
             $('#borrowForUserModal').modal('show');
+        },
+        changePhotoFunction:function(){
+            $('#photoDiv').toggle();
+            $('#imgDiv').toggle();
         }
     }
 });
@@ -78,7 +82,8 @@ var menu = new Vue({
         return {
             activeReservationsLoaded: false,
             activeBorrowsLoaded: false,
-            waitingListLoaded: false
+            waitingListLoaded: false,
+            changePhoto:false
         }
     },
     methods: {

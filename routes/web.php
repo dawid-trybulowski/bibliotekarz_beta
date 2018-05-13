@@ -206,6 +206,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'worker'], function () {
         ->name('admin-location-add');
     Route::get('admin/admin-location-delete', 'AdminLocationController@deleteLocation')
         ->name('admin-location-delete');
+    Route::get('admin/books-delete/{bookId}', 'AdminBookController@deleteBook')
+        ->name('admin-books-delete');
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'admin'], function () {
@@ -243,7 +245,6 @@ Route::post('borrow-lengthen', 'BorrowsController@borrowLengthen')->name('borrow
 Route::post('reservation-cancel', 'ReservationsController@reservationCancel')->name('reservation-cancel');
 Route::post('admin/books-edit', 'BookController@adminBooksEdit')->name('admin-books-edit');
 Route::get('admin/books-edit-show/{bookId}', 'BookController@adminBooksEditShow')->name('admin-books-edit-show');
-Route::get('admin/books-delete/{bookId}', 'BookController@adminBooksDelete')->name('admin-books-delete');
 Route::get('admin/books-add-show', 'BookController@adminBooksAddShow')->name('admin-books-add-show');
 Route::post('admin/books-add', 'BookController@adminBooksAdd')->name('admin-books-add');
 Route::get('admin/users-search', 'UserController@adminUsersSearch')->name('admin-users-search');

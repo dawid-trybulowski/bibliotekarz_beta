@@ -95,11 +95,12 @@ class AdminBookController extends BookController
             'category' => 'required|integer',
             'genres' => 'required',
             'ageCategory' => 'required|integer',
-            'owner' => 'required|string',
+            'locationId' => 'required|integer',
             'locationCode' => 'string|nullable',
-            'visible' => 'required|string',
+            'active' => 'string',
             'binding' => 'string|nullable',
-            'keys' => 'string|nullable'
+            'keys' => 'string|nullable',
+            'changePhoto' => 'string'
         ]);
 
         $photo = null;
@@ -149,9 +150,9 @@ class AdminBookController extends BookController
             'category' => 'required|integer',
             'genres' => 'required',
             'ageCategory' => 'required|integer',
-            'owner' => 'required|string',
+            'locationId' => 'required|integer',
             'binding' => 'string|nullable',
-            'visible' => 'required|string',
+            'active' => 'string',
             'keys' => 'string|nullable'
         ]);
 
@@ -197,5 +198,11 @@ class AdminBookController extends BookController
                     ];
 
         return view('admin/books', compact('compact'));
+    }
+    public function deleteBook(Request $request)
+    {
+        $message = $this->adminBooksService->deleteBook($request);
+
+        return Redirect::back()->with('message', $message);
     }
 }

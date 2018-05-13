@@ -20,7 +20,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use \App\Http\Controllers\Auth\RegistersUsers;
 
     /**
      * Where to redirect users after registration.

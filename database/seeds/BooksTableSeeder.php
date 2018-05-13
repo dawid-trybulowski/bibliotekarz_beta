@@ -15,14 +15,14 @@ class BooksTableSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 1; $i < 200; $i++) {
             $book = new Book();
             $book->title = $faker->word . ' ' . $faker->word;
             $book->unified_title = $book->title;
             $book->author = $faker->randomLetter . '. ' . $faker->lastName();
             $book->description = $faker->text('512');
             $book->subauthors = $faker->randomLetter . '. ' . $faker->lastName() . ', ' . $faker->randomLetter . '. ' . $faker->lastName();
-            $book->status = true;
+            $book->status = 0;
             $book->content_description = 'test';
             $book->items = 2;
             $random = $faker->numberBetween(1, 4);
@@ -48,7 +48,7 @@ class BooksTableSeeder extends Seeder
             $book->pages = $faker->numberBetween(20, 999);
             $book->edition = $faker->numberBetween(0, 10);
             $book->publication_year =  $faker->year();
-            $book->owner = 1;
+            $book->location_id = 1;
             $book->publishing_house = $faker->word;
             $book->keys = $faker->word . ',' . $faker->word . ',' . $faker->word;
             $book->save();
