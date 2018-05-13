@@ -6,7 +6,6 @@
                 <option value="id">ID</option>
                 <option value="surname">Nazwisko</option>
                 <option value="city">Miasto</option>
-                <option value="card_number">Numer kart bibliotecznej</option>
             </select>
             <select name="orderBy" class="mr-2 width_customize">
                 <option value="" selected>Sortuj według...</option>
@@ -37,7 +36,6 @@
                 <th>Nazwisko</th>
                 <th>Miasto</th>
                 <th>Data urodzenia</th>
-                <th>Numer karty bibliotecznej</th>
                 <th>Status</th>
                 <th>Akcje</th>
             </tr>
@@ -51,7 +49,6 @@
                     <td data-title="Nazwisko">{{$user['surname']}}</td>
                     <td data-title="Miasto">{{$user['city']}}</td>
                     <td data-title="Data urodzenia">{{$user['birth_date']}}</td>
-                    <td data-title="Nr karty">{{$user['card_number']}}</td>
                     <td data-title="Status">{{$compact['config']['users_statuses'][$user['status']]['string']}}</td>
                     <td data-title="Akcje">
                         <div class="dropdown">

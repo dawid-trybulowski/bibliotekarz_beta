@@ -22,7 +22,7 @@ class BooksTableSeeder extends Seeder
             $book->author = $faker->randomLetter . '. ' . $faker->lastName();
             $book->description = $faker->text('512');
             $book->subauthors = $faker->randomLetter . '. ' . $faker->lastName() . ', ' . $faker->randomLetter . '. ' . $faker->lastName();
-            $book->status = 0;
+            $book->status = 1;
             $book->content_description = 'test';
             $book->items = 2;
             $random = $faker->numberBetween(1, 4);

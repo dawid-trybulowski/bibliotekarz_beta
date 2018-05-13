@@ -40,6 +40,7 @@
     <div class="col-12">
         <h2 class="mb-2 mt-2">{{__('view.Do zapłaty') . ': ' . Auth::User()->debt / 100 . ' PLN'}}</h2>
     </div>
+    @if((int)$compact['config']['przelewy24_status'])
     <div class="row justify-content-center">
         <div class="col-4 width_customize text-center mb-2">
             <button type="button"
@@ -47,6 +48,7 @@
                     @click="showPrzelewy24PaymentsModal()">{{__('view.Zapłać z Przelewy24')}}</button>
         </div>
     </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-4 width_customize text-center">
             <button type="button"

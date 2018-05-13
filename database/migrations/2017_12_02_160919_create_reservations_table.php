@@ -32,6 +32,7 @@ class CreateReservationsTable extends Migration
                 ->references('id')
                 ->on('items');
             $table->integer('borrow_id')
+                ->unsigned()
                 ->nullable();
             $table->foreign('borrow_id')
                 ->references('id')

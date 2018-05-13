@@ -67,21 +67,6 @@
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('cardId') ? ' has-error' : '' }}">
-
-
-                <div class="input-field col s6">
-                    <input id="cardId" type="text" name="cardId" class="validate"
-                           value="{{ old('cardId') ? old('cardId') : $data['users']->card_number}}">
-                    <label for="card_id">Numer karty bibliotecznej</label>
-                    @if ($errors->has('cardId'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('cardId') }}</strong>
-                                    </span>
-                    @endif
-                </div>
-            </div>
-
             <div class="form-group{{ $errors->has('birthDate') ? ' has-error' : '' }}">
 
                 <div class="input-field col s6">

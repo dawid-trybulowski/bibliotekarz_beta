@@ -95,14 +95,6 @@
                 {{Auth::User()->birth_date ?: '-'}}
             </div>
         </div>
-        <div class="form-group col-4 width_customize">
-            <div class="col-12 bg-secondary text-white border">
-                {{__('view.Numer karty bibliotecznej')}}
-            </div>
-            <div class="col-12 border">
-                {{Auth::User()->card_number ?: '-'}}
-            </div>
-        </div>
     </div>
     <div class="row col-12 mt-3 text-center">
         <div class="form-group align-content-center col-12">

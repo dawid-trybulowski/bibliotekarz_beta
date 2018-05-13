@@ -145,7 +145,7 @@ class AdminBorrowsService extends BorrowsService
     {
         $date = date('Y-m-d');
         return $borrows = $this->borrows
-            ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number', 'users.email')
+            ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.email')
             ->join('users', 'borrows.user_id', '=', 'users.id')
             ->join('books', 'borrows.book_id', '=', 'books.id')
             ->join('items', 'borrows.item_id', '=', 'items.id')

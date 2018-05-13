@@ -40,7 +40,7 @@ class Payments extends Model
     public function getAllPayments(){
         return $this
             ->join('users', 'payments.user_id', '=', 'users.id')
-            ->select('payments.*', 'users.first_name', 'users.surname', 'users.card_number')
+            ->select('payments.*', 'users.first_name', 'users.surname')
             ->paginate(20);
     }
 
@@ -54,14 +54,14 @@ class Payments extends Model
         if ($searchBy !== 'reservations.id') {
             $payments = $this
                 ->join('users', 'payments.user_id', '=', 'users.id')
-                ->select('payments.*', 'users.first_name', 'users.surname', 'users.card_number')
+                ->select('payments.*', 'users.first_name', 'users.surname')
                 ->where($searchBy, 'LIKE', '%' . $text . '%')
                 ->orderBy($orderBy, $orderDirection)
                 ->paginate(20);
         } else {
             $payments = $this
                 ->join('users', 'payments.user_id', '=', 'users.id')
-                ->select('payments.*', 'users.first_name', 'users.surname', 'users.card_number')
+                ->select('payments.*', 'users.first_name', 'users.surname')
                 ->where($searchBy, (int)$text)
                 ->orderBy($orderBy, $orderDirection)
                 ->paginate(20);
