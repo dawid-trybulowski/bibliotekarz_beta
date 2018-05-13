@@ -57,13 +57,13 @@ class CreateBooksTable extends Migration
                 ->nullable();
             $table->string('edition')
                 ->nullable();
-            $table->string('brinding')
+            $table->string('binding')
                 ->nullable();
             $table->integer('publication_year')
                 ->nullable();
             $table->integer('location_id')
                 ->unsigned();
-            $table->foreign('owner')
+            $table->foreign('location_id')
                 ->references('id')
                 ->on('locations');
             $table->string('keys')

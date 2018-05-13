@@ -9,6 +9,7 @@
 namespace App\Http\Services\Content;
 
 
+use App\Http\Helpers\Message;
 use App\Http\Services\Shared\ConfigService;
 use App\Models\Config;
 use App\Models\User;
@@ -56,23 +57,15 @@ class UserService
                         'login' => $login,
                         'password' => Hash::make($password)
                     ]);
-            $message = [
-                'title' => __('W porządku!'),
-                'content' => __('Operacja zakonczona sukcesem'),
-                'code' => 200
-            ];
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
         } catch (Exception $e) {
-            $message = [
-                'title' => __('Błąd'),
-                'content' => __('Wystąpił błąd podczas zapisu danych'),
-                'code' => $e->getCode()
-            ];
+            $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
         }
 
         return $message;
     }
 
-    public function userDataPersonalEdit($userId, $email, $firstName, $secondName, $surname, $city, $street, $houseNumber, $apartmentNumber, $postCode, $birthDate, $cardId)
+    public function userDataPersonalEdit($userId, $email, $firstName, $secondName, $surname, $city, $street, $houseNumber, $apartmentNumber, $postCode, $birthDate)
     {
         try {
             $this->user
@@ -88,21 +81,12 @@ class UserService
                         'apartment_number' => $apartmentNumber,
                         'post_code' => $postCode,
                         'birth_date' => $birthDate,
-                        'card_number' => $cardId,
                         'street' => $street
                     ]
                 );
-            $message = [
-                'title' => __('W porządku!'),
-                'content' => __('Operacja zakonczona sukcesem'),
-                'code' => 200
-            ];
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
         } catch (Exception $e) {
-            $message = [
-                'title' => __('Błąd'),
-                'content' => __('Wystąpił błąd podczas zapisu danych'),
-                'code' => $e->getCode()
-            ];
+            $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
         }
 
         return $message;

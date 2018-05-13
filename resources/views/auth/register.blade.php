@@ -189,19 +189,6 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group col-6 {{ $errors->has('cardId') ? ' has-error' : '' }} width_customize">
-                        <label class="col-12 control-label"
-                               for="cardId">{{__('view.Numer karty bibliotecznej')}}</label>
-                        <div class="col-12">
-                            <input id="cardId" name="cardId" type="text" class="form-control input-md"
-                                   value="{{ old('cardId')}}">
-                            @if ($errors->has('cardId'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('cardId') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
                 </div>
                 <div class="form-group text-center">
                     <div class="col-12">

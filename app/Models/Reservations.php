@@ -52,7 +52,7 @@ class Reservations extends Model
         return $this
             ->join('users', 'reservations.user_id', '=', 'users.id')
             ->join('books', 'reservations.book_id', '=', 'books.id')->join('items', 'reservations.item_id', '=', 'items.id')
-            ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+            ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
             ->orderBy('id', 'DESC')
             ->paginate(20);
     }
@@ -79,7 +79,7 @@ class Reservations extends Model
         if($request->searchBy) {
             if (strpos($searchBy, 'id') == 0) {
                 $reservations = $this
-                    ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
                     ->join('users', 'reservations.user_id', '=', 'users.id')
                     ->join('books', 'reservations.book_id', '=', 'books.id')->join('items', 'reservations.item_id', '=', 'items.id')
                     ->where($searchBy, 'LIKE', '%' . $text . '%')
@@ -87,7 +87,7 @@ class Reservations extends Model
                     ->paginate(20);
             } else {
                 $reservations = $this
-                    ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
                     ->join('users', 'reservations.user_id', '=', 'users.id')
                     ->join('books', 'reservations.book_id', '=', 'books.id')
                     ->join('items', 'reservations.item_id', '=', 'items.id')
@@ -97,7 +97,7 @@ class Reservations extends Model
             }
         } else{
             $reservations = $this
-                ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
                 ->join('users', 'reservations.user_id', '=', 'users.id')
                 ->join('books', 'reservations.book_id', '=', 'books.id')
                 ->join('items', 'reservations.item_id', '=', 'items.id')
@@ -125,7 +125,7 @@ class Reservations extends Model
     {
         $date = date('Y-m-d');
         return $this
-            ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+            ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
             ->join('users', 'reservations.user_id', '=', 'users.id')
             ->join('books', 'reservations.book_id', '=', 'books.id')
             ->join('items', 'reservations.item_id', '=', 'items.id')

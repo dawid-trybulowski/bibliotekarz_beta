@@ -96,9 +96,8 @@ class UserController extends Controller
         $apartmentNumber = (int)$request->apartmentNumber;
         $postCode = filter_var($request->postCode, FILTER_SANITIZE_STRING);
         $birthDate = filter_var($request->birthDate, FILTER_SANITIZE_STRING);
-        $cardId = (int) $request->cardId;
 
-        $message = $this->userService->UserDataPersonalEdit($userId, $email, $firstName, $secondName, $surname, $city, $street, $houseNumber, $apartmentNumber, $postCode, $birthDate, $cardId);
+        $message = $this->userService->UserDataPersonalEdit($userId, $email, $firstName, $secondName, $surname, $city, $street, $houseNumber, $apartmentNumber, $postCode, $birthDate);
 
         return Redirect::back()->with('message', $message);
     }

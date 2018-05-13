@@ -144,18 +144,6 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('cardNumber') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="cardNumber">Numer karty bibliotecznej</label>
-                    <div class="col-12">
-                        <input id="cardNumber" name="cardNumber" type="text" class="form-control input-md"
-                               value="{{ old('cardNumber') ? old('cardNumber') : $compact['user']['card_number']}}">
-                        @if ($errors->has('cardNumber'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('cardNumber') }}</strong>
-                                    </span>
-                        @endif
-                    </div>
-                </div>
                 <div class="form-group col-4 {{ $errors->has('debt') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="debt">Kwota zadłużenia</label>
                     <div class="col-12">

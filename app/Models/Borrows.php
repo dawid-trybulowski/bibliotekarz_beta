@@ -24,7 +24,7 @@ class Borrows extends Model
 
     public function getBorrowByIdAndUserId($borrowId, $userId){
         return $this
-            ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+            ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
             ->join('users', 'borrows.user_id', '=', 'users.id')
             ->join('books', 'borrows.book_id', '=', 'books.id')
             ->join('items', 'borrows.item_id', '=', 'items.id')
@@ -54,7 +54,7 @@ class Borrows extends Model
             ->join('users', 'borrows.user_id', '=', 'users.id')
             ->join('books', 'borrows.book_id', '=', 'books.id')
             ->join('items', 'borrows.item_id', '=', 'items.id')
-            ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+            ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
             ->orderBy('id', 'DESC')
             ->paginate(20);
     }
@@ -82,7 +82,7 @@ class Borrows extends Model
         if($request->searchBy) {
             if (strpos($searchBy, 'id') == 0) {
                 $borrows = $this
-                    ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
                     ->join('users', 'borrows.user_id', '=', 'users.id')
                     ->join('books', 'borrows.book_id', '=', 'books.id')
                     ->join('items', 'borrows.item_id', '=', 'items.id')
@@ -91,7 +91,7 @@ class Borrows extends Model
                     ->paginate(20);
             } else {
                 $borrows = $this
-                    ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
                     ->join('users', 'borrows.user_id', '=', 'users.id')
                     ->join('books', 'borrows.book_id', '=', 'books.id')
                     ->join('items', 'borrows.item_id', '=', 'items.id')
@@ -101,7 +101,7 @@ class Borrows extends Model
             }
         }else{
             $borrows = $this
-                ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname')
                 ->join('users', 'borrows.user_id', '=', 'users.id')
                 ->join('books', 'borrows.book_id', '=', 'books.id')
                 ->join('items', 'borrows.item_id', '=', 'items.id')

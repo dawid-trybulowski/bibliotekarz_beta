@@ -40,7 +40,6 @@
                 <th>ID płatności</th>
                 <th>ID użytkownika</th>
                 <th>Imię i nazwisko użytkownika</th>
-                <th>Numer karty bibliotecznej</th>
                 <th>Kwota</th>
                 <th>Waluta</th>
                 <th>Status</th>
@@ -54,7 +53,6 @@
                     <td data-title="{{__('view.ID')}}">{{$payment['id']}}</td>
                     <td data-title="ID użytkownika">{{$payment['user_id']}}</td>
                     <td data-title="Dane użytkownika">{{$payment['first_name'] . ' ' . $payment['surname']}}</td>
-                    <td data-title="Numer karty">{{$payment['card_number']}}</td>
                     <td data-title="Kwota">{{$payment['amount']}}</td>
                     <td data-title="Waluta">{{$payment['currency']}}</td>
                     <td data-title="Status">{{$payment['status']}}</td>

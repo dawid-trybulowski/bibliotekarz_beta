@@ -11,19 +11,27 @@
                 </button>
             </div>
         </div>
-        @for ($i = 0; $i < 3; $i++)
-            <div class="col-12 border border-dark mt-2 mb-2 internal-div">
-                <h6 class="font-weight-bold">{{$compact['communiques'][$i]['updated_at']}}</h6>
-                <div class="centered_new"><h6>{{$compact['communiques'][$i]['text']}}</h6></div>
-                <div class="text-right pr-5"><h6>{{$compact['communiques'][$i]['user_name']}}</h6></div>
+        @if(count($compact['communiques']))
+            @for ($i = 0; $i < 3; $i++)
+                @if(isset($compact['communiques'][$i]))
+                    <div class="col-12 border border-dark mt-2 mb-2 internal-div">
+                        <h6 class="font-weight-bold">{{$compact['communiques'][$i]['updated_at']}}</h6>
+                        <div class="centered_new"><h6>{{$compact['communiques'][$i]['text']}}</h6></div>
+                        <div class="text-right pr-5"><h6>{{$compact['communiques'][$i]['user_name']}}</h6></div>
+                    </div>
+                @endif
+            @endfor
+            <div class="col-12 centered_new internal-div">
+                <button class="btn btn-outline-dark mt-3"
+                        name="moreCommunicates" @click="showCommuniquesModal()">
+                    Pokaż starsze komunikaty
+                </button>
             </div>
-        @endfor
-        <div class="col-12 centered_new internal-div">
-            <button class="btn btn-outline-dark mt-3"
-                    name="moreCommunicates" @click="showCommuniquesModal()">
-                Pokaż starsze komunikaty
-            </button>
-        </div>
+        @else
+            <div class="col-12 centered_new internal-div">
+                Brak komunikatów
+            </div>
+        @endif
     </div>
 </div>
 <div class="container-fluid center-on-customize">
