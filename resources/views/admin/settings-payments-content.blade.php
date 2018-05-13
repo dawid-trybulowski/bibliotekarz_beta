@@ -60,8 +60,7 @@
             <h4>Płatność przez Przelewy24</h4>
             <div class="form-row col-12 col-center">
                 <div class="form-group col-12 {{ $errors->has('przelewy24Status') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label text-center" for="przelewy24Status">Aktywuj płatność przez Przelewy24
-                        konta</label>
+                    <label class="col-12 control-label text-center" for="przelewy24Status">Aktywuj płatność przez Przelewy24</label>
                     <div class="col-12">
                         <input id="przelewy24Status" name="przelewy24Status" type="checkbox"
                                class="form-control input-md"
@@ -79,7 +78,6 @@
                     <label class="col-12 control-label" for="p24MerchantId">p24_merchant_id</label>
                     <div class="col-12">
                         <input id="p24MerchantId" name="p24MerchantId" type="text" class="form-control input-md"
-                               required=""
                                value="{{ old('p24MerchantId') ? old('p24MerchantId') : $compact['config']['przelewy24_config']['p24_merchant_id']}}">
                         @if ($errors->has('p24MerchantId'))
                             <span class="help-block">
@@ -92,7 +90,6 @@
                     <label class="col-12 control-label" for="p24PosId">p24_pos_id</label>
                     <div class="col-12">
                         <input id="p24PosId" name="p24PosId" type="text" class="form-control input-md"
-                               required=""
                                value="{{ old('p24PosId') ? old('p24PosId') : $compact['config']['przelewy24_config']['p24_pos_id']}}">
                         @if ($errors->has('p24PosId'))
                             <span class="help-block">
@@ -105,7 +102,6 @@
                     <label class="col-12 control-label" for="borrowTime">crc</label>
                     <div class="col-12">
                         <input id="crc" name="crc" type="text" class="form-control input-md"
-                               required=""
                                value="{{ old('crc') ? old('crc') : $compact['config']['przelewy24_config']['crc']}}">
                         @if ($errors->has('crc'))
                             <span class="help-block">

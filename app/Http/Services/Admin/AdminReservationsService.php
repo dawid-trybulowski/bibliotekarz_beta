@@ -33,7 +33,7 @@ class AdminReservationsService extends ReservationsService
 
     public function getAllReservations($request)
     {
-        if ($request->searchBy) {
+        if ($request->action == 'adminSearch' && ($request->searchBy || $request->orderBy)) {
             return $this->reservations->searchByAndSortBy($request);
         }
         return $this->reservations->getAllReservations();

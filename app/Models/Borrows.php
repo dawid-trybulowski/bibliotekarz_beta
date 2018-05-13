@@ -55,6 +55,7 @@ class Borrows extends Model
             ->join('books', 'borrows.book_id', '=', 'books.id')
             ->join('items', 'borrows.item_id', '=', 'items.id')
             ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+            ->orderBy('id', 'DESC')
             ->paginate(20);
     }
 
@@ -78,26 +79,35 @@ class Borrows extends Model
         $orderBy = $request->orderBy;
         $orderDirection = $request->orderDirection;
 
-        if (strpos($searchBy, 'id') == 0) {
+        if($request->searchBy) {
+            if (strpos($searchBy, 'id') == 0) {
+                $borrows = $this
+                    ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->join('users', 'borrows.user_id', '=', 'users.id')
+                    ->join('books', 'borrows.book_id', '=', 'books.id')
+                    ->join('items', 'borrows.item_id', '=', 'items.id')
+                    ->where($searchBy, 'LIKE', '%' . $text . '%')
+                    ->orderBy($orderBy, $orderDirection)
+                    ->paginate(20);
+            } else {
+                $borrows = $this
+                    ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->join('users', 'borrows.user_id', '=', 'users.id')
+                    ->join('books', 'borrows.book_id', '=', 'books.id')
+                    ->join('items', 'borrows.item_id', '=', 'items.id')
+                    ->where($searchBy, (int)$text)
+                    ->orderBy($orderBy, $orderDirection)
+                    ->paginate(20);
+            }
+        }else{
             $borrows = $this
                 ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
                 ->join('users', 'borrows.user_id', '=', 'users.id')
                 ->join('books', 'borrows.book_id', '=', 'books.id')
                 ->join('items', 'borrows.item_id', '=', 'items.id')
-                ->where($searchBy, 'LIKE', '%' . $text . '%')
-                ->orderBy($orderBy, $orderDirection)
-                ->paginate(20);
-        } else {
-            $borrows = $this
-                ->select('borrows.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
-                ->join('users', 'borrows.user_id', '=', 'users.id')
-                ->join('books', 'borrows.book_id', '=', 'books.id')
-                ->join('items', 'borrows.item_id', '=', 'items.id')
-                ->where($searchBy, (int)$text)
                 ->orderBy($orderBy, $orderDirection)
                 ->paginate(20);
         }
-
         return $borrows;
     }
 

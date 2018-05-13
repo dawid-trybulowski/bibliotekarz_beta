@@ -53,6 +53,7 @@ class Reservations extends Model
             ->join('users', 'reservations.user_id', '=', 'users.id')
             ->join('books', 'reservations.book_id', '=', 'books.id')->join('items', 'reservations.item_id', '=', 'items.id')
             ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+            ->orderBy('id', 'DESC')
             ->paginate(20);
     }
 
@@ -75,22 +76,31 @@ class Reservations extends Model
         $text = $request->text;
         $orderBy = $request->orderBy;
         $orderDirection = $request->orderDirection;
-
-        if (strpos($searchBy, 'id') == 0) {
-            $reservations = $this
-                ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
-                ->join('users', 'reservations.user_id', '=', 'users.id')
-                ->join('books', 'reservations.book_id', '=', 'books.id')->join('items', 'reservations.item_id', '=', 'items.id')
-                ->where($searchBy, 'LIKE', '%' . $text . '%')
-                ->orderBy($orderBy, $orderDirection)
-                ->paginate(20);
-        } else {
+        if($request->searchBy) {
+            if (strpos($searchBy, 'id') == 0) {
+                $reservations = $this
+                    ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->join('users', 'reservations.user_id', '=', 'users.id')
+                    ->join('books', 'reservations.book_id', '=', 'books.id')->join('items', 'reservations.item_id', '=', 'items.id')
+                    ->where($searchBy, 'LIKE', '%' . $text . '%')
+                    ->orderBy($orderBy, $orderDirection)
+                    ->paginate(20);
+            } else {
+                $reservations = $this
+                    ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
+                    ->join('users', 'reservations.user_id', '=', 'users.id')
+                    ->join('books', 'reservations.book_id', '=', 'books.id')
+                    ->join('items', 'reservations.item_id', '=', 'items.id')
+                    ->where($searchBy, (int)$text)
+                    ->orderBy($orderBy, $orderDirection)
+                    ->paginate(20);
+            }
+        } else{
             $reservations = $this
                 ->select('reservations.*', 'books.title', 'books.author', 'users.first_name', 'users.second_name', 'users.surname', 'users.card_number')
                 ->join('users', 'reservations.user_id', '=', 'users.id')
                 ->join('books', 'reservations.book_id', '=', 'books.id')
                 ->join('items', 'reservations.item_id', '=', 'items.id')
-                ->where($searchBy, (int)$text)
                 ->orderBy($orderBy, $orderDirection)
                 ->paginate(20);
         }

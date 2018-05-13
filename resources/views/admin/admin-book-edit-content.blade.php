@@ -239,46 +239,29 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group col-4 {{ $errors->has('photo') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="photo">Grafika</label>
+                <div class="form-group col-6 {{ $errors->has('locationId') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="locationId">Lokalizacja</label>
                     <div class="col-12">
-                        <input type="file" class="form-control-file" id="photo" name="photo"
-                               value="{{$compact['book']['image_url']}}">
-                        @if ($errors->has('photo'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('photo') }}</strong>
-                                    </span>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group col-2 {{ $errors->has('photo') ? ' has-error' : '' }} width_customize">
-                    <div class="col-12 align-left">
-                        <img src="{{asset('/img/' . $compact['book']['image_url'])}}" class="img-fluid width_customize"
-                             style="max-width:100px">
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-6 {{ $errors->has('owner') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="owner">Właściciel</label>
-                    <div class="col-12">
-                        <select id="owner" name="owner" class="form-control" id="owner">
+                        <select id="locationId" name="locationId" class="form-control" id="locationId">
                             @foreach($compact['locations'] as $location)
-                                @if($location['id'] == $compact['book']['owner'])
-                                    <option value="{{$location['id']}}" selected>{{$location['name'] . ' ' . $location['address']}}</option>
+                                @if($location['id'] == $compact['book']['location_id'])
+                                    <option value="{{$location['id']}}"
+                                            selected>{{$location['name'] . ' ' . $location['address']}}</option>
                                 @else
                                     <option value="{{$location['id']}}">{{$location['name'] . ' ' . $location['address']}}</option>
                                 @endif
 
                             @endforeach
                         </select>
-                        @if ($errors->has('owner'))
+                        @if ($errors->has('locationId'))
                             <span class="help-block">
-                                        <strong>{{ $errors->first('owner') }}</strong>
+                                        <strong>{{ $errors->first('locationId') }}</strong>
                                     </span>
                         @endif
                     </div>
                 </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-6 {{ $errors->has('keys') ? ' has-error' : '' }} width_customize">
                     <label class="col-12 control-label" for="keys">Słowa kluczowe</label>
                     <div class="col-12">
@@ -292,14 +275,48 @@
                     </div>
                 </div>
             </div>
-            <div class="form-row mt-2 mb-2">
-                <div class="form-group col-6 {{ $errors->has('visible') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="visible">Dostępna do wypożyczenia</label>
-                    <input id="visible" name="visible" type="checkbox" class="form-control form-check-input"
-                            {{$compact['book']['visible'] ? 'checked' : ''}}>
-                    @if ($errors->has('author'))
+            <div class="form-row">
+                <div class="form-group col-3{{ $errors->has('photoChange') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="photoChange">Zmień grafikę</label>
+                    <div class="col-12">
+                        <input id="photoChange" name="photoChange" type="checkbox"
+                               class="form-control form-check-input" @click="changePhotoFunction()">
+                        @if ($errors->has('photoChange'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('photoChange') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group col-3{{ $errors->has('photo') ? ' has-error' : '' }} width_customize" v-show="changePhoto" id="photoDiv">
+                    <label class="col-12 control-label" for="photo">Grafika</label>
+                    <div class="col-12">
+                        <input type="file" class="form-control-file" id="photo" name="photo"
+                               value="{{$compact['book']['image_url']}}">
+                        @if ($errors->has('photo'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+                @if($compact['book']['image_url'])
+                <div class="form-group col-3 {{ $errors->has('photo') ? ' has-error' : '' }} width_customize" id="imgDiv">
+                    <div class="col-12 align-right">
+                        <img src="{{asset('/img/' . $compact['book']['image_url'])}}" class="img-fluid width_customize"
+                             style="max-width:100px">
+                    </div>
+                </div>
+                    @endif
+            </div>
+            <div class="form-row mt-3 mb-2">
+                <div class="form-group col-6 {{ $errors->has('active') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="active">Dostępna do wypożyczenia</label>
+                    <input id="active" name="active" type="checkbox" class="form-control form-check-input"
+                            {{$compact['book']['active'] ? 'checked' : ''}}>
+                    @if ($errors->has('active'))
                         <span class="help-block">
-                                        <strong>{{ $errors->first('visible') }}</strong>
+                                        <strong>{{ $errors->first('active') }}</strong>
                                     </span>
                     @endif
                 </div>

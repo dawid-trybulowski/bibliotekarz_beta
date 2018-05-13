@@ -170,16 +170,20 @@ class BooksService
                         ['searchBy' => 'books.id', 'mark' => '=', 'text' => $request->text],
                     ];
             }else{
-                $search =
-                    [
-                        ['searchBy' => $request->searchBy, 'mark' => 'LIKE', 'text' => '%' . $request->text . '%'],
-                    ];
+                if($request->searchBy) {
+                    $search =
+                        [
+                            ['searchBy' => $request->searchBy, 'mark' => 'LIKE', 'text' => '%' . $request->text . '%'],
+                        ];
+                }else{
+                    $search = [];
+                }
             }
             $orderBy = $request->orderBy;
             $orderDirection = $request->orderDirection;
             return $this->books->adminSearch($search, $orderBy, $orderDirection);
         }
-        if((int)$this->config['show_books_only_for_adults'] && Auth::check())
+        if((int)$this->config['show_books_only_for_adults'] && Auth::check() && !Auth::user()->permissions > 1)
         {
             $now = new DateTime(date("Y-m-d"));
             $birthDate = new DateTime(date(Auth::User()->birth_date));
@@ -187,6 +191,58 @@ class BooksService
             $books = $this->books->getAllBooksWithAgeRestriction($age);
         }else{
             $books = $this->books->getAllBooks();
+        }
+        return $books;
+    }
+
+    public function getAllAdminBooks($request)
+    {
+        if ($request->action == 'search') {
+
+            $search =
+                [
+                    ['searchBy' => $request->search_1_searchBy, 'mark' => 'LIKE', 'text' => '%' . $request->search_1_text . '%'],
+                    ['searchBy' => $request->search_2_searchBy, 'mark' => 'LIKE', 'text' => '%' . $request->search_2_text . '%'],
+                    ['searchBy' => $request->search_3_searchBy, 'mark' => 'LIKE', 'text' => '%' . $request->search_3_text . '%'],
+                    ['searchBy' => 'books.active', 'mark' => '=', 'text' => 1]
+                ];
+
+            $category = $request->category;
+            $genre = $request->genre;
+            $orderBy = $request->orderBy;
+            $orderByArray = explode('|', $orderBy);
+            $orderBy = $orderByArray[1];
+            $orderDirection = $orderBy[0] ==  'DESC' ? 'DESC' : 'ASC';
+
+            return $this->books->search($search, $category, $genre, $orderBy, $orderDirection);
+        }elseif ($request->action == 'adminSearch' && Auth::user()->permissions > 1){
+            if(strpos($request->searchBy, 'id')){
+                $search =
+                    [
+                        ['searchBy' => 'books.id', 'mark' => '=', 'text' => $request->text],
+                    ];
+            }else{
+                if($request->searchBy) {
+                    $search =
+                        [
+                            ['searchBy' => $request->searchBy, 'mark' => 'LIKE', 'text' => '%' . $request->text . '%'],
+                        ];
+                }else{
+                    $search = [];
+                }
+            }
+            $orderBy = $request->orderBy;
+            $orderDirection = $request->orderDirection;
+            return $this->books->adminSearch($search, $orderBy, $orderDirection);
+        }
+        if((int)$this->config['show_books_only_for_adults'] && Auth::check() && !Auth::user()->permissions > 1)
+        {
+            $now = new DateTime(date("Y-m-d"));
+            $birthDate = new DateTime(date(Auth::User()->birth_date));
+            $age = $now->diff($birthDate)->y;
+            $books = $this->books->getAllBooksWithAgeRestriction($age);
+        }else{
+            $books = $this->books->getAllBooksAdmin();
         }
         return $books;
     }

@@ -26,7 +26,7 @@ class BookMapper
             'edition' => 'wydanie',
             'binding' => 'oprawa',
             'location_code' => 'kod lokalizacji',
-            'owner' => 'właściciel',
+            'location_id' => 'lokalizacja',
             'keys' => 'klucze',
             'created_at' => 'data utworzenia rekordu',
             'updated_at' => 'data edycko rekordu',

@@ -180,7 +180,7 @@ class MainController
 
     public function books(Request $request)
     {
-        $books = $this->booksService->getAllBooks($request);
+        $books = $this->booksService->getAllAdminBooks($request);
         $preparedBooks = $this->booksService->prepareBooks($books->paginate());
         $users = $this->user->get();
         $request->searchBy = '';

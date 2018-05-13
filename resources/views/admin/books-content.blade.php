@@ -74,7 +74,7 @@
                                    href="{{route('admin-book-edit-show', ['bookId' => $book['id']])}}">Edytuj</a>
                                 <a class="dropdown-item cursorPointer" @click="showBorrowForUserModal({{$book['id']}})">Wypożycz użytkownikowi</a>
                                 <a class="dropdown-item"
-                                   href="{{route('admin-books-delete', ['bookId' => $book['id']])}}">Usun</a>
+                                   href="{{route('admin-books-delete', ['bookId' => $book['id']])}}">Usuń</a>
                             </div>
                         </div>
                     </td>

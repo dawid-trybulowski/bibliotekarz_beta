@@ -94,11 +94,12 @@ class Book extends Model
             ->where($where[4]['searchBy'], $where[4]['mark'], $where[4]['text'])
             ->where($where[5]['searchBy'], $where[5]['mark'], $where[5]['text'])
             ->where('books.active', 1)
+            ->where('books.visible', 1)
             ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
             ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
             ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
             ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
-            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
+            ->leftJoin('locations', 'books.location_id', '=', 'locations.id')
             ->orderBy('books.' . $orderBy, $orderDirection);
 
         return $books;
@@ -123,13 +124,14 @@ class Book extends Model
                 'locations.name as locations_name',
                 'locations.address as locations_address'
             )
+            ->where('books.visible', 1)
             ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
             ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
             ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
             ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
-            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
+            ->leftJoin('locations', 'books.location_id', '=', 'locations.id')
             ->where($where[0]['searchBy'], $where[0]['mark'], $where[0]['text'])
-            ->orderBy($orderBy, $orderDirection);
+            ->orderBy($orderBy ?: 'books.id', $orderDirection);
 
         return $books;
     }
@@ -168,8 +170,6 @@ class Book extends Model
         return $this
             ->select(
                 'books.*',
-                'genres.id as genres_id',
-                'genres.name as genres_name',
                 'categories.id as categories_id',
                 'categories.name as categories_name',
                 'age_categories.id as age_categories_id',
@@ -181,11 +181,32 @@ class Book extends Model
                 'locations.address as locations_address'
             )
             ->where('books.active', 1)
-            ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
-            ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
+            ->where('books.visible', 1)
             ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
             ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
-            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
+            ->leftJoin('locations', 'books.location_id', '=', 'locations.id')
+            ->orderBy('books.id', 'DESC');
+    }
+
+    public function getAllBooksAdmin()
+    {
+        return $this
+            ->select(
+                'books.*',
+                'categories.id as categories_id',
+                'categories.name as categories_name',
+                'age_categories.id as age_categories_id',
+                'age_categories.name as age_categories_name',
+                'age_categories.min_age as age_categories_min_age',
+                'age_categories.max_age as age_categories_max_age',
+                'locations.id as locations_id',
+                'locations.name as locations_name',
+                'locations.address as locations_address'
+            )
+            ->where('books.visible', 1)
+            ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
+            ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
+            ->leftJoin('locations', 'books.location_id', '=', 'locations.id')
             ->orderBy('id', 'DESC');
     }
 
@@ -207,14 +228,15 @@ class Book extends Model
             (
                 [
                     ['age_categories.max_age', '<', (int)$age],
-                    ['active', '=', 1]
+                    ['books.active', '=', 1],
+                    ['books.visible', '=', 1]
                 ]
             )
             ->leftJoin('books_have_genres', 'books.id', '=', 'books_have_genres.book_id')
             ->leftJoin('genres', 'books_have_genres.genre_id', '=', 'genres.id')
             ->leftJoin('categories', 'books.category_id', '=', 'categories.id')
             ->leftJoin('age_categories', 'books.age_category_id', '=', 'age_categories.id')
-            ->leftJoin('locations', 'books.owner', '=', 'locations.id')
+            ->leftJoin('locations', 'books.location_id', '=', 'locations.id')
             ->orderBy('id', 'DESC');
     }
 

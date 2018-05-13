@@ -63,6 +63,12 @@ class AdminConfigService extends ConfigService
         } else {
             $przelewy24Status = false;
         }
+        $przelewy24TestMode = $request->testMode;
+        if ($przelewy24TestMode === 'on') {
+            $przelewy24TestMode = true;
+        } else {
+            $przelewy24TestMode = false;
+        }
 
         if ($przelewy24Status) {
             $przelewy24Config =
@@ -70,14 +76,15 @@ class AdminConfigService extends ConfigService
                     'p24_merchant_id' => $request->p24MerchantId,
                     'p24_pos_id' => $request->p24PosId,
                     'crc' => $request->crc,
-                    'test_mode' => $request->testMode
+                    'test_mode' => $przelewy24TestMode
                 ];
         } else {
             $przelewy24Config =
                 [
                     'p24_merchant_id' => '',
                     'p24_pos_id' => '',
-                    'crc' => ''
+                    'crc' => '',
+                    'test_mode' => false
                 ];
         }
         $przelewy24Config = json_encode($przelewy24Config);

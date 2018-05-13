@@ -18,7 +18,7 @@ class ForgotPasswordController extends Controller
     |
     */
 
-    use SendsPasswordResetEmails;
+    use \App\Http\Controllers\Auth\SendsPasswordResetEmails;
 
     /**
      * Create a new controller instance.

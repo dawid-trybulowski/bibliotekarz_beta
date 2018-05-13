@@ -33,7 +33,7 @@ class AdminBorrowsService extends BorrowsService
 
     public function getAllBorrows($request)
     {
-        if ($request->searchBy) {
+        if ($request->action == 'adminSearch' && ($request->searchBy || $request->orderBy)) {
             return $this->borrows->searchByAndSortBy($request);
         }
         return $this->borrows->getAllBorrows();

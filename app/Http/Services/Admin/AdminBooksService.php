@@ -15,68 +15,130 @@ class AdminBooksService extends BooksService
             $uploadOk = $this->addPhoto($photo);
         }
         if (!$uploadOk) {
-            $photo = 'book.png';
+            $photo = null;
         } else {
             $photo = $photo['name'];
         }
 
-        if ($request->visible == 'on') {
-            $visible = true;
+        if ($request->active == 'on') {
+            $active = true;
         } else {
-            $visible = false;
+            $active = false;
         }
 
-        if ($this->books
-            ->where('id', $request->id)
-            ->update
-            (
-                [
-                    'title' => $request->title,
-                    'unified_title' => $request->unifiedTitle,
-                    'author' => $request->author,
-                    'subauthors' => $request->subauthors,
-                    'publishing_house' => $request->publishingHouse,
-                    'isbn' => $request->isbn,
-                    'language' => $request->language,
-                    'publication_country_code' => $request->publicationCountryCode,
-                    'pages' => $request->pages,
-                    'edition' => $request->edition,
-                    'publication_year' => $request->publicationYear,
-                    'owner' => $request->owner,
-                    'location_code' => $request->locationCode,
-                    'description' => $request->description,
-                    'image_url' => $photo,
-                    'category_id' => $request->category,
-                    'age_category_id' => $request->ageCategory,
-                    'visible' => $visible,
-                    'binding' => $request->binding,
-                    'keys' => $request->keys
-                ]
-            )) {
-            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
+        if ($request->photoChange == 'on') {
+            $photoChange = true;
         } else {
-            $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
+            $photoChange = false;
+        }
+
+        if ($photoChange) {
+            if ($this->books
+                ->where('id', $request->id)
+                ->update
+                (
+                    [
+                        'title' => $request->title,
+                        'unified_title' => $request->unifiedTitle,
+                        'author' => $request->author,
+                        'subauthors' => $request->subauthors,
+                        'publishing_house' => $request->publishingHouse,
+                        'isbn' => $request->isbn,
+                        'language' => $request->language,
+                        'publication_country_code' => $request->publicationCountryCode,
+                        'pages' => $request->pages,
+                        'edition' => $request->edition,
+                        'publication_year' => $request->publicationYear,
+                        'location_id' => $request->locationId,
+                        'location_code' => $request->locationCode,
+                        'description' => $request->description,
+                        'image_url' => $photo,
+                        'category_id' => $request->category,
+                        'age_category_id' => $request->ageCategory,
+                        'active' => $active,
+                        'binding' => $request->binding,
+                        'keys' => $request->keys
+                    ]
+                )) {
+                $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
+            } else {
+                $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
+            }
+        } else {
+            if ($this->books
+                ->where('id', $request->id)
+                ->update
+                (
+                    [
+                        'title' => $request->title,
+                        'unified_title' => $request->unifiedTitle,
+                        'author' => $request->author,
+                        'subauthors' => $request->subauthors,
+                        'publishing_house' => $request->publishingHouse,
+                        'isbn' => $request->isbn,
+                        'language' => $request->language,
+                        'publication_country_code' => $request->publicationCountryCode,
+                        'pages' => $request->pages,
+                        'edition' => $request->edition,
+                        'publication_year' => $request->publicationYear,
+                        'location_id' => $request->locationId,
+                        'location_code' => $request->locationCode,
+                        'description' => $request->description,
+                        'category_id' => $request->category,
+                        'age_category_id' => $request->ageCategory,
+                        'active' => $active,
+                        'binding' => $request->binding,
+                        'keys' => $request->keys
+                    ]
+                )) {
+                $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
+            } else {
+                $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
+            }
+        }
+        $this->booksHaveGenres
+            ->where('book_id', $request->id)
+            ->delete();
+        foreach ($request->genres as $genre) {
+            $result = $this->booksHaveGenres
+                ->insert
+                (
+                    [
+                        'book_id' => $request->id,
+                        'genre_id' => $genre
+                    ]
+                );
+            if (!$result) {
+                $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 409, false);
+                return $message;
+            }
         }
         return $message;
     }
 
     public function addBook($request, $photo)
     {
+        if ($request->photoChange == 'on') {
+            $photoChange = true;
+        } else {
+            $photoChange = false;
+        }
         $uploadOk = 0;
         if ($photo['name']) {
             $uploadOk = $this->addPhoto($photo);
         }
-        if (!$uploadOk) {
-            $photo = 'book.png';
+        if (!$uploadOk || !$photoChange) {
+            $photo = null;
         } else {
             $photo = $photo['name'];
         }
 
-        if ($request->visible == 'on') {
-            $visible = true;
+        if ($request->active == 'on') {
+            $active = true;
         } else {
-            $visible = false;
+            $active = false;
         }
+
         $bookId = $this->books
             ->insertGetId
             (
@@ -92,7 +154,7 @@ class AdminBooksService extends BooksService
                     'pages' => $request->pages,
                     'edition' => $request->edition,
                     'publication_year' => $request->publicationYear,
-                    'owner' => $request->owner,
+                    'location_id' => $request->locationId,
                     'description' => $request->description,
                     'image_url' => $photo,
                     'category_id' => $request->category,
@@ -101,7 +163,7 @@ class AdminBooksService extends BooksService
                     'items' => 0,
                     'binding' => $request->binding,
                     'keys' => $request->keys,
-                    'visible' => $visible
+                    'active' => $active
                 ]
             );
         if ($bookId) {
@@ -172,5 +234,22 @@ class AdminBooksService extends BooksService
     public function addItemToBook($bookId)
     {
         return $this->books->addItem($bookId);
+    }
+
+    public function deleteBook($request)
+    {
+        $bookId = (int)$request->bookId;
+        $result = $this->books
+            ->where('id', $bookId)
+            ->update
+            (
+                ['visible' => 0]
+            );
+        if ($result) {
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
+        } else {
+            $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
+        }
+        return $message;
     }
 }

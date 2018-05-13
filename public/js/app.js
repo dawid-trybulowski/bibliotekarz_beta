@@ -18158,6 +18158,10 @@ new _vue2.default({
         showBorrowForUserModal: function showBorrowForUserModal(bookId) {
             $('#bookId').val(bookId);
             $('#borrowForUserModal').modal('show');
+        },
+        changePhotoFunction: function changePhotoFunction() {
+            $('#photoDiv').toggle();
+            $('#imgDiv').toggle();
         }
     }
 });
@@ -18168,7 +18172,8 @@ var menu = new _vue2.default({
         return {
             activeReservationsLoaded: false,
             activeBorrowsLoaded: false,
-            waitingListLoaded: false
+            waitingListLoaded: false,
+            changePhoto: false
         };
     },
     methods: {
