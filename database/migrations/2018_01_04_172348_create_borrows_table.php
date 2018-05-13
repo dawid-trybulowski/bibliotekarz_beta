@@ -34,6 +34,9 @@ class CreateBorrowsTable extends Migration
             $table->date('borrow_date_end');
             $table->integer('reservation_id')
                 ->nullable();
+            $table->foreign('reservation_id')
+                ->references('id')
+                ->on('reservations');
             $table->integer('delay')
                 ->default(0);
             $table->float('delay_cost')

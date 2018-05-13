@@ -26,7 +26,7 @@ class CreateBooksTable extends Migration
                 ->nullable();
             $table->string('image_url')
                 ->nullable();
-            $table->boolean('status');
+            $table->integer('status');
             $table->integer('items');
             $table->float('rate')
                 ->nullable();
@@ -34,8 +34,6 @@ class CreateBooksTable extends Migration
                 ->default(0);
             $table->integer('rate_sum')
                 ->default(0);
-            $table->string('genres')
-                ->nullable();
             $table->integer('category_id')
                 ->unsigned();
             $table->foreign('category_id')
@@ -49,7 +47,8 @@ class CreateBooksTable extends Migration
             $table->string('isbn');
             $table->string('language')
                 ->default('PL');
-            $table->string('publishing_house');
+            $table->string('publishing_house')
+                ->nullable();
             $table->string('publication_country_code')
                 ->default('PL')
                 ->nullable();
@@ -61,9 +60,11 @@ class CreateBooksTable extends Migration
                 ->nullable();
             $table->integer('publication_year')
                 ->nullable();
-            $table->string('location_code')
-                ->nullable();
-            $table->string('owner');
+            $table->integer('owner')
+                ->unsigned();
+            $table->foreign('owner')
+                ->references('id')
+                ->on('locations');
             $table->string('keys')
                 ->nullable();
             $table->boolean('active')

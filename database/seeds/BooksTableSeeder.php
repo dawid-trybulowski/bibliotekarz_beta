@@ -15,9 +15,9 @@ class BooksTableSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 5000; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $book = new Book();
-            $book->title = $faker->word;
+            $book->title = $faker->word . ' ' . $faker->word;
             $book->unified_title = $book->title;
             $book->author = $faker->randomLetter . '. ' . $faker->lastName();
             $book->description = $faker->text('512');
@@ -25,32 +25,22 @@ class BooksTableSeeder extends Seeder
             $book->status = true;
             $book->content_description = 'test';
             $book->items = 2;
-            $random = $faker->numberBetween(1, 5);
+            $random = $faker->numberBetween(1, 4);
             switch ($random) {
                 case 1:
-                    $img = 'antybasnie.jpg';
-                    break;
-                case 2:
                     $img = 'biblia.jpg';
                     break;
+                case 2:
+                    $img = 'book_2.jpg';
+                    break;
                 case 3:
-                    $img = 'lot_nad_kukulczym_gniazdem.jpg';
+                    $img = 'book_3.jpg';
                     break;
                 case 4:
-                    $img = 'lsnienie.jpg';
+                    $img = null;
                     break;
-                case 5:
-                    $img = 'phmspr.jpg';
             }
             $book->image_url = $img;
-            $book->genres = '{
-              "0": {
-                "id": "' . $faker->numberBetween(1, 5) . '"
-              },
-              "1": {
-                "id": "' . $faker->numberBetween(6, 10) . '"
-              }
-            }';
             $book->category_id = $faker->numberBetween(1, 5);
             $book->age_category_id = $faker->numberBetween(1, 4);
             $book->isbn = $faker->numberBetween(100, 999) . '-' . $faker->numberBetween(0, 10) . '-' . $faker->numberBetween(1000, 9999) . '-' . $faker->numberBetween(1000, 9999) . '-' . $faker->numberBetween(0, 10);
@@ -58,8 +48,7 @@ class BooksTableSeeder extends Seeder
             $book->pages = $faker->numberBetween(20, 999);
             $book->edition = $faker->numberBetween(0, 10);
             $book->publication_year =  $faker->year();
-            $book->location_code =  $faker->word . '/' . $faker->numberBetween(0, 10) . '/' . $faker->numberBetween(20, 999);
-            $book->owner = $faker->word;
+            $book->owner = 1;
             $book->publishing_house = $faker->word;
             $book->keys = $faker->word . ',' . $faker->word . ',' . $faker->word;
             $book->save();

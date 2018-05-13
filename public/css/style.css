@@ -365,7 +365,10 @@ main {
     height: 120px;
     animation: spin 2s linear infinite;
 }
-
+a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
 @keyframes spin {
     0% {
         transform: rotate(0deg);

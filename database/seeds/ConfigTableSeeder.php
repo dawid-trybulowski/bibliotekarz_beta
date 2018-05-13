@@ -15,7 +15,7 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'library_name';
         $config->type = 'string';
-        $config->value = "Biblioteka w Gryfinie";
+        $config->value = "Moja biblioteka";
         $config->save();
 
         $config = new Config();
@@ -27,7 +27,7 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'library_address';
         $config->type = 'string';
-        $config->value = "Kościelna 15 19-100 Gryfino";
+        $config->value = "Testowa 1 00-000 Testowo";
         $config->save();
 
         $config = new Config();
@@ -39,7 +39,7 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'library_email';
         $config->type = 'string';
-        $config->value = "";
+        $config->value = "example@example.pl";
         $config->save();
 
         $config = new Config();
@@ -69,7 +69,7 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'books_per_page';
         $config->type = 'string';
-        $config->value = "20";
+        $config->value = "10";
         $config->save();
 
         $config = new Config();
@@ -81,7 +81,7 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'age_limit';
         $config->type = 'string';
-        $config->value = "1";
+        $config->value = "0";
         $config->save();
 
         $config = new Config();
@@ -132,8 +132,10 @@ class ConfigTableSeeder extends Seeder
   },
   "1": {
     "string": "Aktywna"
-  }
-}';
+  },
+  "2": {
+    "string": "Zmieniona w wypożyczenie"
+  }';
         $config->save();
 
         $config = new Config();
@@ -141,10 +143,10 @@ class ConfigTableSeeder extends Seeder
         $config->type = 'json';
         $config->value = '{
   "0": {
-    "string": "Aktywna"
+    "string": "Zakończona"
   },
   "1": {
-    "string": "Zakończona"
+    "string": "Aktywna"
   },
   "2": {
     "string": "Aktywna opóźniona"
@@ -174,9 +176,9 @@ class ConfigTableSeeder extends Seeder
         $config->name = 'przelewy24_config';
         $config->type = 'json';
         $config->value = '{
-  "p24_merchant_id": "44214",
-  "p24_pos_id": "44214",
-  "crc": "e9b3d80bd6575239"
+  "p24_merchant_id": "",
+  "p24_pos_id": "",
+  "crc": ""
 }';
         $config->save();
 
@@ -185,7 +187,7 @@ class ConfigTableSeeder extends Seeder
         $config->type = 'json';
         $config->value = '{
   "subject": "Zapytanie od czytelnika",
-  "email": "test@frustrat-polski.pl",
+  "email": "example@example.pl",
   "template": "email"
 }';
         $config->save();
@@ -195,7 +197,7 @@ class ConfigTableSeeder extends Seeder
         $config->type = 'json';
         $config->value = '{
   "subject": "Potwierdzenie rejestracji",
-  "email": "test@frustrat-polski.pl",
+  "email": "example@example.pl",
   "template": "registrationEmail",
   "text": "Dziękujemy za rejestrację w naszej bibliotece!\r\n\r\nMożesz teraz rezerwować pozycje poprzez portal. Rezerwacja jest ważna przez 3 dni. Prosimy o zgłoszenie się po odbiór książki w określonym terminie, w przeciwnym wypadku rejestracja będzie anulowana.Pamiętaj, że jednocześnie możesz zarezerwować najwyżej 3 książki.\r\n\r\nW każdej chwili możesz odwołać rezerwację w zakładce \'Aktywne rezerwacje\'.\r\n\r\nTwoje konto nie jest jeszcze zweryfikowane, więc przy realizacji pierwszego zamówienia prosimy mieć przy sobie dowód osobisty, lub inny dokument potwierdzający dane osobowe. Dane zostaną zweryfikowane przez pracownika na miejscu.\r\n\r\nW razie pytan prosimy o kontakt przez formularz lub telefonicznie. Wszystkie dane znajdziesz w zakładce \'kontakt\'."
 }';
@@ -210,13 +212,13 @@ class ConfigTableSeeder extends Seeder
         $config = new Config();
         $config->name = 'przelewy24_status';
         $config->type = 'string';
-        $config->value = "1";
+        $config->value = "0";
         $config->save();
 
         $config = new Config();
         $config->name = 'payments_data';
         $config->type = 'json';
-        $config->value = '{"account_number":"5249000051033225454100103","payment_title":"p\u0142atno\u015b\u0107 u\u017cytkownika","receiver":"Biblioteka w Gryfinie","address":"ul. Durnowata 11 00-000 Gryfino"}';
+        $config->value = '{"account_number":"5249000051033225454100103","payment_title":"p\u0142atno\u015b\u0107 u\u017cytkownika","receiver":"Moja biblioteka","address":"ul. Testowa 1 00-000 Testowo"}';
         $config->save();
 
         $config = new Config();
@@ -231,7 +233,6 @@ class ConfigTableSeeder extends Seeder
         $config->value = "1";
         $config->save();
 
-        $config->save();
         $config = new Config();
         $config->name = 'users_permissions';
         $config->type = 'json';
@@ -246,5 +247,29 @@ class ConfigTableSeeder extends Seeder
     "string": "Administrator"
   }
 }';
+        $config->save();
+
+        $config = new Config();
+        $config->name = 'delay_email';
+        $config->type = 'json';
+        $config->value = '{
+  "subject": "Informacja o opóźnionych wypożyczeniach",
+  "email": "test@frustrat-polski.pl",
+  "template": "delayEmail",
+  "text": "Odnotowaliśmy na twoim koncie wypożyczenia, które nie zostały zwrócone na czas. Każdy dzień opóźnienia zwiększa kwotę opłaty za przetrzymanie pozycji. Aby uniknąć dalszych naliczen prosimy o pilny zwrot pozycji. Wykaz przetrzymanych pozycji oraz kwoty naliczeń dostępny poniżej.\r\n\r\nJednocześnie informujemy, że wpłaty można dokonywać w placówce jak również przez strone biblioteki w panelu użytkownika, w zakładce \'Płatności\'."
+}';
+        $config->save();
+
+        $config = new Config();
+        $config->name = 'reservation_email';
+        $config->type = 'json';
+        $config->value = '{
+  "subject": "Zarezerwowana pozycja",
+  "email": "test@frustrat-polski.pl",
+  "template": "emails/reservationEmail",
+  "text": "Poniższa pozycja została dla Ciebie zarezerwowana.",
+"text2": "Będzie czekała na Ciebie w bibliotece do "
+}';
+        $config->save();
     }
 }

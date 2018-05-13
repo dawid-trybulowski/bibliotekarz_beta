@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -38,8 +39,6 @@ class CreateUsersTable extends Migration
                 ->nullable();
             $table->date('birth_date')
                 ->nullable();
-            $table->string('card_number')
-                ->nullable();
             $table->integer('status');
             $table->integer('debt')
                 ->default(0);
@@ -48,7 +47,8 @@ class CreateUsersTable extends Migration
             $table->integer('permissions')
                 ->default(1);
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

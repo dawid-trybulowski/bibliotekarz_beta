@@ -183,7 +183,9 @@ class MainController
         $books = $this->booksService->getAllBooks($request);
         $preparedBooks = $this->booksService->prepareBooks($books->paginate());
         $users = $this->user->get();
+        $request->searchBy = '';
         $locations = $this->adminLocationService->getAllLocations($request);
+
         $compact =
             [
                 'users' => $users,

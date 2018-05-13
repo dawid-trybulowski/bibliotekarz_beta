@@ -82,5 +82,7 @@ return [
     'Rozpoczęcie' => 'Rozpoczęcie',
     'Zakończenie' => 'Zakończenie',
     'Opóźnienie' => 'Opóźnienie',
-    'Koszt' => 'Koszt'
+    'Koszt' => 'Koszt',
+    'Lokalizacja' => 'Lokalizacja',
+    'Słowa kluczowe' => 'Słowa kluczowe'
 ];

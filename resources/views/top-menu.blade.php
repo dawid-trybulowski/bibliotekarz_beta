@@ -25,13 +25,15 @@
                     </div>
                 </li>
                 @if(isset($compact['route']) && $compact['route'] == 'index')
-                <li class="nav-item" id="search">
-                    <a class="nav-link cursorPointer">Szukaj</a>
-                </li>
+                    <li class="nav-item" id="search">
+                        <a class="nav-link cursorPointer">Szukaj</a>
+                    </li>
                 @endif
-                <li class="nav-item" id="adminPanel">
-                    <a class="nav-link cursorPointer" href="{{route('admin-index')}}">Panel administracyjny</a>
-                </li>
+                @if(Auth::User()->permissions > 1)
+                    <li class="nav-item" id="adminPanel">
+                        <a class="nav-link cursorPointer" href="{{route('admin-index')}}">Panel administracyjny</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>

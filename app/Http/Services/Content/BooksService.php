@@ -160,14 +160,14 @@ class BooksService
             $orderBy = $request->orderBy;
             $orderByArray = explode('|', $orderBy);
             $orderBy = $orderByArray[1];
-            $orderDirection = $orderBy[0] ? 'DESC' : 'ASC';
+            $orderDirection = $orderBy[0] ==  'DESC' ? 'DESC' : 'ASC';
 
             return $this->books->search($search, $category, $genre, $orderBy, $orderDirection);
         }elseif ($request->action == 'adminSearch' && Auth::user()->permissions > 1){
-            if($request->searchBy == 'ID'){
+            if(strpos($request->searchBy, 'id')){
                 $search =
                     [
-                        ['searchBy' => $request->searchBy, 'mark' => '=', 'text' => '%' . $request->text . '%'],
+                        ['searchBy' => 'books.id', 'mark' => '=', 'text' => $request->text],
                     ];
             }else{
                 $search =

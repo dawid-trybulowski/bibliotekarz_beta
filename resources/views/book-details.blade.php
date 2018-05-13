@@ -43,11 +43,11 @@
         <div class="card mt-2">
             <div class="card-block p-2">
                 <p><i class="font-weight-bold">{{ __('view.Kategoria') . __('view.:') . ' '}}</i>
-                    {{$book->categories_name}}
+                    <a href="{{route('index', ['action' => 'search', 'search_1_searchBy' => 'author', 'search_1_text' => '', 'search_2_searchBy' => 'author', 'search_2_text' => '', 'search_3_searchBy' => 'author', 'search_3_text' => '', 'category' => $book->categories_id, 'genre'=> '', 'orderBy' => 'DESC|created_at'])}}"> {{$book->categories_name}} </a>
                 </p>
                 <p><i class="font-weight-bold">{{ __('view.Gatunki') . __('view.:')}}</i>
                     @foreach($book->genres as $genre)
-                        {{$genre['string'] . ', '}}
+                        <a href="{{route('index', ['action' => 'search', 'search_1_searchBy' => 'author', 'search_1_text' => '', 'search_2_searchBy' => 'author', 'search_2_text' => '', 'search_3_searchBy' => 'author', 'search_3_text' => '', 'category' => '', 'genre'=> $genre['id'], 'orderBy' => 'DESC|created_at'])}}"> {{$genre['string'] . ', '}}</a>
                     @endforeach
                 </p>
                 <p><i class="font-weight-bold">{{ __('view.Kategoria wiekowa') . __('view.:') . ' '}}</i>
@@ -59,7 +59,7 @@
                     {{$book->locations_name . ' ' . $book->locations_address}}</p>
                 <p><i class="font-weight-bold">{{ __('view.Słowa kluczowe') . __('view.:')}}</i>
                     @foreach(explode(',', $book->keys) as $key)
-                        {{$key . ' '}}
+                        <a href="{{route('index', ['action' => 'search', 'search_1_searchBy' => 'keys', 'search_1_text' => $key, 'search_2_searchBy' => 'author', 'search_2_text' => '', 'search_3_searchBy' => 'author', 'search_3_text' => '', 'category' => '', 'genre'=> '', 'orderBy' => 'DESC|created_at'])}}"> {{$key . ' '}}</a>
                     @endforeach
                 </p>
                 <p><i class="font-weight-bold">{{ __('view.Średnia ocena') . __('view.:')}}</i>

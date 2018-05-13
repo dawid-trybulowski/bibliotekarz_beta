@@ -71,12 +71,7 @@ class Book extends Model
     public function search($search, $category, $genre, $orderBy, $orderDirection)
     {
         $where = $this->prepareWhereQuery($search, (int)$category, (int)$genre);
-//var_dump($where);
-//var_dump($category);
-//var_dump($genre);
-//var_dump($orderBy);
-//var_dump($orderDirection);
-//die;
+
         $books = $this
             ->select(
                 'books.*',
@@ -112,6 +107,7 @@ class Book extends Model
     public function adminSearch($search, $orderBy, $orderDirection)
     {
         $where = $this->prepareWhereQuery($search, null, null);
+
         $books = $this
             ->select(
                 'books.*',
@@ -144,12 +140,12 @@ class Book extends Model
         if (!empty($category)) {
             array_push($where, ['searchBy' => 'books.category_id', 'mark' => '=', 'text' => $category]);
         } else {
-            array_push($where, ['searchBy' => 'books.id', 'mark' => '>', 'text' => 0]);
+            array_push($where, ['searchBy' => 'books.active', 'mark' => '>=', 'text' => 0]);
         }
         if (!empty($genre)) {
             array_push($where, ['searchBy' => 'books_have_genres.genre_id', 'mark' => '=', 'text' => $genre]);
         } else {
-            array_push($where, ['searchBy' => 'books.id', 'mark' => '>', 'text' => 0]);
+            array_push($where, ['searchBy' => 'books.active', 'mark' => '>=', 'text' => 0]);
         }
 
         return $where;

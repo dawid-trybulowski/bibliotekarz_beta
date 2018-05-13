@@ -59,7 +59,6 @@ class RegisterController extends Controller
             'apartmentNumber' => 'max:255',
             'postCode' => 'required|string|max:6',
             'birthDate' => 'required|date|max:10',
-            'cardId' => 'max:255'
         ]);
 
     }
@@ -72,6 +71,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $count = User::count();
+        if(!$count){
+            $permissions = 3;
+        }else{
+            $permissions = 1;
+        }
+
         return User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -85,8 +91,8 @@ class RegisterController extends Controller
             'apartment_number' => $data['apartmentNumber'],
             'post_code' => $data['postCode'],
             'birth_date' => $data['birthDate'],
-            'card_number' => $data['cardId'],
-            'status' => 0
+            'status' => 0,
+            'permissions' => $permissions
         ]);
     }
 }

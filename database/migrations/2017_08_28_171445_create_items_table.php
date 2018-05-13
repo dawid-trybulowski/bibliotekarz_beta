@@ -24,7 +24,7 @@ class CreateItemsTable extends Migration
                 ->nullable();
             $table->string('comment')
                 ->nullable();
-            $table->boolean('status')
+            $table->integer('status')
                 ->nullable();
             $table->boolean('active')
                 ->default(true);

@@ -12,7 +12,7 @@ class BooksSearchMapper
             'title' => 'Tytuł',
             'description' => 'Opis',
             'keys' => 'Słowa kluczowe',
-            'publishing_house' => 'publishing_house',
+            'publishing_house' => 'Wydawnictwo',
             'isbn' => 'isbn',
             'subauthors' => 'Współautor'
         ];
