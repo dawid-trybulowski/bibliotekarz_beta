@@ -78,9 +78,9 @@
                     @foreach($compact['comments'][$book->id] as $comment)
                         <h5 class="card-title">{{$comment->user->login}}</h5>
                         <h6 class="card-subtitle text-muted">{{$comment->created_at}}</h6>
-                        <h6 class="card-subtitle text-muted">
+                        <h6 class="card-subtitle text-muted mt-1">
                             Ocena: {!! '<span style="color:'.$compact['config']['books_rates'][round($comment['rate'])]['color'] . '">' . $comment->rate . '</span>' !!}</h6>
-                        <p class="card-text">{{$comment->comment}}</p>
+                        <p class="card-text mt-1">{{$comment->comment}}</p>
                     @endforeach
                 @else
                     <h5 class="card-title text-center">{{ __('view.Ta pozycja nie została jeszcze skomentowana')}}</h5>

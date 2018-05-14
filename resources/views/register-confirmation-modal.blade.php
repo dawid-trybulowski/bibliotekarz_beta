@@ -14,9 +14,6 @@
         dowód osobisty, lub inny dokument potwierdzający dane osobowe. Dane zostaną zweryfikowane przez pracownika na
         miejscu
         </br></br>
-        W razie pytan prosimy o kontakt przez formularz lub telefonicznie. Wszystkie dane znajdziesz w zakładce
-        "kontakt"
-        </br></br>
         <p style="text-align:right">Pozdrawiamy,
             </br>
             Pracownicy Biblioteki Publicznej w Gryfinie</p>

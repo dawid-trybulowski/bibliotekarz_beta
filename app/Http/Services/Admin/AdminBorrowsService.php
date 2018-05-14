@@ -5,11 +5,15 @@ namespace App\Http\Services\Admin;
 use App\Http\Helpers\Message;
 use App\Http\Services\Content\BorrowsService;
 use App\Http\Services\Content\EmailService;
+use App\Http\Services\Content\ReservationsService;
+use App\Http\Services\Content\WaitingListService;
 use App\Http\Services\Shared\ConfigService;
 use App\Models\Book;
 use App\Models\Borrows;
 use App\Models\Config;
 use App\Models\Items;
+use App\Models\Reservations;
+use App\Models\User;
 use App\Models\WaitingList;
 use Illuminate\Support\Facades\DB;
 
@@ -23,12 +27,32 @@ class AdminBorrowsService extends BorrowsService
      * @var EmailService
      */
     private $emailService;
+    /**
+     * @var Reservations
+     */
+    private $reservations;
+    /**
+     * @var WaitingListService
+     */
+    private $waitingListService;
+    /**
+     * @var ReservationsService
+     */
+    private $reservationsService;
+    /**
+     * @var User
+     */
+    private $user;
 
-    public function __construct(Borrows $borrows, Book $books, Items $items, WaitingList $waitingList, Config $configAll, ConfigService $configService, AdminUserService $adminUserService, EmailService $emailService)
+    public function __construct(Borrows $borrows, Book $books, Items $items, WaitingList $waitingList, Config $configAll, ConfigService $configService, AdminUserService $adminUserService, EmailService $emailService, Reservations $reservations, WaitingListService $waitingListService, ReservationsService $reservationsService, User $user)
     {
         parent::__construct($borrows, $books, $items, $waitingList, $configAll, $configService);
         $this->adminUserService = $adminUserService;
         $this->emailService = $emailService;
+        $this->reservations = $reservations;
+        $this->waitingListService = $waitingListService;
+        $this->reservationsService = $reservationsService;
+        $this->user = $user;
     }
 
     public function getAllBorrows($request)
@@ -41,7 +65,8 @@ class AdminBorrowsService extends BorrowsService
 
     public function borrow($bookId, $userId, $reservationId)
     {
-        $availableItem = $this->items->findFirstAvailableItem($bookId);
+        $reservation = $this->reservations->getReservationByReservationId((int)$reservationId);
+        $availableItem = $this->items->getItemById((int)$reservation->item_id);
         if ($availableItem) {
             $this->items->makeBorrowForItem($availableItem->id);
             $borrowDateStart = date('Y-m-d');
@@ -64,6 +89,19 @@ class AdminBorrowsService extends BorrowsService
             if ($this->borrows->endBorrow($borrowId)) {
                 $this->books->cancelBorrowForBook($book->id, $book->items + 1);
                 $this->items->cancelBorrowForItem($borrow->item_id);
+                $waitinglist = $this->waitingListService->getWaitingListByBook($book->id);
+                foreach ($waitinglist as $listElement) {
+                    if ((int)$listElement->position === 1) {
+                        $message = $this->reservationsService->reserve($book->id, $listElement->user_id, true);
+                        if ($message->success) {
+                            $reservationId = $message->additional['reservationId'];
+                            $reservation = $this->reservations->getReservationByReservationId($reservationId);
+                            $user = $this->user->getUserById($listElement->user_id);
+                            $message = $this->waitingListService->cancelWaitingListElement($listElement->id, $listElement->user_id);
+                            $this->emailService->sendEmail($user->email, env('MAIL_ADDRESS'), $this->config['reservation_email']['subject'], $this->config['reservation_email']['text'], $this->config['reservation_email']['template'],['text2' => $this->config['reservation_email']['text2'], 'reservationDateEnd' => $reservation->reservation_date_end, 'topText' => $user->login, 'book' => $book, 'reservation' => $reservation]);
+                        }
+                    }
+                }
                 DB::commit();
                 $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem'), 200, true);
             } else {
@@ -137,7 +175,7 @@ class AdminBorrowsService extends BorrowsService
                     'debt' => $user->debt
                 ];
 
-            $this->emailService->sendEmail($user->email, $this->config['delay_email']['email'], $this->config['delay_email']['subject'], $this->config['delay_email']['text'], 'emails/delayEmail', $additonal);
+            $this->emailService->sendEmail($user->email, env('MAIL_ADDRESS'), $this->config['delay_email']['subject'], $this->config['delay_email']['text'], 'emails/delayEmail', $additonal);
         }
     }
 

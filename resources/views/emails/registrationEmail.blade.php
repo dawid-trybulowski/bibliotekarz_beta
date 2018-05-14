@@ -165,7 +165,7 @@
     <tr>
         <td>
             <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                Welcome to MDB!
+                {{$data['libraryName']}}
             </div>
         </td>
     </tr>
@@ -337,12 +337,6 @@
                                             <td align="center">
                                                 <a style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;color: #5caad2; text-decoration: none;font-weight:bold;"
                                                    href="{{route('index')}}">Strona biblioteki</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center">
-                                                <a style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;color: #5caad2; text-decoration: none;font-weight:bold;"
-                                                   href="{{route('admin-index')}}">Panel administracyjny</a>
                                             </td>
                                         </tr>
                                     </table>
