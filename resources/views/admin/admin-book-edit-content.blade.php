@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6 {{ $errors->has('genres') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="genres">Kategoria</label>
+                    <label class="col-12 control-label" for="genres">Gatunki</label>
                     <div class="col-12">
                         <select multiple="multiple" id="genres" name="genres[]" class="form-control">
                             @foreach($compact['genres'] as $genre)

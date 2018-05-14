@@ -57,11 +57,6 @@ class AdminItemService extends ItemService
 
     public function editItem($request)
     {
-        if ($request->active == 'on') {
-            $active = true;
-        } else {
-            $active = false;
-        }
 
         $result = $this->items->where('id', $request->id)->update
         (
@@ -70,7 +65,7 @@ class AdminItemService extends ItemService
                 'comment' => $request->comment,
                 'location_code' => $request->locationCode,
                 'status' => 1,
-                'active' => $active,
+                'active' => 1,
                 "created_at" => \Carbon\Carbon::now(), # \Datetime()
                 "updated_at" => \Carbon\Carbon::now(),  # \Datetime()
             ]
@@ -87,11 +82,6 @@ class AdminItemService extends ItemService
 
     public function addItem($request)
     {
-        if ($request->active == 'on') {
-            $active = true;
-        } else {
-            $active = false;
-        }
         DB::beginTransaction();
         $result = $this->items->where('id', $request->id)->insertGetId
         (
@@ -100,7 +90,7 @@ class AdminItemService extends ItemService
                 'comment' => $request->comment,
                 'location_code' => $request->locationCode,
                 'status' => 0,
-                'active' => $active,
+                'active' => 1,
                 "created_at" => \Carbon\Carbon::now(), # \Datetime()
                 "updated_at" => \Carbon\Carbon::now(),  # \Datetime()
             ]

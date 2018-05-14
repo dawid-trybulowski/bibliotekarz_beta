@@ -164,11 +164,13 @@ class ReservationsService
     public function getActiveReservationsByUser($userId)
     {
         $reservations = $this->reservations
+            ->select('reservations.*', 'books.title', 'books.author')
             ->where([
                     ['user_id', (int)$userId],
-                    ['status', 1]
+                    ['reservations.status', 1]
                 ]
             )
+            ->join('books', 'reservations.book_id', '=', 'books.id')
             ->get();
 
         //$preparedReservations = $this->prepareReservations($reservations);
@@ -194,7 +196,7 @@ class ReservationsService
                             $reservation = $this->reservations->getReservationByReservationId($reservationId);
                             $user = $this->user->getUserById($listElement->user_id);
                             $message = $this->waitingListService->cancelWaitingListElement($listElement->id, $listElement->user_id);
-                            $this->emailService->sendEmail($user->email, $this->config['library_email'], $this->config['reservation_email']['subject'], $this->config['reservation_email']['text'], $this->config['reservation_email']['template'],['text2' => $this->config['reservation_email']['text2'], 'reservationDateEnd' => $reservation->reservation_date_end, 'topText' => $user->login, 'book' => $book, 'reservation' => $reservation]);
+                            $this->emailService->sendEmail($user->email, env('MAIL_ADDRESS'), $this->config['reservation_email']['subject'], $this->config['reservation_email']['text'], $this->config['reservation_email']['template'],['text2' => $this->config['reservation_email']['text2'], 'reservationDateEnd' => $reservation->reservation_date_end, 'topText' => $user->login, 'book' => $book, 'reservation' => $reservation]);
                         }
                     }
                 }
@@ -205,6 +207,7 @@ class ReservationsService
                 DB::rollback();
             }
         } catch (Exception $e) {
+
             DB::rollback();
             $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
         }

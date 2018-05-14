@@ -89,10 +89,10 @@ var menu = new Vue({
     methods: {
         showActiveReservationsModal: function () {
             $.post("activeReservationsByUser", function (data) {
+                $('#activeReservationsThead').empty();
+                $('#activeReservationsTbody').empty();
                 var self = this;
                 if (data.length > 0) {
-                    $('#activeReservationsThead').empty();
-                    $('#activeReservationsTbody').empty();
                     var mainRow = '<tr>' +
                         '<th class="numeric">ID</th>' +
                         '<th class="numeric">Tytuł</th>' +
@@ -103,10 +103,11 @@ var menu = new Vue({
                         '</tr>';
                     $('#activeReservationsThead').append(mainRow);
                     $.each(data, function (key, reservation) {
+                        console.log(reservation);
                         var row = '<tr>' +
                             '<td data-title="ID">' + reservation.id + '</td>' +
-                            '<td data-title="Tytuł">' + reservation.book_title + '</td>' +
-                            '<td data-title="Autor" class="numeric">' + reservation.book_author + '</td>' +
+                            '<td data-title="Tytuł">' + reservation.title + '</td>' +
+                            '<td data-title="Autor" class="numeric">' + reservation.author + '</td>' +
                             '<td data-title="Rozpoczęcie" class="numeric">' + reservation.reservation_date_start + '</td>' +
                             '<td data-title="Zakończenie" class="numeric">' + reservation.reservation_date_end + '</td>' +
                             '<td data-title="Akcje" class="numeric"><a href="cancelReservation/' + reservation.id + '"><button type="button" class="btn btn-danger btn-sm">Anuluj</button></a></td>' +
@@ -124,9 +125,9 @@ var menu = new Vue({
         },
         showActiveBorrowsModal: function () {
             $.post("activeBorrowsByUser", function (data) {
+                $('#activeBorrowsThead').empty();
+                $('#activeBorrowsTbody').empty();
                 if (data.length > 0) {
-                    $('#activeBorrowsThead').empty();
-                    $('#activeBorrowsTbody').empty();
                     var mainRow = '<tr>' +
                         '<th class="numeric">ID</th>' +
                         '<th class="numeric">Tytuł</th>' +
@@ -137,10 +138,11 @@ var menu = new Vue({
                         '</tr>';
                     $('#activeBorrowsThead').append(mainRow);
                     $.each(data, function (key, borrow) {
+                        console.log(borrow);
                         var row = '<tr>' +
                             '<td data-title="ID" class="numeric text-center">' + borrow.id + '</td>' +
-                            '<td data-title="Tytuł" class="numeric text-center">' + borrow.book_title + '</td>' +
-                            '<td data-title="Autor" class="numeric text-center">' + borrow.book_author + '</td>' +
+                            '<td data-title="Tytuł" class="numeric text-center">' + borrow.title + '</td>' +
+                            '<td data-title="Autor" class="numeric text-center">' + borrow.author + '</td>' +
                             '<td data-title="Rozpoczęcie" class="numeric text-center">' + borrow.borrow_date_start + '</td>' +
                             '<td data-title="Zakończenie" class="numeric text-center">' + borrow.borrow_date_end + '</td>' +
                             '<td data-title="Akcje" class="numeric text-center"><a href="extendBorrow/' + borrow.id + '"><button type="button" class="btn btn-danger btn-sm">Przedłuż</button></a></td>' +
@@ -158,10 +160,9 @@ var menu = new Vue({
         },
         showWaitingListModal: function () {
             $.post("waitingListByUser", function (data) {
-
+                $('#waitingListThead').empty();
+                $('#waitingListTbody').empty();
                 if (data.length > 0) {
-                    $('#waitingListThead').empty();
-                    $('#waitingListTbody').empty();
                     var mainRow = '<tr>' +
                         '<th class="numeric">ID</th>' +
                         '<th class="numeric">Tytuł</th>' +
@@ -172,6 +173,7 @@ var menu = new Vue({
                         '</tr>';
                     $('#waitingListThead').append(mainRow);
                     $.each(data, function (key, waitingListElement) {
+                        console.log(waitingListElement);
                         var row = '<tr>' +
                             '<td data-title="ID">' + waitingListElement.id + '</td>' +
                             '<td data-title="Tytuł">' + waitingListElement.title + '</td>' +

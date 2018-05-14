@@ -62,7 +62,7 @@ trait RegistersUsers
             ];
 
         $emailService = new EmailService(new Config(), new ConfigService(new Config()));
-        $emailService->sendEmail($to, $this->config['registration_email']['email'], $subject, $text, '/emails/' . $template, $additional);
+        $emailService->sendEmail($to, env('MAIL_ADDRESS'), $subject, $text, '/emails/' . $template, $additional);
 
         $message = new Message('Dziękujemy za rejestrację', 'Dziękujemy za rejestrację w naszej bibliotece. W najbliższym czasie powinieneś otrzymać wiadomość mailową z instrukcjami dotyczącymi korzystania z portalu. Życzymy miłego korzystania z systemu bibliotecznego.', 200, 1);
 

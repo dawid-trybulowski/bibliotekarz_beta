@@ -51,7 +51,7 @@ class AdminReservationsService extends ReservationsService
                 ->where('reservation_id', $reservationId)
                 ->first();
             $this->reservations->borrowReservation($reservationId, $borrow->id);
-            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem') . 'ID wypożyczenia: ' . $borrow->id, 200, true);
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem') . '. ID wypożyczenia: ' . $borrow->id, 200, true);
             DB::commit();
         } else {
             $message = $borrowResult;

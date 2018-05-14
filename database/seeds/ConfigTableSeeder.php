@@ -129,6 +129,7 @@ class ConfigTableSeeder extends Seeder
   },
   "2": {
     "string": "Zmieniona w wypożyczenie"
+  }
   }';
         $config->save();
 
@@ -189,7 +190,7 @@ class ConfigTableSeeder extends Seeder
   "subject": "Potwierdzenie rejestracji",
   "email": "example@example.pl",
   "template": "registrationEmail",
-  "text": "Dziękujemy za rejestrację w naszej bibliotece!\r\n\r\nMożesz teraz rezerwować pozycje poprzez portal. Rezerwacja jest ważna przez 3 dni. Prosimy o zgłoszenie się po odbiór książki w określonym terminie, w przeciwnym wypadku rejestracja będzie anulowana.Pamiętaj, że jednocześnie możesz zarezerwować najwyżej 3 książki.\r\n\r\nW każdej chwili możesz odwołać rezerwację w zakładce \'Aktywne rezerwacje\'.\r\n\r\nTwoje konto nie jest jeszcze zweryfikowane, więc przy realizacji pierwszego zamówienia prosimy mieć przy sobie dowód osobisty, lub inny dokument potwierdzający dane osobowe. Dane zostaną zweryfikowane przez pracownika na miejscu.\r\n\r\nW razie pytan prosimy o kontakt przez formularz lub telefonicznie. Wszystkie dane znajdziesz w zakładce \'kontakt\'."
+  "text": "Dziękujemy za rejestrację w naszej bibliotece!\r\n\r\nMożesz teraz rezerwować pozycje poprzez portal. Rezerwacja jest ważna przez 3 dni. Prosimy o zgłoszenie się po odbiór książki w określonym terminie, w przeciwnym wypadku rejestracja będzie anulowana.Pamiętaj, że jednocześnie możesz zarezerwować najwyżej 3 książki.\r\n\r\nW każdej chwili możesz odwołać rezerwację w zakładce \'Aktywne rezerwacje\'.\r\n\r\nTwoje konto nie jest jeszcze zweryfikowane, więc przy realizacji pierwszego zamówienia prosimy mieć przy sobie dowód osobisty, lub inny dokument potwierdzający dane osobowe. Dane zostaną zweryfikowane przez pracownika na miejscu.\r\n\r\nW razie pytan prosimy o kontakt przez formularz lub telefonicznie."
 }';
         $config->save();
 
@@ -234,6 +235,9 @@ class ConfigTableSeeder extends Seeder
     "string": "Pracownik"
   },
   "2": {
+    "string": "Administrator"
+  },
+  "3": {
     "string": "Administrator"
   }
 }';

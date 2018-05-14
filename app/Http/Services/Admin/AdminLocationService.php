@@ -62,7 +62,7 @@ class AdminLocationService
         $locationEntity = $this->createLocationEntity(null, $request->name, $request->address);
         $result = $this->location->addLocation($locationEntity);
         if ($result) {
-            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem') . '. Id nowej kategorii: ' . $result, 200, true);
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem') . '. Id nowej lokalizacji: ' . $result, 200, true);
         } else {
             $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
         }

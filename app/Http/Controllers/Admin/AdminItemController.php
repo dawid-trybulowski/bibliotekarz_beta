@@ -75,8 +75,7 @@ class AdminItemController extends ItemController
             'id' => 'required|integer',
             'bookId' => 'required|integer',
             'comment' => 'string|nullable',
-            'locationCode' => 'string|nullable',
-            'active' => 'required|string',
+            'locationCode' => 'string|nullable'
         ]);
         $message = $this->adminItemService->editItem($request);
 
@@ -99,8 +98,7 @@ class AdminItemController extends ItemController
         $request->validate([
             'bookId' => 'required|integer',
             'comment' => 'string|nullable',
-            'locationCode' => 'string|nullable',
-            'active' => 'required|string',
+            'locationCode' => 'string|nullable'
         ]);
         $message = $this->adminItemService->addItem($request);
 

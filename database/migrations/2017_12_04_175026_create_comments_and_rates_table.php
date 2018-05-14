@@ -29,7 +29,7 @@ class CreateCommentsAndRatesTable extends Migration
                 ->on('books');
             $table->float('rate')
                 ->nullable();
-            $table->boolean('active')
+            $table->boolean('status')
                 ->default(true);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
