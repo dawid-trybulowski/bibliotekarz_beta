@@ -6,12 +6,12 @@ namespace App\Http\Services\Admin;
 
 use App\Http\Entities\LocationEntity;
 use App\Http\Helpers\Message;
-use App\Models\location;
+use App\Models\Location;
 
 class AdminLocationService
 {
     /**
-     * @var location
+     * @var Location
      */
     private $location;
 

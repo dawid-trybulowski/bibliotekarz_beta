@@ -36,7 +36,7 @@ class WaitingListService
         $book = $this->books->getBookById($bookId);
         $isPositionOnWaitingList = $this->waitingList->getWaitingListByBookAndUserId($bookId, $userId);
         if (!$isPositionOnWaitingList) {
-            if ($book->status === 0) {
+            if ((int)$book->status === 0) {
                 try {
                     $position = $this->countPosition($bookId);
                     $waitingListEntity = $this->createWaitingListEntity($userId, $bookId, $position, 1);
