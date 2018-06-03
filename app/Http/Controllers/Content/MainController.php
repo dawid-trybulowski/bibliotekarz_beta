@@ -177,4 +177,22 @@ class MainController
 
         return view('contact-form', compact('compact'));
     }
+
+    public function showRegulations(){
+        $compact =
+            [
+                'config' => $this->config
+            ];
+
+        return view('regulations', compact('compact'));
+    }
+
+    public function showPrivacyPolicy(){
+        $compact =
+            [
+                'config' => $this->config
+            ];
+
+        return view('privacy-policy', compact('compact'));
+    }
 }

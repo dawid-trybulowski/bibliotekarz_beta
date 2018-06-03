@@ -94,8 +94,8 @@ class PaymentsService
                 'p24_description' => 'Płatność użytkownika ' . Auth::User()->login,
                 'p24_email' => Auth::User()->email,
                 'p24_country' => 'PL',
-                'p24_url_return' => 'http://localhost/bibliotekarz_beta/public?session_id=' . $sessionId,
-                'p24_url_status' => 'http://localhost/bibliotekarz_beta/public/',
+                'p24_url_return' => route('index') . '?session_id=' . $sessionId,
+                'p24_url_status' => route('index'),
                 'p24_api_version' => '3.2',
                 'p24_sign' => md5($sessionId . '|' . $this->config['przelewy24_config']['p24_merchant_id'] . '|' . (int)$amount . '|' . 'PLN' . $this->config['przelewy24_config']['crc'])
             ];

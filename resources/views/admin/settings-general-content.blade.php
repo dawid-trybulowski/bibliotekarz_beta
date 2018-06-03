@@ -111,6 +111,34 @@
                     </div>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-12 {{ $errors->has('privacyPolicy') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="privacyPolicy">Tekst polityki prywatności</label>
+                    <div class="col-12">
+                        <textarea style="min-height: 300px;" id="privacyPolicy" class="form-control input-md"
+                                  name="privacyPolicy">{{ old('privacyPolicy') ? old('privacyPolicy') : $compact['config']['privacy_policy']}}</textarea>
+                        @if ($errors->has('privacyPolicy'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('privacyPolicy') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12 {{ $errors->has('regulations') ? ' has-error' : '' }} width_customize">
+                    <label class="col-12 control-label" for="privacyPolicy">Tekst Regulaminu</label>
+                    <div class="col-12">
+                        <textarea style="min-height: 300px;" id="regulations" class="form-control input-md"
+                                  name="regulations">{{ old('regulations') ? old('regulations') : $compact['config']['regulations']}}</textarea>
+                        @if ($errors->has('regulations'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('regulations') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
             <div class="form-group text-center">
                 <div class="col-12">
                     <input name="reservation" value="{{__('view.Zatwierdź')}}" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2"

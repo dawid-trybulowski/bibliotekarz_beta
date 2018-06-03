@@ -1,6 +1,6 @@
 @if(Auth::check())
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
-        <a class="navbar-brand" href="{{route('index')}}">Biblioteka w Gryfinie</a>
+        <a class="navbar-brand" href="{{route('index')}}">{{$compact['config']['library_name']}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@
     </nav>
 @else
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{route('index')}}">Biblioteka w Gryfinie</a>
+        <a class="navbar-brand" href="{{route('index')}}">{{$compact['config']['library_name']}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

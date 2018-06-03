@@ -14,6 +14,8 @@ class GeneralSettingsEntity
     private $libraryPhone;
     private $libraryAddress;
     private $libraryEmail;
+    private $privacyPolicy;
+    private $regulations;
 
     /**
      * @return mixed
@@ -141,5 +143,37 @@ class GeneralSettingsEntity
     public function setLibraryEmail($libraryEmail)
     {
         $this->libraryEmail = $libraryEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivacyPolicy()
+    {
+        return $this->privacyPolicy;
+    }
+
+    /**
+     * @param mixed $privacyPolicy
+     */
+    public function setPrivacyPolicy($privacyPolicy)
+    {
+        $this->privacyPolicy = $privacyPolicy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegulations()
+    {
+        return $this->regulations;
+    }
+
+    /**
+     * @param mixed $regulations
+     */
+    public function setRegulations($regulations)
+    {
+        $this->regulations = $regulations;
     }
 }
