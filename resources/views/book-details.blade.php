@@ -57,7 +57,7 @@
                 <p><i class="font-weight-bold">{{ __('view.Dostępne egzemplarze') . __('view.:')}}</i>
                     {{$book->items}}</p>
                 <p><i class="font-weight-bold">{{ __('view.Lokalizacja') . __('view.:')}}</i>
-                    {{$book->locations_name . ' ' . $book->locations_address}}</p>
+                    {{$book->locations_name . ', ' . $book->locations_address}}</p>
                 <p><i class="font-weight-bold">{{ __('view.Słowa kluczowe') . __('view.:')}}</i>
                     @foreach(explode(',', $book->keys) as $key)
                         <a href="{{route('index', ['action' => 'search', 'search_1_searchBy' => 'keys', 'search_1_text' => $key, 'search_2_searchBy' => 'author', 'search_2_text' => '', 'search_3_searchBy' => 'author', 'search_3_text' => '', 'category' => '', 'genre'=> '', 'orderBy' => 'DESC|created_at'])}}"> {{$key . ' '}}</a>

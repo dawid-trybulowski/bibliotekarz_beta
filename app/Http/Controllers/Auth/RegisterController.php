@@ -59,6 +59,8 @@ class RegisterController extends Controller
             'apartmentNumber' => 'max:255',
             'postCode' => 'required|string|max:6',
             'birthDate' => 'required|date|max:10',
+            'regulations' => 'required|in:on',
+            'privacyPolicy' => 'required|in:on'
         ]);
 
     }

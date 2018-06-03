@@ -24,7 +24,9 @@ class Config extends Model
                 'library_name' => $generalSettingsEntity->getLibraryName(),
                 'library_phone' => $generalSettingsEntity->getLibraryPhone(),
                 'library_address' => $generalSettingsEntity->getLibraryAddress(),
-                'library_email' => $generalSettingsEntity->getLibraryEmail()
+                'library_email' => $generalSettingsEntity->getLibraryEmail(),
+                'privacy_policy' => $generalSettingsEntity->getPrivacyPolicy(),
+                'regulations' => $generalSettingsEntity->getRegulations()
             ];
         return $this->saveSettings($settings);
     }

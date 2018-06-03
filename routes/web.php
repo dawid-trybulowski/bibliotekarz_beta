@@ -31,6 +31,10 @@ Route::group(['namespace' => 'Content', ], function () {
         ->name('email');
     Route::get('search', 'MainController@search')
         ->name('search');
+    Route::get('privacy-policy', 'MainController@showPrivacyPolicy')
+        ->name('privacy-policy');
+    Route::get('regulations', 'MainController@showRegulations')
+        ->name('regulations');
 });
 
 Route::get('admin/delay-borrows-action', 'admin\AdminBorrowController@delayBorrowsAction')
@@ -140,6 +144,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'worker'], function () {
         ->name('admin-item-edit');
     Route::get('admin/admin-item-add', 'AdminItemController@addItemShow')
         ->name('admin-item-add-show');
+    Route::get('admin/admin-payment-add', 'AdminPaymentController@addPaymentShow')
+        ->name('admin-payment-add-show');
+    Route::post('admin/admin-payment-add', 'AdminPaymentController@addPayment')
+        ->name('admin-payment-add');
     Route::post('admin/admin-item-add', 'AdminItemController@addItem')
         ->name('admin-item-add');
     Route::get('admin/admin-item-delete', 'AdminItemController@deleteItem')

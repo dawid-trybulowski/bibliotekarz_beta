@@ -22,14 +22,14 @@
                 Wyszukaj
             </button>
         </form>
-        {{--<div class="col-4 text-right width_customize center-on-customize" style="font-size: 150%">--}}
-            {{--<a href="{{route('admin-genre-add-show')}}">--}}
-                {{--<button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="button"--}}
-                        {{--name="submit" value="search">--}}
-                    {{--Dodaj <i class="fas fa-plus-circle"></i>--}}
-                {{--</button>--}}
-            {{--</a>--}}
-        {{--</div>--}}
+        <div class="col-4 text-right width_customize center-on-customize" style="font-size: 150%">
+            <a href="{{route('admin-payment-add-show')}}">
+                <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="button"
+                        name="submit" value="search">
+                    Dodaj <i class="fas fa-plus-circle"></i>
+                </button>
+            </a>
+        </div>
     </div>
 </div>
 <div class="container-fluid">
@@ -40,7 +40,7 @@
                 <th>ID płatności</th>
                 <th>ID użytkownika</th>
                 <th>Imię i nazwisko użytkownika</th>
-                <th>Kwota</th>
+                <th>Kwota (gr.)</th>
                 <th>Waluta</th>
                 <th>Status</th>
                 <th>Data transakcji</th>
@@ -53,9 +53,9 @@
                     <td data-title="{{__('view.ID')}}">{{$payment['id']}}</td>
                     <td data-title="ID użytkownika">{{$payment['user_id']}}</td>
                     <td data-title="Dane użytkownika">{{$payment['first_name'] . ' ' . $payment['surname']}}</td>
-                    <td data-title="Kwota">{{$payment['amount']}}</td>
+                    <td data-title="Kwota (gr.)">{{$payment['amount']}}</td>
                     <td data-title="Waluta">{{$payment['currency']}}</td>
-                    <td data-title="Status">{{$payment['status']}}</td>
+                    <td data-title="Status">{{$compact['config']['payments_statuses'][$payment['status']]['string']}}</td>
                     <td data-title="Data transakcji">{{$payment['created_at']}}</td>
                     <td data-title="Akcje">
                         <div class="dropdown">

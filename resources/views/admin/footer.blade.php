@@ -12,7 +12,8 @@
                 <ul class="list-unstyled">
                     <li><a class="gray-color" href="{{route('show-contact-form')}}">Formularz kontaktowy</a>
                     </li>
-                    <li><a class="gray-color" href="http://www.biblioteka.gryfino.pl/Biblioteka/chapter_61075.asp">Strona biblioteki</a></li>
+                    <li><a class="gray-color" href="{{route('regulations')}}">Regulamin biblioteki</a></li>
+                    <li><a class="gray-color" href="{{route('privacy-policy')}}">Polityka prywatności</a></li>
                 </ul>
             </div>
         </div>

@@ -42,6 +42,8 @@ class AdminConfigService extends ConfigService
         $generalSettingsEntity->setLibraryPhone($map['libraryPhone']);
         $generalSettingsEntity->setLibraryAddress($map['libraryAddress']);
         $generalSettingsEntity->setLibraryEmail($map['libraryEmail']);
+        $generalSettingsEntity->setPrivacyPolicy($map['privacyPolicy']);
+        $generalSettingsEntity->setRegulations($map['regulations']);
         return $generalSettingsEntity;
     }
 

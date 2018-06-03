@@ -14,6 +14,8 @@ class GeneralSettingsMapper
             'library_name' => 'libraryName',
             'library_phone' => 'libraryPhone',
             'library_address' => 'libraryAddress',
-            'library_email' => 'libraryEmail'
+            'library_email' => 'libraryEmail',
+            'privacy_policy' => 'privacyPolicy',
+            'regulations' => 'regulations'
         ];
 }

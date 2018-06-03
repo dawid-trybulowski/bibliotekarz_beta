@@ -43,4 +43,25 @@ class AdminPaymentService extends PaymentsService
         }
         return $message;
     }
+
+    public function addPayment($request){
+
+        $result = $result = $this->payments
+            ->insertGetId
+            (
+                [
+                    'user_id' => (int)$request->userId,
+                    'amount' => (int)$request->amount,
+                    'currency' => 'PLN',
+                    'status' => (int)$request->status,
+                    'method' => $request->method
+                ]
+            );
+        if ($result) {
+            $message = new Message(__('view.W porządku!'), __('view.Operacja zakonczona sukcesem') . '. Id nowej płatności: ' . $result, 200, true);
+        } else {
+            $message = new Message(__('view.Błąd'), __('view.Wystąpił błąd podczas zapisu danych'), 404, false);
+        }
+        return $message;
+    }
 }
