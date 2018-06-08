@@ -5,7 +5,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="id" value="{{$compact['ageCategory']['id']}}">
                 <div class="form-group col-6 {{ $errors->has('name') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="name">Nazwa</label>
+                    <label class="col-12 control-label" for="name">Nazwa *</label>
                     <div class="col-12">
                         <input id="name" name="name" type="text" class="form-control input-md"
                                value="{{ old('name') ? old('name') : $compact['ageCategory']['name']}}">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="form-group col-3 {{ $errors->has('minAge') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="minAge">Minimalny wiek (0 - brak limitu)</label>
+                    <label class="col-12 control-label" for="minAge">Minimalny wiek * (0 - brak limitu)</label>
                     <div class="col-12">
                         <input id="minAge" name="minAge" type="text" class="form-control input-md"
                                value="{{ old('minAge') ? old('minAge') : $compact['ageCategory']['min_age']}}">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-group col-3 {{ $errors->has('maxAge') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="maxAge">MAksymalny wiek (0 - brak limitu)</label>
+                    <label class="col-12 control-label" for="maxAge">MAksymalny wiek * (0 - brak limitu)</label>
                     <div class="col-12">
                         <input id="maxAge" name="maxAge" type="text" class="form-control input-md"
                                value="{{ old('maxAge') ? old('maxAge') : $compact['ageCategory']['max_age']}}">

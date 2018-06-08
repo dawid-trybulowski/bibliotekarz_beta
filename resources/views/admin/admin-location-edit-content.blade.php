@@ -5,7 +5,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="id" value="{{$compact['location']['id']}} ">
                 <div class="form-group col-6 {{ $errors->has('location') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="name">Nazwa</label>
+                    <label class="col-12 control-label" for="name">Nazwa *</label>
                     <div class="col-12">
                         <input id="name" name="name" type="text" class="form-control input-md"
                                value="{{ old('name') ? old('name') : $compact['location']['name']}}">
