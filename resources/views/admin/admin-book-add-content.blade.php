@@ -4,7 +4,7 @@
             <div class="form-row col-12">
                 {{ csrf_field() }}
                 <div class="form-group col-6 {{ $errors->has('title') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="title">Tytuł</label>
+                    <label class="col-12 control-label" for="title">Tytuł *</label>
                     <div class="col-12">
                         <input id="title" name="title" type="text" class="form-control input-md" required=""
                                value="{{ old('title') ? old('title') : ''}}">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6 {{ $errors->has('unifiedTitle') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="author">Tytuł zunifikowany</label>
+                    <label class="col-12 control-label" for="author">Tytuł zunifikowany *</label>
                     <div class="col-12">
                         <input id="unifiedTitle" name="unifiedTitle" type="text" class="form-control input-md"
                                value="{{ old('unifiedTitle') ? old('unifiedTitle') : ''}}">
@@ -30,7 +30,7 @@
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-6 {{ $errors->has('author') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="author">Autor</label>
+                    <label class="col-12 control-label" for="author">Autor *</label>
                     <div class="col-12">
                         <input id="author" name="author" type="text" class="form-control input-md"
                                required=""
@@ -57,7 +57,7 @@
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-6 {{ $errors->has('publishingHouse') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="publishingHouse">Wydawnictwo</label>
+                    <label class="col-12 control-label" for="publishingHouse">Wydawnictwo  *</label>
                     <div class="col-12">
                         <input id="publishingHouse" name="publishingHouse" type="text" class="form-control input-md"
                                value="{{ old('publishingHouse') ? old('publishingHouse') : ''}}">
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6 {{ $errors->has('isbn') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="isbn">ISBN</label>
+                    <label class="col-12 control-label" for="isbn">ISBN  *</label>
                     <div class="col-12">
                         <input id="isbn" name="isbn" type="text" class="form-control input-md"
                                required=""
@@ -84,7 +84,7 @@
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-2 {{ $errors->has('language') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="language">Język (skrót)</label>
+                    <label class="col-12 control-label" for="language">Język * (skrót)</label>
                     <div class="col-12">
                         <input id="language" name="language" type="text" class="form-control input-md"
                                required=""
@@ -160,7 +160,7 @@
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-12 {{ $errors->has('description') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="description">Opis</label>
+                    <label class="col-12 control-label" for="description">Opis  *</label>
                     <div class="col-12">
                         <textarea style="min-height: 150px;" id="description" class="form-control input-md"
                                   name="description">{{ old('description') ? old('description') : ''}}</textarea>
@@ -174,7 +174,7 @@
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-6 {{ $errors->has('category') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="category">Kategoria</label>
+                    <label class="col-12 control-label" for="category">Kategoria  *</label>
                     <div class="col-12">
                         <select id="category" name="category" class="form-control" id="exampleFormControlSelect1">
                             @foreach($compact['categories'] as $category)
@@ -189,7 +189,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6 {{ $errors->has('genres') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="genres">Gatunki</label>
+                    <label class="col-12 control-label" for="genres">Gatunki  *</label>
                     <div class="col-12">
                         <select multiple="multiple" id="genres" name="genres[]" class="form-control">
                             @foreach($compact['genres'] as $genre)
@@ -206,7 +206,7 @@
             </div>
             <div class="form-row col-12">
                 <div class="form-group col-6 {{ $errors->has('ageCategory') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="ageCategory">Kategoria wiekowa</label>
+                    <label class="col-12 control-label" for="ageCategory">Kategoria wiekowa  *</label>
                     <div class="col-12">
                         <select id="ageCategory" name="ageCategory" class="form-control" id="exampleFormControlSelect1">
                             @foreach($compact['ageCategories'] as $ageCategory)
@@ -221,7 +221,7 @@
                     </div>
                 </div>
                 <div class="form-group col-6 {{ $errors->has('locationId') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="locationId">Lokalizacja</label>
+                    <label class="col-12 control-label" for="locationId">Lokalizacja  *</label>
                     <div class="col-12">
                         <select id="locationId" name="locationId" class="form-control" id="locationId">
                             @foreach($compact['locations'] as $location)

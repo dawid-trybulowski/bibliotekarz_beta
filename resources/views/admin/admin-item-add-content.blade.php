@@ -4,7 +4,7 @@
             <div class="form-row">
                 {{ csrf_field() }}
                 <div class="form-group col-6 {{ $errors->has('bookId') ? ' has-error' : '' }} width_customize">
-                    <label class="col-12 control-label" for="bookId">Pozycja</label>
+                    <label class="col-12 control-label" for="bookId">Pozycja *</label>
                     <div class="col-12">
                         <select id="bookId" name="bookId" class="form-control">
                             @foreach($compact['books'] as $book)
